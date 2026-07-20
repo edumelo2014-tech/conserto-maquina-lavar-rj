@@ -1,0 +1,29 @@
+---
+import WhatsAppIcon from './icons/WhatsAppIcon.astro';
+import { whatsappUrl, whatsappAriaLabel } from '@/site.config';
+
+interface Props {
+  label?: string;
+  class?: string;
+  variant?: 'solid' | 'block';
+  message?: string;
+}
+
+const { label = 'Solicitar Orçamento no WhatsApp', class: className = '', variant = 'solid' } =
+  Astro.props;
+
+const classes = ['btn', 'btn-whatsapp', variant === 'block' ? 'btn-block' : '', className]
+  .filter(Boolean)
+  .join(' ');
+---
+
+<a
+  href={whatsappUrl}
+  class={classes}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label={whatsappAriaLabel}
+>
+  <WhatsAppIcon size={20} />
+  <span>{label}</span>
+</a>

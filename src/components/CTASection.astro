@@ -1,0 +1,118 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import { siteConfig, whatsappUrl, whatsappAriaLabel } from '@/site.config';
+import WhatsAppIcon from './icons/WhatsAppIcon.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  buttonLabel?: string;
+  showPhone?: boolean;
+  backgroundImage?: ImageMetadata;
+  backgroundAlt?: string;
+}
+
+const {
+  title,
+  description,
+  buttonLabel = 'Solicitar Orçamento no WhatsApp',
+  showPhone = false,
+  backgroundImage,
+  backgroundAlt = '',
+} = Astro.props;
+---
+
+<section class={`cta-section ${backgroundImage ? 'has-image' : ''}`}>
+  {backgroundImage && (
+    <Image
+      src={backgroundImage}
+      alt={backgroundAlt}
+      width={1600}
+      height={900}
+      loading="lazy"
+      class="cta-bg-image"
+    />
+  )}
+  <div class="cta-overlay" aria-hidden={backgroundImage ? 'true' : undefined}></div>
+  <div class="container cta-content">
+    <h2>{title}</h2>
+    <p>{description}</p>
+    <div class="cta-actions">
+      <a
+        href={whatsappUrl}
+        class="btn btn-whatsapp"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={whatsappAriaLabel}
+      >
+        <WhatsAppIcon size={20} />
+        <span>{buttonLabel}</span>
+      </a>
+      {showPhone && <span class="cta-phone">{siteConfig.phoneDisplay}</span>}
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-section {
+    position: relative;
+    background: var(--dark-gradient);
+    padding-block: clamp(56px, 8vw, 100px);
+    overflow: hidden;
+  }
+
+  .cta-bg-image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cta-overlay {
+    position: absolute;
+    inset: 0;
+  }
+
+  .has-image .cta-overlay {
+    background: linear-gradient(135deg, rgba(7, 31, 74, 0.92), rgba(10, 42, 102, 0.88));
+  }
+
+  .cta-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .cta-content h2 {
+    color: var(--white);
+    font-size: clamp(1.6rem, 3vw, 2.3rem);
+    max-width: 40rem;
+  }
+
+  .cta-content p {
+    color: #dbe4f5;
+    max-width: 36rem;
+    font-size: 1.05rem;
+  }
+
+  .cta-actions {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .cta-phone {
+    color: var(--white);
+    font-weight: 700;
+    font-size: 1.15rem;
+  }
+</style>

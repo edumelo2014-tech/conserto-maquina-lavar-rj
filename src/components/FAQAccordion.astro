@@ -1,0 +1,132 @@
+---
+interface FAQItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  items: FAQItem[];
+  idPrefix?: string;
+}
+
+const { items, idPrefix = 'faq' } = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map((item) => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
+---
+
+<div class="faq-accordion" id="faq-accordion">
+  {items.map((item, index) => {
+    const panelId = `${idPrefix}-panel-${index}`;
+    return (
+      <details class="faq-item" name={idPrefix}>
+        <summary class="faq-trigger" aria-controls={panelId}>
+          <span>{item.question}</span>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
+        <div id={panelId} class="faq-panel">
+          <p set:html={item.answer} />
+        </div>
+      </details>
+    );
+  })}
+</div>
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+
+<script>
+  // Reforço de acessibilidade: fecha os demais itens ao abrir um novo,
+  // mesmo em navegadores sem suporte ao atributo "name" em <details>.
+  const accordion = document.getElementById('faq-accordion');
+  if (accordion) {
+    const items = Array.from(accordion.querySelectorAll<HTMLDetailsElement>('.faq-item'));
+    items.forEach((item) => {
+      item.addEventListener('toggle', () => {
+        if (item.open) {
+          items.forEach((other) => {
+            if (other !== item) other.open = false;
+          });
+        }
+      });
+    });
+  }
+</script>
+
+<style>
+  .faq-accordion {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .faq-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+  }
+
+  .faq-trigger {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    background: transparent;
+    text-align: left;
+    padding: 18px 22px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--primary);
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq-trigger::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-trigger:focus-visible {
+    outline: 3px solid var(--electric);
+    outline-offset: -3px;
+  }
+
+  .faq-icon {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: rgba(30, 91, 255, 0.1);
+    color: var(--electric);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 800;
+    transition: transform 0.15s ease;
+  }
+
+  .faq-item[open] .faq-icon {
+    transform: rotate(45deg);
+  }
+
+  .faq-panel {
+    padding: 0 22px 20px;
+    color: var(--muted);
+  }
+
+  .faq-panel p {
+    margin: 0;
+    line-height: 1.7;
+  }
+</style>

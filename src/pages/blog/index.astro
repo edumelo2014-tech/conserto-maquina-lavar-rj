@@ -1,0 +1,137 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import BlogCard from '@/components/BlogCard.astro';
+import { organizationJsonLd, blogJsonLd, collectionPageJsonLd } from '@/lib/jsonld';
+
+const pageTitle = 'Blog sobre Máquinas de Lavar | Conserto de Máquina de Lavar no RJ';
+const pageDescription =
+  'Dicas e informações sobre defeitos, manutenção e marcas de máquinas de lavar, com conteúdo produzido para quem busca conserto de máquina de lavar no RJ.';
+
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf()
+);
+
+const categories = ['Todos', 'Defeitos', 'Manutenção', 'Marcas', 'Guias'] as const;
+
+const jsonLd = [
+  organizationJsonLd(),
+  blogJsonLd('/blog/'),
+  collectionPageJsonLd('/blog/', pageTitle),
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} path="/blog/" jsonLd={jsonLd}>
+  <div class="container">
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Blog', href: '/blog/' }]} />
+  </div>
+
+  <section class="section section-light page-intro">
+    <div class="container">
+      <span class="eyebrow">Blog</span>
+      <h1>Dicas e Informações sobre Máquinas de Lavar</h1>
+      <p class="page-hero-lede">
+        Conteúdo técnico e prático sobre defeitos, manutenção e cuidados com máquinas de lavar
+        residenciais.
+      </p>
+      <div class="category-filters" role="tablist" aria-label="Filtrar artigos por categoria">
+        {categories.map((category) => (
+          <button type="button" class="category-filter" data-category={category}>
+            {category}
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light blog-list">
+    <div class="container">
+      {allPosts.length > 0 ? (
+        <div class="grid grid-3" id="blog-grid">
+          {allPosts.map((post) => (
+            <div class="blog-grid-item" data-category={post.data.category}>
+              <BlogCard post={post} />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p>Em breve, novos conteúdos sobre máquinas de lavar.</p>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const buttons = document.querySelectorAll<HTMLButtonElement>('.category-filter');
+  const items = document.querySelectorAll<HTMLElement>('.blog-grid-item');
+
+  function setActive(category: string) {
+    buttons.forEach((btn) => {
+      btn.setAttribute('aria-pressed', String(btn.dataset.category === category));
+    });
+    items.forEach((item) => {
+      const show = category === 'Todos' || item.dataset.category === category;
+      item.style.display = show ? '' : 'none';
+    });
+  }
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => setActive(btn.dataset.category || 'Todos'));
+  });
+
+  setActive('Todos');
+</script>
+
+<style>
+  .page-intro {
+    padding-top: clamp(32px, 5vw, 56px);
+    padding-bottom: clamp(20px, 3vw, 32px);
+  }
+
+  .page-intro h1 {
+    font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+    color: var(--primary);
+    max-width: 28ch;
+  }
+
+  .page-hero-lede {
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 40rem;
+    margin-bottom: 26px;
+  }
+
+  .category-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .category-filter {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 9px 18px;
+    font-weight: 600;
+    font-size: 0.88rem;
+    color: var(--secondary);
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+  }
+
+  .category-filter[aria-pressed='true'] {
+    background: var(--electric);
+    border-color: var(--electric);
+    color: var(--white);
+  }
+
+  .category-filter:focus-visible {
+    outline: 3px solid var(--electric);
+    outline-offset: 2px;
+  }
+
+  .blog-list {
+    padding-top: 0;
+  }
+</style>

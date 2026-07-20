@@ -1,0 +1,106 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { siteConfig } from '@/site.config';
+import { organizationJsonLd, webPageJsonLd } from '@/lib/jsonld';
+
+const pageTitle = 'Aviso Legal | Conserto de Máquina de Lavar no RJ';
+const pageDescription =
+  'Informações legais sobre a natureza do site, a independência do atendimento e o uso responsável do conteúdo publicado.';
+
+const jsonLd = [organizationJsonLd(), webPageJsonLd(pageTitle, pageDescription, '/aviso-legal/')];
+const lastUpdate = '20 de julho de 2026';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} path="/aviso-legal/" jsonLd={jsonLd}>
+  <div class="container">
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Aviso Legal', href: '/aviso-legal/' }]} />
+  </div>
+
+  <section class="section section-light legal-page">
+    <div class="container legal-content">
+      <h1>Aviso Legal</h1>
+      <p class="legal-updated">Última atualização: {lastUpdate}</p>
+
+      <h2>1. Natureza do Site</h2>
+      <p>
+        Este site tem finalidade informativa e comercial, divulgando serviços de conserto e
+        manutenção de máquinas de lavar prestados de forma independente na cidade do
+        {siteConfig.city}.
+      </p>
+
+      <h2>2. Atendimento Independente</h2>
+      <p>
+        A assistência técnica divulgada neste site é especializada e independente, não possuindo
+        vínculo oficial, autorização ou representação de nenhum fabricante de eletrodomésticos.
+      </p>
+
+      <h2>3. Marcas de Terceiros</h2>
+      <p>
+        Eventuais menções a marcas como Brastemp, Electrolux, Consul e Samsung têm finalidade
+        exclusivamente informativa, indicando fabricantes cujos equipamentos podem ser avaliados
+        e reparados. Todas as marcas pertencem aos seus respectivos titulares.
+      </p>
+
+      <h2>4. Conteúdo Informativo</h2>
+      <p>
+        As informações publicadas neste site, incluindo os artigos do blog, têm caráter educativo
+        e não substituem a avaliação técnica presencial. Decisões sobre reparo, substituição de
+        peças ou continuidade de uso de um equipamento devem considerar o diagnóstico de um
+        profissional.
+      </p>
+
+      <h2>5. Preços e Prazos</h2>
+      <p>
+        Este site não apresenta tabelas fixas de preços ou prazos absolutos de execução, já que
+        esses valores dependem do diagnóstico de cada caso. Orçamentos são sempre apresentados
+        antes da execução de qualquer serviço.
+      </p>
+
+      <h2>6. Limitação de Responsabilidade</h2>
+      <p>
+        Buscamos manter as informações deste site atualizadas e corretas, mas não garantimos que
+        estejam livres de eventuais imprecisões. O uso das informações aqui disponibilizadas é de
+        responsabilidade do usuário.
+      </p>
+
+      <h2>7. Alterações deste Aviso</h2>
+      <p>
+        Este Aviso Legal pode ser atualizado periodicamente. Recomendamos a consulta ocasional
+        desta página para acompanhar eventuais mudanças.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding-top: clamp(28px, 4vw, 44px);
+  }
+
+  .legal-content {
+    max-width: 760px;
+  }
+
+  .legal-content h1 {
+    color: var(--primary);
+    font-size: clamp(1.7rem, 3vw, 2.2rem);
+  }
+
+  .legal-updated {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 2em;
+  }
+
+  .legal-content h2 {
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin-top: 1.8em;
+  }
+
+  .legal-content p {
+    color: var(--muted);
+    line-height: 1.75;
+  }
+</style>

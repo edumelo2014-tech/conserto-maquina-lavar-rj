@@ -1,0 +1,57 @@
+---
+import Icon from './icons/Icon.astro';
+import { siteConfig } from '@/site.config';
+import type { IconName } from './icons/icon-names';
+
+const items: { icon: IconName; label: string }[] = [
+  { icon: 'calendar', label: `Desde ${siteConfig.startYear}` },
+  { icon: 'home-visit', label: 'Atendimento em domicílio' },
+  { icon: 'quote', label: 'Orçamento antes do reparo' },
+  { icon: 'map-pin', label: `Atendimento na cidade do ${siteConfig.city}` },
+];
+---
+
+<section class="trust-bar" aria-label="Diferenciais rápidos do atendimento">
+  <div class="container trust-grid">
+    {items.map((item) => (
+      <div class="trust-item">
+        <Icon name={item.icon} size={26} class="trust-icon" />
+        <span>{item.label}</span>
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .trust-bar {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding-block: 22px;
+  }
+
+  .trust-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 0.95rem;
+  }
+
+  .trust-icon {
+    color: var(--electric);
+    flex-shrink: 0;
+  }
+
+  @media (max-width: 780px) {
+    .trust-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

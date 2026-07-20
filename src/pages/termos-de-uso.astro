@@ -1,0 +1,114 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import { siteConfig } from '@/site.config';
+import { organizationJsonLd, webPageJsonLd } from '@/lib/jsonld';
+
+const pageTitle = 'Termos de Uso | Conserto de Máquina de Lavar no RJ';
+const pageDescription = 'Condições de uso do site e das informações relacionadas ao conserto de máquina de lavar no RJ.';
+
+const jsonLd = [organizationJsonLd(), webPageJsonLd(pageTitle, pageDescription, '/termos-de-uso/')];
+const lastUpdate = '20 de julho de 2026';
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} path="/termos-de-uso/" jsonLd={jsonLd}>
+  <div class="container">
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Termos de Uso', href: '/termos-de-uso/' }]} />
+  </div>
+
+  <section class="section section-light legal-page">
+    <div class="container legal-content">
+      <h1>Termos de Uso</h1>
+      <p class="legal-updated">Última atualização: {lastUpdate}</p>
+
+      <p>
+        Ao acessar e utilizar este site, você concorda com os termos descritos a seguir. Caso não
+        concorde com alguma condição, recomendamos não continuar a utilização do site.
+      </p>
+
+      <h2>1. Objeto</h2>
+      <p>
+        Este site tem como objetivo apresentar informações sobre serviços de conserto e
+        manutenção de máquinas de lavar na cidade do {siteConfig.city}, além de viabilizar contato
+        para solicitação de orçamento.
+      </p>
+
+      <h2>2. Uso do Conteúdo</h2>
+      <p>
+        O conteúdo publicado, incluindo textos, imagens e artigos do blog, pode ser acessado
+        livremente para fins informativos. A reprodução total ou parcial para outras finalidades
+        deve ser previamente autorizada.
+      </p>
+
+      <h2>3. Formulário de Contato</h2>
+      <p>
+        Ao preencher o formulário de contato, você declara que as informações fornecidas são
+        verdadeiras e que tem interesse em receber contato relacionado ao serviço solicitado. O
+        envio da mensagem é realizado por você mesmo, através do WhatsApp.
+      </p>
+
+      <h2>4. Orçamentos e Serviços</h2>
+      <p>
+        Os orçamentos apresentados são elaborados após diagnóstico técnico e podem variar
+        conforme marca, modelo, defeito identificado e necessidade de peças. A execução de
+        qualquer serviço depende da aprovação prévia do cliente.
+      </p>
+
+      <h2>5. Disponibilidade do Site</h2>
+      <p>
+        Buscamos manter o site disponível de forma contínua, mas eventuais interrupções para
+        manutenção ou atualização podem ocorrer sem aviso prévio.
+      </p>
+
+      <h2>6. Links Externos</h2>
+      <p>
+        Este site pode conter links para serviços de terceiros, como WhatsApp e mapas. Não nos
+        responsabilizamos pelo conteúdo ou pelas políticas desses serviços externos.
+      </p>
+
+      <h2>7. Alterações destes Termos</h2>
+      <p>
+        Estes Termos de Uso podem ser atualizados periodicamente, sem aviso prévio individual.
+        Recomendamos a consulta ocasional desta página.
+      </p>
+
+      <h2>8. Legislação Aplicável</h2>
+      <p>
+        Estes Termos de Uso são regidos pela legislação brasileira aplicável às relações de
+        consumo e à prestação de serviços.
+      </p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .legal-page {
+    padding-top: clamp(28px, 4vw, 44px);
+  }
+
+  .legal-content {
+    max-width: 760px;
+  }
+
+  .legal-content h1 {
+    color: var(--primary);
+    font-size: clamp(1.7rem, 3vw, 2.2rem);
+  }
+
+  .legal-updated {
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-bottom: 2em;
+  }
+
+  .legal-content h2 {
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin-top: 1.8em;
+  }
+
+  .legal-content p {
+    color: var(--muted);
+    line-height: 1.75;
+  }
+</style>

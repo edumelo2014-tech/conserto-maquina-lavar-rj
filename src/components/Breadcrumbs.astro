@@ -1,0 +1,87 @@
+---
+import { siteConfig } from '@/site.config';
+
+interface Crumb {
+  label: string;
+  href: string;
+}
+
+interface Props {
+  items: Crumb[];
+}
+
+const { items } = Astro.props;
+
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: items.map((item, index) => ({
+    '@type': 'ListItem',
+    position: index + 1,
+    name: item.label,
+    item: new URL(item.href, siteConfig.siteUrl).toString(),
+  })),
+};
+---
+
+<nav class="breadcrumbs" aria-label="Trilha de navegação">
+  <ol>
+    {items.map((item, index) => (
+      <li>
+        {index === items.length - 1 ? (
+          <span aria-current="page">{item.label}</span>
+        ) : (
+          <>
+            <a href={item.href}>{item.label}</a>
+            <span class="sep" aria-hidden="true">/</span>
+          </>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>
+
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} is:inline />
+
+<style>
+  .breadcrumbs {
+    padding-block: 14px;
+    font-size: 0.88rem;
+  }
+
+  .breadcrumbs ol {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    color: var(--muted);
+  }
+
+  .breadcrumbs li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .breadcrumbs a {
+    color: var(--muted);
+    text-decoration: none;
+  }
+
+  .breadcrumbs a:hover {
+    color: var(--electric);
+    text-decoration: underline;
+  }
+
+  .breadcrumbs [aria-current='page'] {
+    color: var(--primary);
+    font-weight: 600;
+  }
+
+  .sep {
+    color: var(--border);
+  }
+</style>

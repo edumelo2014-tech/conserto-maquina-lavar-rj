@@ -1,0 +1,40 @@
+---
+import { siteConfig } from '@/site.config';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  ogImage?: string;
+  noindex?: boolean;
+  jsonLd?: Record<string, unknown>[];
+}
+
+const { title, description, path, ogImage = '/images/logo/logo.png', noindex = false, jsonLd = [] } =
+  Astro.props;
+
+const canonicalUrl = new URL(path, siteConfig.siteUrl).toString();
+const ogImageUrl = new URL(ogImage, siteConfig.siteUrl).toString();
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalUrl} />
+<meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={siteConfig.siteName} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:locale" content="pt_BR" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageUrl} />
+
+{jsonLd.map((entry) => (
+  <script type="application/ld+json" set:html={JSON.stringify(entry)} is:inline />
+))}

@@ -1,0 +1,194 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import SectionHeader from '@/components/SectionHeader.astro';
+import ServiceCard from '@/components/ServiceCard.astro';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import CTASection from '@/components/CTASection.astro';
+import Icon from '@/components/icons/Icon.astro';
+import { services } from '@/data/services';
+import { problems } from '@/data/problems';
+import { organizationJsonLd, webPageJsonLd, servicesJsonLd } from '@/lib/jsonld';
+
+const pageTitle = 'Serviços para Máquina de Lavar no RJ | Manutenção e Reparo';
+const pageDescription =
+  'Conheça os serviços de conserto, diagnóstico e manutenção de máquinas de lavar com atendimento na cidade do Rio de Janeiro.';
+
+const jsonLd = [
+  organizationJsonLd(),
+  webPageJsonLd(pageTitle, pageDescription, '/servicos/'),
+  ...servicesJsonLd(services.map((s) => ({ name: s.title, description: s.longDescription }))),
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} path="/servicos/" jsonLd={jsonLd}>
+  <div class="container">
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Serviços', href: '/servicos/' }]} />
+  </div>
+
+  <section class="section section-light page-intro">
+    <div class="container">
+      <span class="eyebrow">Manutenção e reparo</span>
+      <h1>Serviços para Máquinas de Lavar no RJ</h1>
+      <p class="page-hero-lede">
+        Conserto e manutenção de lavadoras com atendimento na cidade do Rio de Janeiro, sempre com
+        diagnóstico técnico antes da execução de qualquer serviço.
+      </p>
+      <WhatsAppButton />
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container narrow">
+      <SectionHeader align="left" eyebrow="Como trabalhamos" title="Conserto e Manutenção de Lavadoras no Rio de Janeiro" />
+      <p>
+        O atendimento cobre desde reparos pontuais até manutenção preventiva, com foco em
+        identificar a causa real do defeito antes de qualquer troca de peça. O objetivo é que você
+        entenda o que está sendo feito e por quê, do início ao fim do serviço.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-light" id="lista-de-servicos">
+    <div class="container">
+      <SectionHeader eyebrow="O que oferecemos" title="Serviços Disponíveis" />
+      <div class="grid grid-3">
+        {services.map((service) => (
+          <ServiceCard icon={service.icon} title={service.title} description={service.longDescription} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container">
+      <SectionHeader
+        align="left"
+        eyebrow="Processo"
+        title="Como Funciona o Atendimento no RJ"
+        lede="Um fluxo simples do primeiro contato até o teste final do equipamento."
+      />
+      <ol class="mini-steps">
+        <li><Icon name="chat" size={20} /> Contato pelo WhatsApp com marca, modelo e defeito</li>
+        <li><Icon name="calendar" size={20} /> Agendamento do atendimento em domicílio</li>
+        <li><Icon name="search" size={20} /> Diagnóstico técnico presencial</li>
+        <li><Icon name="quote" size={20} /> Apresentação do orçamento</li>
+        <li><Icon name="wrench" size={20} /> Execução do reparo após aprovação</li>
+        <li><Icon name="check-circle" size={20} /> Teste final de funcionamento</li>
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container">
+      <SectionHeader
+        eyebrow="Sinais de atenção"
+        title="Problemas que Podem Exigir Avaliação Técnica"
+        lede="Alguns sintomas indicam a necessidade de uma avaliação mais próxima do equipamento."
+      />
+      <div class="grid grid-4">
+        {problems.slice(0, 8).map((problem) => (
+          <div class="mini-problem card">
+            <Icon name={problem.icon} size={22} class="mini-problem-icon" />
+            <h3>{problem.title}</h3>
+          </div>
+        ))}
+      </div>
+      <p class="section-note">
+        Não é possível confirmar a causa de um defeito apenas pela descrição. A avaliação técnica
+        é o que define o diagnóstico final.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container narrow">
+      <SectionHeader align="left" eyebrow="Transparência" title="Orçamento e Aprovação do Serviço" />
+      <p>
+        O orçamento é apresentado após o diagnóstico, com explicação sobre o defeito identificado
+        e as peças envolvidas, quando necessárias. A execução do reparo só começa depois da sua
+        aprovação. Nem todos os componentes podem ser recuperados — quando isso ocorre, as
+        alternativas são explicadas antes de qualquer decisão.
+      </p>
+    </div>
+  </section>
+
+  <CTASection
+    title="Solicite Atendimento no Rio de Janeiro"
+    description="Envie a marca, o modelo e o defeito observado pelo WhatsApp para receber a avaliação inicial."
+    showPhone={true}
+  />
+</BaseLayout>
+
+<style>
+  .page-intro {
+    padding-top: clamp(32px, 5vw, 56px);
+    padding-bottom: clamp(28px, 4vw, 44px);
+  }
+
+  .page-intro h1 {
+    font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+    color: var(--primary);
+    max-width: 26ch;
+  }
+
+  .page-hero-lede {
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 40rem;
+    margin-bottom: 24px;
+  }
+
+  .narrow {
+    max-width: 760px;
+  }
+
+  .mini-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+
+  .mini-steps li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    color: var(--white);
+    font-weight: 600;
+    font-size: 0.92rem;
+  }
+
+  .mini-steps :global(svg) {
+    color: var(--cyan);
+    flex-shrink: 0;
+  }
+
+  .mini-problem {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .mini-problem-icon {
+    color: var(--electric);
+    margin-bottom: 10px;
+  }
+
+  .mini-problem h3 {
+    font-size: 0.92rem;
+    color: var(--primary);
+    margin: 0;
+  }
+
+  @media (max-width: 780px) {
+    .mini-steps {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

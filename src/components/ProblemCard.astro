@@ -1,0 +1,43 @@
+---
+import Icon from './icons/Icon.astro';
+import type { IconName } from './icons/icon-names';
+
+interface Props {
+  icon: IconName;
+  title: string;
+  description: string;
+}
+
+const { icon, title, description } = Astro.props;
+---
+
+<article class="problem-card card">
+  <Icon name={icon} size={24} class="problem-icon" />
+  <h3>{title}</h3>
+  <p>{description}</p>
+</article>
+
+<style>
+  .problem-card {
+    padding: 24px 22px;
+    background: var(--light);
+    border-color: var(--border);
+  }
+
+  .problem-icon {
+    color: var(--electric);
+    margin-bottom: 12px;
+  }
+
+  .problem-card h3 {
+    font-size: 1rem;
+    color: var(--primary);
+    margin-bottom: 8px;
+  }
+
+  .problem-card p {
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin-bottom: 0;
+  }
+</style>

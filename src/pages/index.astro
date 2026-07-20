@@ -1,0 +1,765 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import SectionHeader from '@/components/SectionHeader.astro';
+import TrustBar from '@/components/TrustBar.astro';
+import ServiceCard from '@/components/ServiceCard.astro';
+import ProblemCard from '@/components/ProblemCard.astro';
+import BrandCard from '@/components/BrandCard.astro';
+import ProcessSteps from '@/components/ProcessSteps.astro';
+import PricingFactors from '@/components/PricingFactors.astro';
+import RepairWorthTable from '@/components/RepairWorthTable.astro';
+import SafetyAlert from '@/components/SafetyAlert.astro';
+import AreaGrid from '@/components/AreaGrid.astro';
+import MapSection from '@/components/MapSection.astro';
+import FAQAccordion from '@/components/FAQAccordion.astro';
+import BlogCard from '@/components/BlogCard.astro';
+import CTASection from '@/components/CTASection.astro';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import Icon from '@/components/icons/Icon.astro';
+import { images } from '@/assets/images';
+import { siteConfig } from '@/site.config';
+import { services } from '@/data/services';
+import { problems } from '@/data/problems';
+import { pricingFactors } from '@/data/pricingFactors';
+import { homeFaq } from '@/data/faq';
+import {
+  organizationJsonLd,
+  websiteJsonLd,
+  professionalServiceJsonLd,
+  servicesJsonLd,
+  webPageJsonLd,
+} from '@/lib/jsonld';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const recentPosts = allPosts
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .slice(0, 3);
+
+const brands = [
+  {
+    image: images.marcaBrastemp,
+    alt: 'Máquinas de lavar Brastemp atendidas',
+    title: 'Máquinas de Lavar Brastemp',
+    description: 'Atendimento a diferentes linhas e modelos, de lavadoras convencionais a versões com mais tecnologia embarcada.',
+  },
+  {
+    image: images.marcaEletrolux,
+    alt: 'Máquinas de lavar Electrolux atendidas',
+    title: 'Máquinas de Lavar Electrolux',
+    description: 'Avaliação de falhas elétricas, mecânicas e de programação em modelos populares da marca.',
+  },
+  {
+    image: images.marcaConsul,
+    alt: 'Máquinas de lavar Consul atendidas',
+    title: 'Máquinas de Lavar Consul',
+    description: 'Diagnóstico de defeitos comuns em lavadoras de diferentes capacidades e faixas de uso.',
+  },
+  {
+    image: images.marcaSamsung,
+    alt: 'Máquinas de lavar Samsung atendidas',
+    title: 'Máquinas de Lavar Samsung',
+    description: 'Suporte técnico a modelos com painéis eletrônicos e sistemas de centrifugação mais recentes.',
+  },
+];
+
+const processSteps = [
+  { title: 'Contato e Identificação do Problema', description: 'Você descreve o defeito, a marca e o modelo pelo WhatsApp.' },
+  { title: 'Agendamento do Atendimento', description: 'Combinamos um horário compatível com sua rotina.' },
+  { title: 'Diagnóstico Técnico', description: 'O equipamento é avaliado presencialmente para identificar a causa real.' },
+  { title: 'Apresentação do Orçamento', description: 'Os valores são apresentados antes de qualquer execução.' },
+  { title: 'Execução do Reparo', description: 'O serviço é realizado somente após a sua aprovação.' },
+  { title: 'Teste Final da Máquina', description: 'O equipamento é testado para confirmar o funcionamento.' },
+];
+
+const whyChooseUs: { icon: 'calendar' | 'home-visit' | 'quote' | 'search' | 'shield' | 'chat'; title: string; description: string }[] = [
+  { icon: 'calendar', title: 'Experiência Desde 2010', description: 'Vivência prática adquirida ao longo de anos de atendimento a máquinas de lavar residenciais.' },
+  { icon: 'home-visit', title: 'Atendimento em Domicílio', description: 'Avaliação e, na maioria dos casos, reparo realizado no próprio local.' },
+  { icon: 'quote', title: 'Orçamento Antes do Serviço', description: 'O valor é apresentado e aprovado antes da execução de qualquer reparo.' },
+  { icon: 'search', title: 'Diagnóstico Técnico', description: 'A causa do defeito é investigada antes da indicação de qualquer solução.' },
+  { icon: 'shield', title: 'Garantia Conforme o Reparo', description: 'Prazo e cobertura são informados de acordo com o serviço e a peça utilizada.' },
+  { icon: 'chat', title: 'Atendimento Direto pelo WhatsApp', description: 'Comunicação simples, direta e sem burocracia durante todo o processo.' },
+];
+
+const informItems = [
+  { title: 'Marca da Máquina', description: 'Identifica o fabricante do equipamento.' },
+  { title: 'Modelo do Equipamento', description: 'Costuma estar na etiqueta traseira, lateral, sob a tampa ou perto da porta.' },
+  { title: 'Defeito Apresentado', description: 'Descreva o que está acontecendo com o máximo de detalhes possível.' },
+  { title: 'Código de Erro no Painel', description: 'Se a máquina exibir algum código, ele ajuda a orientar o diagnóstico.' },
+  { title: 'Bairro do Atendimento', description: 'Facilita a organização da visita técnica.' },
+  { title: 'Quando o Problema Começou', description: 'Ajuda a entender se o defeito é recente ou recorrente.' },
+];
+
+const pageTitle = 'Conserto de Máquina de Lavar no RJ | Atendimento em Domicílio';
+const pageDescription = siteConfig.defaultDescription;
+
+const serviceJsonLdEntries = servicesJsonLd(
+  services.map((service) => ({ name: service.title, description: service.longDescription }))
+);
+
+const jsonLd = [
+  organizationJsonLd(),
+  websiteJsonLd(),
+  professionalServiceJsonLd(),
+  webPageJsonLd(pageTitle, pageDescription, '/'),
+  ...serviceJsonLdEntries,
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} path="/" jsonLd={jsonLd}>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Assistência técnica especializada e independente</span>
+        <h1>Conserto de Máquina de Lavar no RJ</h1>
+        <p class="hero-subheadline">
+          Atendimento em domicílio com experiência desde {siteConfig.startYear}, diagnóstico
+          técnico e orçamento apresentado antes da realização do serviço.
+        </p>
+        <ul class="hero-signals">
+          <li><Icon name="check-circle" size={18} /> Experiência desde {siteConfig.startYear}</li>
+          <li><Icon name="check-circle" size={18} /> Atendimento em domicílio</li>
+          <li><Icon name="check-circle" size={18} /> Diagnóstico técnico</li>
+          <li><Icon name="check-circle" size={18} /> Orçamento antes do serviço</li>
+        </ul>
+        <div class="hero-actions">
+          <WhatsAppButton label="Solicitar Orçamento no WhatsApp" />
+          <a href="/servicos/" class="btn btn-outline-primary">Conhecer os Serviços</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <Image
+          src={images.heroTecnico}
+          alt="Técnico avaliando máquina de lavar em residência no Rio de Janeiro"
+          width={640}
+          height={800}
+          loading="eager"
+          fetchpriority="high"
+          decoding="async"
+          class="hero-img"
+        />
+      </div>
+    </div>
+  </section>
+
+  <TrustBar />
+
+  <!-- EMPRESA DESDE 2010 -->
+  <section class="section section-dark">
+    <div class="container about-grid">
+      <div class="about-copy">
+        <span class="eyebrow">Nossa trajetória</span>
+        <h2>Empresa de Conserto de Máquina de Lavar no RJ Desde {siteConfig.startYear}</h2>
+        <p>
+          Atuamos no conserto de máquinas de lavar na cidade do Rio de Janeiro desde
+          {siteConfig.startYear}, atendendo residências com foco em diagnóstico técnico e
+          transparência. Cada atendimento começa pela avaliação do equipamento, para que o
+          orçamento seja apresentado somente depois que o defeito é identificado.
+        </p>
+        <p>
+          O serviço é executado com cuidado com o ambiente e com o próprio equipamento, e a
+          execução do reparo só acontece após a aprovação do cliente. Essa forma de trabalhar
+          busca manter a relação clara em cada etapa, da avaliação inicial ao teste final da
+          máquina.
+        </p>
+        <WhatsAppButton label="Falar com um técnico" />
+      </div>
+      <div class="about-card">
+        <ul>
+          <li>
+            <span class="about-number">1</span>
+            <div>
+              <h3>Experiência no Mercado Desde {siteConfig.startYear}</h3>
+              <p>Vivência prática construída ao longo de anos de atendimento a lavadoras residenciais.</p>
+            </div>
+          </li>
+          <li>
+            <span class="about-number">2</span>
+            <div>
+              <h3>Atendimento Transparente</h3>
+              <p>Explicações claras sobre o defeito identificado e as opções de reparo.</p>
+            </div>
+          </li>
+          <li>
+            <span class="about-number">3</span>
+            <div>
+              <h3>Diagnóstico Antes do Reparo</h3>
+              <p>Nenhuma peça é trocada sem que a causa do problema seja confirmada.</p>
+            </div>
+          </li>
+          <li>
+            <span class="about-number">4</span>
+            <div>
+              <h3>Orçamento Antes da Execução do Serviço</h3>
+              <p>O valor é apresentado e só avançamos com a sua aprovação.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section class="section section-light" id="servicos">
+    <div class="container">
+      <SectionHeader
+        eyebrow="O que fazemos"
+        title="Serviços para Máquinas de Lavar"
+        lede="Do diagnóstico ao teste final, cada etapa é conduzida com avaliação técnica e comunicação clara sobre o que está sendo feito."
+      />
+      <div class="grid grid-3">
+        {services.map((service) => (
+          <ServiceCard icon={service.icon} title={service.title} description={service.description} />
+        ))}
+      </div>
+      <div class="section-cta">
+        <a href="/servicos/" class="btn btn-outline-primary">Ver todos os serviços</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEMAS COMUNS -->
+  <section class="section section-dark">
+    <div class="container">
+      <SectionHeader
+        eyebrow="Sintomas frequentes"
+        title="Problemas Comuns em Máquinas de Lavar no RJ"
+        lede="Alguns sinais aparecem com frequência nos atendimentos residenciais. Reconhecê-los ajuda a descrever melhor o defeito ao solicitar o orçamento."
+      />
+      <div class="grid grid-4">
+        {problems.map((problem) => (
+          <ProblemCard icon={problem.icon} title={problem.title} description={problem.description} />
+        ))}
+      </div>
+      <p class="section-note">
+        Os sintomas podem ter causas diferentes. A confirmação depende de avaliação técnica.
+      </p>
+    </div>
+  </section>
+
+  <!-- MARCAS ATENDIDAS -->
+  <section class="section section-light">
+    <div class="container">
+      <SectionHeader
+        eyebrow="Marcas atendidas"
+        title="Marcas de Máquinas de Lavar Atendidas no RJ"
+        lede="Atendimento a diferentes fabricantes e modelos de lavadoras residenciais."
+      />
+      <div class="grid grid-4">
+        {brands.map((brand) => (
+          <BrandCard image={brand.image} alt={brand.alt} title={brand.title} description={brand.description} />
+        ))}
+      </div>
+      <p class="section-note">
+        As marcas mencionadas pertencem aos seus respectivos titulares. O atendimento é realizado
+        de forma especializada e independente.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA INTERMEDIÁRIO -->
+  <CTASection
+    title="Sua máquina apresentou defeito?"
+    description="Envie pelo WhatsApp a marca, o modelo, o defeito observado e o bairro do atendimento para facilitar a avaliação inicial."
+    buttonLabel="Falar pelo WhatsApp"
+  />
+
+  <!-- ATENDIMENTO EM DOMICÍLIO -->
+  <section class="section section-light">
+    <div class="container home-visit-grid">
+      <div class="home-visit-media">
+        <Image
+          src={images.tecnicoAtendendoCliente}
+          alt="Técnico atendendo cliente em domicílio no Rio de Janeiro"
+          width={640}
+          height={800}
+          loading="lazy"
+          class="home-visit-img"
+        />
+      </div>
+      <div class="home-visit-copy">
+        <span class="eyebrow">Atendimento residencial</span>
+        <h2>Técnico de Máquina de Lavar em Domicílio no RJ</h2>
+        <p>
+          Muitos defeitos podem ser avaliados e reparados diretamente na residência, o que evita o
+          transporte do equipamento e agiliza o atendimento. A máquina é analisada já instalada,
+          nas condições reais de uso.
+        </p>
+        <p>
+          Em situações específicas, quando o reparo exige recursos que não estão disponíveis em
+          domicílio, pode ser necessário avaliar a retirada técnica do equipamento — isso é
+          informado durante o diagnóstico, sem prometer que toda máquina será consertada no local.
+        </p>
+        <ul class="checklist">
+          <li><Icon name="check-circle" size={18} /> Atendimento no Local</li>
+          <li><Icon name="check-circle" size={18} /> Avaliação Técnica da Lavadora</li>
+          <li><Icon name="check-circle" size={18} /> Serviço Realizado Após Aprovação</li>
+          <li><Icon name="check-circle" size={18} /> Teste da Máquina Após o Reparo</li>
+        </ul>
+        <WhatsAppButton label="Solicitar Orçamento no WhatsApp" />
+      </div>
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section class="section section-dark">
+    <div class="container">
+      <SectionHeader
+        eyebrow="Passo a passo"
+        title="Como Funciona o Conserto de Máquina de Lavar no RJ"
+        lede="Um processo em seis etapas, do primeiro contato ao teste final do equipamento."
+      />
+      <ProcessSteps steps={processSteps} />
+    </div>
+  </section>
+
+  <!-- O QUE INFLUENCIA O PREÇO -->
+  <section class="section section-light">
+    <div class="container pricing-grid">
+      <div>
+        <SectionHeader
+          align="left"
+          eyebrow="Transparência"
+          title="O Que Influencia o Preço do Conserto no RJ?"
+          lede="Alguns fatores costumam pesar mais no valor final do orçamento."
+        />
+        <PricingFactors factors={pricingFactors} />
+      </div>
+      <div class="pricing-box">
+        <Icon name="quote" size={26} class="pricing-box-icon" />
+        <p>
+          Um valor responsável depende do diagnóstico. Evite promessas de preço fechado sem
+          identificar o defeito e o modelo da máquina.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUANDO VALE A PENA CONSERTAR -->
+  <section class="section section-dark">
+    <div class="container worth-grid">
+      <div class="worth-media">
+        <Image
+          src={images.tecnicoTestandoComponente}
+          alt="Técnico avaliando componente eletrônico de máquina de lavar aberta"
+          width={640}
+          height={800}
+          loading="lazy"
+          class="worth-img"
+        />
+      </div>
+      <div class="worth-copy">
+        <SectionHeader
+          align="left"
+          eyebrow="Vale a pena consertar?"
+          title="Quando Vale a Pena Consertar a Máquina de Lavar no RJ?"
+          lede="Idade, conservação e custo do reparo ajudam a orientar essa decisão."
+        />
+        <RepairWorthTable />
+        <p class="section-note light-note">
+          Essas informações são orientativas e não substituem o diagnóstico técnico.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- POR QUE ESCOLHER -->
+  <section class="section section-light">
+    <div class="container">
+      <SectionHeader
+        eyebrow="Por que escolher"
+        title="Por Que Escolher Nossa Manutenção de Lavadoras no RJ?"
+        lede="Princípios que guiam o atendimento do início ao fim do serviço."
+      />
+      <div class="grid grid-3">
+        {whyChooseUs.map((item) => (
+          <ServiceCard icon={item.icon} title={item.title} description={item.description} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- O QUE INFORMAR ANTES DO ATENDIMENTO -->
+  <section class="section section-dark">
+    <div class="container">
+      <SectionHeader
+        eyebrow="Information gain"
+        title="O Que Informar ao Solicitar Atendimento no RJ?"
+        lede="Quanto mais detalhes você enviar, mais precisa é a avaliação inicial do defeito."
+      />
+      <div class="grid grid-3 inform-grid">
+        {informItems.map((item) => (
+          <div class="inform-item">
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </div>
+        ))}
+      </div>
+      <div class="inform-extra">
+        <p>
+          Quando possível, envie também uma foto da etiqueta do equipamento e um vídeo curto do
+          ruído ou vazamento observado, desde que isso possa ser feito com segurança. A etiqueta
+          com o modelo costuma ficar na parte traseira, em uma lateral, sob a tampa superior ou
+          próxima à abertura da porta.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUANDO DESLIGAR A MÁQUINA -->
+  <section class="section section-light">
+    <div class="container">
+      <SectionHeader
+        eyebrow="Segurança"
+        title="Quando Desligar a Máquina e Solicitar um Técnico no RJ?"
+        lede="Alguns sinais indicam que o equipamento deve ser desligado antes mesmo do atendimento técnico."
+      />
+      <SafetyAlert />
+    </div>
+  </section>
+
+  <!-- ÁREAS ATENDIDAS -->
+  <section class="section section-dark">
+    <div class="container">
+      <SectionHeader
+        eyebrow="Cobertura"
+        title="Áreas Atendidas no Rio de Janeiro"
+        lede={`Atendemos toda a cidade do ${siteConfig.city}.`}
+      />
+      <AreaGrid />
+    </div>
+  </section>
+
+  <!-- MAPA -->
+  <section class="section section-light">
+    <div class="container">
+      <SectionHeader
+        eyebrow="Localização"
+        title="Atendimento em Toda a Cidade do Rio de Janeiro"
+        lede="O atendimento é realizado em diferentes regiões da cidade do Rio de Janeiro. Informe seu bairro ao solicitar o orçamento."
+      />
+      <MapSection />
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section-dark">
+    <div class="container faq-container">
+      <SectionHeader
+        eyebrow="Dúvidas frequentes"
+        title="Perguntas Frequentes sobre Conserto de Máquina de Lavar no RJ"
+      />
+      <FAQAccordion items={homeFaq} idPrefix="home-faq" />
+    </div>
+  </section>
+
+  <!-- ARTIGOS RECENTES -->
+  {recentPosts.length > 0 && (
+    <section class="section section-light">
+      <div class="container">
+        <SectionHeader
+          eyebrow="Blog"
+          title="Conteúdos Recentes sobre Máquinas de Lavar"
+          lede="Dicas práticas e informações técnicas sobre manutenção e defeitos de máquinas de lavar."
+        />
+        <div class="grid grid-3">
+          {recentPosts.map((post) => <BlogCard post={post} />)}
+        </div>
+        <div class="section-cta">
+          <a href="/blog/" class="btn btn-outline-primary">Ver Todos os Artigos</a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA FINAL -->
+  <CTASection
+    title="Precisa de Conserto de Máquina de Lavar no RJ?"
+    description="Entre em contato pelo WhatsApp, informe a marca, o modelo, o defeito apresentado e seu bairro para solicitar uma avaliação."
+    showPhone={true}
+    backgroundImage={images.assistenciaTecnicaOficina}
+    backgroundAlt="Oficina organizada com máquinas de lavar prontas para atendimento"
+  />
+</BaseLayout>
+
+<style>
+  .hero {
+    background: linear-gradient(180deg, #f3f6fc 0%, #ffffff 65%);
+    padding-block: clamp(40px, 6vw, 76px);
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 4vw, 3.1rem);
+    color: var(--primary);
+    max-width: 18ch;
+  }
+
+  .hero-subheadline {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 34rem;
+  }
+
+  .hero-signals {
+    list-style: none;
+    margin: 0 0 26px;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    gap: 10px 24px;
+  }
+
+  .hero-signals li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: var(--secondary);
+    font-size: 0.95rem;
+  }
+
+  .hero-signals :global(svg) {
+    color: var(--whatsapp);
+    flex-shrink: 0;
+  }
+
+  .hero-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  .hero-media {
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-img {
+    width: 100%;
+    max-width: 460px;
+    height: auto;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+
+  @media (max-width: 900px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+    }
+    .hero-media {
+      order: 2;
+    }
+    .hero-signals {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* About / empresa desde 2010 */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .about-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 30px;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .about-card ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .about-card li {
+    display: flex;
+    gap: 16px;
+  }
+
+  .about-card h3 {
+    font-size: 1rem;
+    color: var(--primary);
+    margin-bottom: 4px;
+  }
+
+  .about-card p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .about-number {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--electric);
+    color: var(--white);
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (max-width: 900px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Generic section helpers */
+  .section-cta {
+    margin-top: 36px;
+    text-align: center;
+  }
+
+  .section-note {
+    text-align: center;
+    color: var(--muted);
+    font-size: 0.9rem;
+    margin-top: 28px;
+  }
+
+  .light-note {
+    text-align: left;
+    color: #cfdaf0;
+  }
+
+  /* Home visit section */
+  .home-visit-grid {
+    display: grid;
+    grid-template-columns: 0.85fr 1.15fr;
+    gap: 44px;
+    align-items: center;
+  }
+
+  .home-visit-img {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+  }
+
+  .checklist {
+    list-style: none;
+    margin: 0 0 26px;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+
+  .checklist li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--secondary);
+    font-weight: 600;
+  }
+
+  .checklist :global(svg) {
+    color: var(--whatsapp);
+  }
+
+  @media (max-width: 900px) {
+    .home-visit-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Pricing */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .pricing-box {
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 28px;
+  }
+
+  .pricing-box-icon {
+    color: var(--electric);
+    margin-bottom: 12px;
+  }
+
+  .pricing-box p {
+    color: var(--muted);
+    margin: 0;
+    font-size: 0.98rem;
+  }
+
+  @media (max-width: 900px) {
+    .pricing-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Worth repairing */
+  .worth-grid {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: 44px;
+    align-items: start;
+  }
+
+  .worth-img {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+  }
+
+  @media (max-width: 900px) {
+    .worth-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Inform items */
+  .inform-item h3 {
+    color: var(--white);
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
+
+  .inform-item p {
+    color: #cfdaf0;
+    font-size: 0.92rem;
+    margin: 0;
+  }
+
+  .inform-extra {
+    margin-top: 32px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: var(--radius-md);
+    padding: 22px 26px;
+  }
+
+  .inform-extra p {
+    margin: 0;
+    color: #dbe4f5;
+  }
+
+  .faq-container {
+    max-width: 860px;
+  }
+</style>

@@ -1,0 +1,252 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import SectionHeader from '@/components/SectionHeader.astro';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import CTASection from '@/components/CTASection.astro';
+import { images } from '@/assets/images';
+import { siteConfig } from '@/site.config';
+import { organizationJsonLd, aboutPageJsonLd } from '@/lib/jsonld';
+
+const pageTitle = 'Sobre | Conserto de Máquina de Lavar no RJ';
+const pageDescription =
+  'Conheça nossa experiência em conserto de máquina de lavar no Rio de Janeiro, com atendimento em domicílio e atuação desde 2010.';
+
+const workSteps = [
+  { title: 'Identificação do Equipamento', description: 'Levantamos marca, modelo e o defeito relatado antes da visita.' },
+  { title: 'Avaliação do Defeito', description: 'O equipamento é analisado presencialmente para confirmar a causa do problema.' },
+  { title: 'Apresentação do Orçamento', description: 'Os valores são explicados com base no que foi identificado.' },
+  { title: 'Aprovação do Cliente', description: 'O reparo só é iniciado depois da sua confirmação.' },
+  { title: 'Execução e Teste', description: 'O serviço é realizado e a máquina é testada antes da conclusão do atendimento.' },
+];
+
+const jsonLd = [
+  organizationJsonLd(),
+  aboutPageJsonLd('/sobre/'),
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} path="/sobre/" jsonLd={jsonLd}>
+  <div class="container">
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Sobre', href: '/sobre/' }]} />
+  </div>
+
+  <section class="section section-light page-hero">
+    <div class="container page-hero-grid">
+      <div>
+        <span class="eyebrow">Quem realiza o atendimento</span>
+        <h1>Experiência em Conserto de Máquina de Lavar no RJ Desde {siteConfig.startYear}</h1>
+        <p class="page-hero-lede">
+          Assistência técnica especializada e independente, voltada ao conserto e à manutenção de
+          máquinas de lavar residenciais na cidade do Rio de Janeiro.
+        </p>
+        <WhatsAppButton />
+      </div>
+      <div>
+        <Image
+          src={images.tecnicoOrcamentoCelular}
+          alt="Técnico de máquina de lavar preparando atendimento no Rio de Janeiro"
+          width={560}
+          height={700}
+          loading="eager"
+          fetchpriority="high"
+          class="page-hero-img"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container narrow">
+      <SectionHeader align="left" eyebrow="Trajetória" title="Nossa Experiência no Rio de Janeiro" />
+      <p>
+        O atendimento a máquinas de lavar residenciais é realizado desde {siteConfig.startYear},
+        com foco na cidade do Rio de Janeiro. Ao longo desse período, a rotina de diagnosticar
+        defeitos elétricos, mecânicos e eletrônicos em diferentes marcas e modelos consolidou uma
+        forma de trabalho baseada em avaliação técnica antes de qualquer intervenção.
+      </p>
+      <p>
+        Não se trata de uma grande estrutura corporativa, e sim de um atendimento direto, pensado
+        para quem precisa resolver o problema da lavadora com clareza sobre o que está sendo feito
+        e quanto isso custa.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container">
+      <SectionHeader eyebrow="Metodologia" title="Como Trabalhamos" lede="Um processo simples, pensado para reduzir surpresas durante o atendimento." />
+      <ol class="work-steps">
+        {workSteps.map((step, index) => (
+          <li>
+            <span class="work-number">{index + 1}</span>
+            <div>
+              <h3>{step.title}</h3>
+              <p>{step.description}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container narrow">
+      <SectionHeader align="left" eyebrow="Confiança" title="Diagnóstico e Transparência" />
+      <p>
+        Cada atendimento começa por uma avaliação do equipamento. Só depois de confirmado o
+        defeito é que o orçamento é apresentado, com explicação sobre o que motivou o valor
+        informado. Isso evita trocas de peças desnecessárias e ajuda você a decidir com mais
+        segurança se o reparo compensa.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container page-hero-grid reverse">
+      <div>
+        <Image
+          src={images.tecnicoAtendendoCliente}
+          alt="Técnico conversando com cliente sobre o conserto da máquina de lavar"
+          width={560}
+          height={700}
+          loading="lazy"
+          class="page-hero-img"
+        />
+      </div>
+      <div>
+        <SectionHeader align="left" eyebrow="No seu endereço" title="Atendimento em Domicílio" />
+        <p>
+          A avaliação e, na maioria dos casos, o próprio reparo acontecem no local onde a máquina
+          está instalada. Isso reduz o transporte do equipamento e permite observar as condições
+          reais de uso, como instalação elétrica e hidráulica.
+        </p>
+        <WhatsAppButton label="Agendar avaliação pelo WhatsApp" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container narrow">
+      <SectionHeader align="left" eyebrow="Compromisso" title="Compromisso com o Cliente" />
+      <p>
+        O compromisso central do atendimento é a transparência: diagnóstico antes do orçamento,
+        orçamento antes da execução e teste do equipamento antes da conclusão do serviço. Prazo e
+        cobertura de garantia são informados conforme o reparo realizado e a peça utilizada em
+        cada caso.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container">
+      <SectionHeader
+        eyebrow="Cobertura"
+        title="Regiões Atendidas no Rio de Janeiro"
+        lede={`Atendemos toda a cidade do ${siteConfig.city}: ${siteConfig.regions.join(', ')}.`}
+      />
+    </div>
+  </section>
+
+  <CTASection
+    title="Quer avaliar o conserto da sua máquina?"
+    description="Envie a marca, o modelo e o defeito observado pelo WhatsApp e receba orientação sobre os próximos passos."
+  />
+</BaseLayout>
+
+<style>
+  .page-hero {
+    padding-top: clamp(32px, 5vw, 56px);
+  }
+
+  .page-hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .page-hero-grid.reverse {
+    grid-template-columns: 0.9fr 1.1fr;
+  }
+
+  .page-hero-grid.reverse > div:first-child {
+    order: 1;
+  }
+
+  .page-hero h1 {
+    font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+    color: var(--primary);
+    margin-bottom: 16px;
+  }
+
+  .page-hero-lede {
+    color: var(--muted);
+    font-size: 1.05rem;
+    margin-bottom: 24px;
+  }
+
+  .page-hero-img {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .narrow {
+    max-width: 760px;
+  }
+
+  .work-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 20px;
+  }
+
+  .work-steps li {
+    display: flex;
+    gap: 18px;
+    align-items: flex-start;
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 20px 22px;
+  }
+
+  .work-number {
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: var(--electric);
+    color: var(--white);
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .work-steps h3 {
+    font-size: 1.02rem;
+    color: var(--primary);
+    margin-bottom: 4px;
+  }
+
+  .work-steps p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 0.94rem;
+  }
+
+  @media (max-width: 860px) {
+    .page-hero-grid,
+    .page-hero-grid.reverse {
+      grid-template-columns: 1fr;
+    }
+    .page-hero-grid.reverse > div:first-child {
+      order: 0;
+    }
+  }
+</style>

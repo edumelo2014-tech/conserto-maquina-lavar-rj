@@ -1,0 +1,51 @@
+---
+import WhatsAppIcon from './icons/WhatsAppIcon.astro';
+import { whatsappUrl, whatsappAriaLabel } from '@/site.config';
+---
+
+<a
+  href={whatsappUrl}
+  class="floating-whatsapp"
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label={whatsappAriaLabel}
+>
+  <WhatsAppIcon size={28} />
+</a>
+
+<style>
+  .floating-whatsapp {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    width: 58px;
+    height: 58px;
+    border-radius: 50%;
+    background: var(--whatsapp);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 10px 24px rgba(34, 197, 94, 0.4);
+    z-index: 900;
+    transition:
+      transform 0.15s ease,
+      background-color 0.15s ease;
+  }
+
+  .floating-whatsapp:hover {
+    background: var(--whatsapp-hover);
+    transform: translateY(-2px) scale(1.03);
+  }
+
+  .floating-whatsapp:focus-visible {
+    outline: 3px solid var(--cyan);
+    outline-offset: 3px;
+  }
+
+  @media print {
+    .floating-whatsapp {
+      display: none;
+    }
+  }
+</style>

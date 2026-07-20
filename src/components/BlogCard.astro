@@ -1,0 +1,120 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, description, category, publishDate, image, imageAlt } = post.data;
+
+const formattedDate = publishDate.toLocaleDateString('pt-BR', {
+  day: '2-digit',
+  month: 'long',
+  year: 'numeric',
+});
+---
+
+<article class="blog-card card">
+  <a href={`/blog/${post.slug}/`} class="blog-card-image-link">
+    <Image src={image} alt={imageAlt} width={480} height={300} loading="lazy" class="blog-card-image" />
+  </a>
+  <div class="blog-card-body">
+    <span class="blog-card-category">{category}</span>
+    <h3><a href={`/blog/${post.slug}/`}>{title}</a></h3>
+    <p>{description}</p>
+    <div class="blog-card-meta">
+      <time datetime={publishDate.toISOString()}>{formattedDate}</time>
+      <a href={`/blog/${post.slug}/`} class="blog-card-link">Ler artigo →</a>
+    </div>
+  </div>
+</article>
+
+<style>
+  .blog-card {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .blog-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .blog-card-image-link {
+    display: block;
+    aspect-ratio: 8 / 5;
+    overflow: hidden;
+  }
+
+  .blog-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .blog-card-body {
+    padding: 20px 22px 22px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .blog-card-category {
+    display: inline-block;
+    align-self: flex-start;
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--electric);
+    background: rgba(30, 91, 255, 0.1);
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-bottom: 12px;
+  }
+
+  .blog-card-body h3 {
+    font-size: 1.05rem;
+    margin-bottom: 10px;
+  }
+
+  .blog-card-body h3 a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+
+  .blog-card-body h3 a:hover {
+    color: var(--electric);
+  }
+
+  .blog-card-body p {
+    color: var(--muted);
+    font-size: 0.92rem;
+    flex: 1;
+  }
+
+  .blog-card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-top: 12px;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  .blog-card-link {
+    color: var(--electric);
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .blog-card-link:hover {
+    text-decoration: underline;
+  }
+</style>

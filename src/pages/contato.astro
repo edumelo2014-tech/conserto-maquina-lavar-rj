@@ -1,0 +1,339 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import SectionHeader from '@/components/SectionHeader.astro';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import MapSection from '@/components/MapSection.astro';
+import Icon from '@/components/icons/Icon.astro';
+import { siteConfig, whatsappUrl, whatsappAriaLabel } from '@/site.config';
+import { organizationJsonLd, contactPageJsonLd } from '@/lib/jsonld';
+
+const pageTitle = 'Contato | Conserto de Máquina de Lavar no RJ';
+const pageDescription =
+  'Entre em contato para solicitar avaliação e orçamento de conserto de máquina de lavar na cidade do Rio de Janeiro.';
+
+const jsonLd = [organizationJsonLd(), contactPageJsonLd('/contato/')];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} path="/contato/" jsonLd={jsonLd}>
+  <div class="container">
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Contato', href: '/contato/' }]} />
+  </div>
+
+  <section class="section section-light page-intro">
+    <div class="container">
+      <span class="eyebrow">Fale conosco</span>
+      <h1>Contato para Conserto de Máquina de Lavar no RJ</h1>
+      <p class="page-hero-lede">
+        Preencha o formulário para montar sua mensagem automaticamente ou fale direto pelo
+        WhatsApp.
+      </p>
+      <WhatsAppButton />
+    </div>
+  </section>
+
+  <section class="section section-light contact-section">
+    <div class="container contact-grid">
+      <div class="contact-form-wrap">
+        <h2>Solicite seu Orçamento</h2>
+        <form id="contact-form" class="contact-form" novalidate>
+          <div class="form-row">
+            <label for="nome">Nome *</label>
+            <input type="text" id="nome" name="nome" required autocomplete="name" />
+            <p class="field-error" id="erro-nome" hidden>Informe seu nome.</p>
+          </div>
+
+          <div class="form-row">
+            <label for="telefone">Telefone / WhatsApp *</label>
+            <input type="tel" id="telefone" name="telefone" required autocomplete="tel" inputmode="tel" />
+            <p class="field-error" id="erro-telefone" hidden>Informe um telefone válido para contato.</p>
+          </div>
+
+          <div class="form-row">
+            <label for="bairro">Bairro</label>
+            <input type="text" id="bairro" name="bairro" autocomplete="address-level3" />
+          </div>
+
+          <div class="form-row-inline">
+            <div class="form-row">
+              <label for="marca">Marca da máquina</label>
+              <input type="text" id="marca" name="marca" />
+            </div>
+            <div class="form-row">
+              <label for="modelo">Modelo</label>
+              <input type="text" id="modelo" name="modelo" />
+            </div>
+          </div>
+
+          <div class="form-row">
+            <label for="descricao">Descrição do problema *</label>
+            <textarea id="descricao" name="descricao" rows="4" required></textarea>
+            <p class="field-error" id="erro-descricao" hidden>Descreva brevemente o defeito apresentado.</p>
+          </div>
+
+          <div class="form-row checkbox-row">
+            <input type="checkbox" id="consentimento" name="consentimento" required />
+            <label for="consentimento">
+              Li e concordo com a <a href="/politica-de-privacidade/">Política de Privacidade</a>. *
+            </label>
+          </div>
+          <p class="field-error" id="erro-consentimento" hidden>É necessário concordar com a Política de Privacidade.</p>
+
+          <button type="submit" class="btn btn-whatsapp btn-block">
+            Enviar pelo WhatsApp
+          </button>
+          <p class="form-note">
+            Ao enviar, uma conversa será aberta no WhatsApp com os dados preenchidos, prontos para
+            revisão antes do envio.
+          </p>
+        </form>
+      </div>
+
+      <aside class="contact-info">
+        <div class="contact-info-card">
+          <h2>Atendimento pelo WhatsApp</h2>
+          <p>Prefere falar direto? Envie sua mensagem agora mesmo.</p>
+          <a href={whatsappUrl} class="btn btn-whatsapp btn-block" target="_blank" rel="noopener noreferrer" aria-label={whatsappAriaLabel}>
+            <Icon name="chat" size={18} />
+            <span>{siteConfig.phoneDisplay}</span>
+          </a>
+        </div>
+
+        <div class="contact-info-card">
+          <h2>Informações que Ajudam na Avaliação</h2>
+          <ul>
+            <li>Marca e modelo do equipamento</li>
+            <li>Defeito observado</li>
+            <li>Código de erro no painel, se houver</li>
+            <li>Bairro do atendimento</li>
+          </ul>
+        </div>
+
+        <div class="contact-info-card">
+          <h2>Área de Atendimento no Rio de Janeiro</h2>
+          <p>Atendemos toda a cidade do {siteConfig.city}: {siteConfig.regions.join(', ')}.</p>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section-alt">
+    <div class="container">
+      <SectionHeader eyebrow="Mapa" title="Mapa da Cidade do Rio de Janeiro" lede="Área geral de atendimento — informe seu bairro ao solicitar o orçamento." />
+      <MapSection />
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+  const whatsappNumber = '5521969008005';
+
+  function showError(id: string, show: boolean) {
+    const el = document.getElementById(id);
+    if (el) el.hidden = !show;
+  }
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const nome = (document.getElementById('nome') as HTMLInputElement)?.value.trim();
+    const telefone = (document.getElementById('telefone') as HTMLInputElement)?.value.trim();
+    const bairro = (document.getElementById('bairro') as HTMLInputElement)?.value.trim();
+    const marca = (document.getElementById('marca') as HTMLInputElement)?.value.trim();
+    const modelo = (document.getElementById('modelo') as HTMLInputElement)?.value.trim();
+    const descricao = (document.getElementById('descricao') as HTMLTextAreaElement)?.value.trim();
+    const consentimento = (document.getElementById('consentimento') as HTMLInputElement)?.checked;
+
+    let valid = true;
+
+    if (!nome) {
+      showError('erro-nome', true);
+      valid = false;
+    } else {
+      showError('erro-nome', false);
+    }
+
+    if (!telefone || telefone.replace(/\D/g, '').length < 10) {
+      showError('erro-telefone', true);
+      valid = false;
+    } else {
+      showError('erro-telefone', false);
+    }
+
+    if (!descricao) {
+      showError('erro-descricao', true);
+      valid = false;
+    } else {
+      showError('erro-descricao', false);
+    }
+
+    if (!consentimento) {
+      showError('erro-consentimento', true);
+      valid = false;
+    } else {
+      showError('erro-consentimento', false);
+    }
+
+    if (!valid) return;
+
+    const lines = [
+      'Olá, vim do site de conserto de máquina de lavar no RJ e quero solicitar um orçamento.',
+      `Nome: ${nome}`,
+      `Telefone: ${telefone}`,
+      bairro ? `Bairro: ${bairro}` : '',
+      marca ? `Marca: ${marca}` : '',
+      modelo ? `Modelo: ${modelo}` : '',
+      `Defeito: ${descricao}`,
+    ].filter(Boolean);
+
+    const message = encodeURIComponent(lines.join('\n'));
+    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank', 'noopener,noreferrer');
+  });
+</script>
+
+<style>
+  .page-intro {
+    padding-top: clamp(32px, 5vw, 56px);
+    padding-bottom: clamp(28px, 4vw, 44px);
+  }
+
+  .page-intro h1 {
+    font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+    color: var(--primary);
+    max-width: 28ch;
+  }
+
+  .page-hero-lede {
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 40rem;
+  }
+
+  .contact-section {
+    padding-top: 0;
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.9fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .contact-form-wrap h2,
+  .contact-info-card h2 {
+    color: var(--primary);
+    font-size: 1.2rem;
+  }
+
+  .contact-form {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 30px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .form-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .form-row-inline {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+
+  label {
+    font-weight: 600;
+    color: var(--secondary);
+    font-size: 0.92rem;
+  }
+
+  input[type='text'],
+  input[type='tel'],
+  textarea {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    font-size: 1rem;
+    font-family: inherit;
+    color: var(--text);
+  }
+
+  input:focus-visible,
+  textarea:focus-visible {
+    outline: 3px solid var(--electric);
+    outline-offset: 1px;
+  }
+
+  .checkbox-row {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .checkbox-row input {
+    margin-top: 4px;
+  }
+
+  .checkbox-row label {
+    font-weight: 500;
+    color: var(--muted);
+  }
+
+  .checkbox-row a {
+    color: var(--electric);
+  }
+
+  .field-error {
+    color: #b91c1c;
+    font-size: 0.85rem;
+    margin: 0;
+  }
+
+  .form-note {
+    color: var(--muted);
+    font-size: 0.85rem;
+    margin: 0;
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .contact-info-card {
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 24px;
+  }
+
+  .contact-info-card ul {
+    margin: 0;
+    padding-left: 1.2em;
+    color: var(--muted);
+  }
+
+  .contact-info-card p {
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+
+  @media (max-width: 900px) {
+    .contact-grid {
+      grid-template-columns: 1fr;
+    }
+    .form-row-inline {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

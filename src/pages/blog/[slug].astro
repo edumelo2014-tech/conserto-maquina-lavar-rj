@@ -1,0 +1,224 @@
+---
+import { getCollection, render } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import BlogCard from '@/components/BlogCard.astro';
+import CTASection from '@/components/CTASection.astro';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import Icon from '@/components/icons/Icon.astro';
+import { blogPostingJsonLd, organizationJsonLd } from '@/lib/jsonld';
+import { siteConfig } from '@/site.config';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const { title, description, category, publishDate, updatedDate, readingTime, image, imageAlt, author, relatedSlugs } =
+  post.data;
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const relatedPosts = allPosts.filter((p) => relatedSlugs.includes(p.slug));
+
+const formattedPublish = publishDate.toLocaleDateString('pt-BR', {
+  day: '2-digit',
+  month: 'long',
+  year: 'numeric',
+});
+const formattedUpdated = updatedDate?.toLocaleDateString('pt-BR', {
+  day: '2-digit',
+  month: 'long',
+  year: 'numeric',
+});
+
+const path = `/blog/${post.slug}/`;
+const imageUrl = new URL(image.src, siteConfig.siteUrl).toString();
+
+const jsonLd = [
+  organizationJsonLd(),
+  blogPostingJsonLd({ title, description, path, imageUrl, publishDate, updatedDate, author }),
+];
+---
+
+<BaseLayout title={`${title} | Blog`} description={description} path={path} ogImage={image.src} jsonLd={jsonLd}>
+  <div class="container">
+    <Breadcrumbs
+      items={[
+        { label: 'Home', href: '/' },
+        { label: 'Blog', href: '/blog/' },
+        { label: title, href: path },
+      ]}
+    />
+  </div>
+
+  <article class="post">
+    <header class="post-header container">
+      <span class="eyebrow">{category}</span>
+      <h1>{title}</h1>
+      <div class="post-meta">
+        <span><Icon name="calendar" size={16} /> Publicado em {formattedPublish}</span>
+        {formattedUpdated && <span><Icon name="calendar" size={16} /> Atualizado em {formattedUpdated}</span>}
+        <span><Icon name="clock" size={16} /> {readingTime}</span>
+        <span><Icon name="check-circle" size={16} /> {author}</span>
+      </div>
+    </header>
+
+    <div class="post-image container">
+      <Image src={image} alt={imageAlt} width={1200} height={675} loading="eager" fetchpriority="high" class="post-featured-img" />
+    </div>
+
+    <div class="container post-body-grid">
+      <div class="post-prose prose">
+        <Content />
+
+        <div class="post-cta-inline">
+          <p>Precisa de ajuda com o defeito da sua máquina?</p>
+          <WhatsAppButton />
+        </div>
+      </div>
+    </div>
+  </article>
+
+  {relatedPosts.length > 0 && (
+    <section class="section section-alt">
+      <div class="container">
+        <h2 class="related-title">Artigos Relacionados</h2>
+        <div class="grid grid-3">
+          {relatedPosts.map((related) => <BlogCard post={related} />)}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <CTASection
+    title="Precisa de Conserto de Máquina de Lavar no RJ?"
+    description="Envie a marca, o modelo e o defeito observado pelo WhatsApp para receber uma avaliação."
+    showPhone={true}
+  />
+</BaseLayout>
+
+<style>
+  .post-header {
+    padding-block: clamp(28px, 5vw, 44px) 20px;
+  }
+
+  .post-header h1 {
+    font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+    color: var(--primary);
+    max-width: 40ch;
+  }
+
+  .post-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    color: var(--muted);
+    font-size: 0.88rem;
+  }
+
+  .post-meta span {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .post-image {
+    margin-bottom: 32px;
+  }
+
+  .post-featured-img {
+    width: 100%;
+    max-height: 460px;
+    object-fit: cover;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+  }
+
+  .post-body-grid {
+    padding-bottom: 20px;
+  }
+
+  .prose {
+    max-width: 760px;
+    margin-inline: auto;
+    color: var(--text);
+    font-size: 1.05rem;
+    line-height: 1.8;
+  }
+
+  .prose :global(h2) {
+    color: var(--primary);
+    font-size: 1.4rem;
+    margin-top: 2em;
+  }
+
+  .prose :global(h3) {
+    color: var(--secondary);
+    font-size: 1.15rem;
+    margin-top: 1.6em;
+  }
+
+  .prose :global(p) {
+    margin-bottom: 1.2em;
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin-bottom: 1.2em;
+    padding-left: 1.4em;
+  }
+
+  .prose :global(li) {
+    margin-bottom: 0.4em;
+  }
+
+  .prose :global(blockquote) {
+    margin: 1.6em 0;
+    padding: 16px 20px;
+    background: #fff7e6;
+    border-left: 4px solid var(--accent);
+    border-radius: var(--radius-sm);
+    color: #6b4514;
+  }
+
+  .prose :global(blockquote p) {
+    margin: 0;
+  }
+
+  .prose :global(a) {
+    color: var(--electric);
+  }
+
+  .prose :global(table) {
+    margin-bottom: 1.2em;
+  }
+
+  .post-cta-inline {
+    margin-top: 3em;
+    padding: 26px;
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    text-align: center;
+  }
+
+  .post-cta-inline p {
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 14px;
+  }
+
+  .related-title {
+    text-align: center;
+    color: var(--primary);
+    font-size: 1.5rem;
+    margin-bottom: 28px;
+  }
+</style>

@@ -1,0 +1,74 @@
+---
+import Icon from './icons/Icon.astro';
+
+const situations = [
+  'Cheiro de queimado',
+  'Vazamento próximo à tomada',
+  'Faíscas ou aquecimento anormal',
+  'Ruído metálico intenso',
+  'Disjuntor desarmando',
+];
+---
+
+<div class="safety-alert" role="note" aria-label="Situações de risco e orientação de segurança">
+  <div class="safety-header">
+    <Icon name="alert-triangle" size={26} class="safety-icon" />
+    <h3>Quando desligar a máquina imediatamente</h3>
+  </div>
+  <ul class="safety-list">
+    {situations.map((item) => <li>{item}</li>)}
+  </ul>
+  <p class="safety-note">
+    Desligue o equipamento da tomada e, quando houver vazamento, feche o registro de água. Não
+    tente desmontar a máquina sem conhecimento técnico.
+  </p>
+</div>
+
+<style>
+  .safety-alert {
+    background: #fff7e6;
+    border: 1px solid #f4d68f;
+    border-left: 5px solid var(--accent);
+    border-radius: var(--radius-md);
+    padding: 26px 28px;
+  }
+
+  .safety-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .safety-icon {
+    color: #b45309;
+    flex-shrink: 0;
+  }
+
+  .safety-header h3 {
+    margin: 0;
+    color: #7c3e0c;
+    font-size: 1.1rem;
+  }
+
+  .safety-list {
+    columns: 2;
+    column-gap: 24px;
+    margin: 0 0 16px;
+    padding-left: 1.2em;
+    color: #6b4514;
+  }
+
+  .safety-note {
+    margin: 0;
+    color: #6b4514;
+    font-weight: 600;
+    font-size: 0.94rem;
+  }
+
+  @media (max-width: 620px) {
+    .safety-list {
+      columns: 1;
+    }
+  }
+</style>

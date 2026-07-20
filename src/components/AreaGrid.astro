@@ -1,0 +1,83 @@
+---
+import Icon from './icons/Icon.astro';
+import { siteConfig, whatsappUrlWithMessage, whatsappAriaLabel } from '@/site.config';
+
+const message =
+  'Olá, gostaria de saber se atendem meu bairro para conserto de máquina de lavar no RJ.';
+---
+
+<div class="area-grid-wrap">
+  <div class="area-grid">
+    {siteConfig.regions.map((region) => (
+      <div class="area-item">
+        <Icon name="map-pin" size={22} class="area-icon" />
+        <span>{region}</span>
+      </div>
+    ))}
+  </div>
+  <div class="area-cta">
+    <p>Não encontrou sua região? Fale conosco pelo WhatsApp e confirme o atendimento.</p>
+    <a
+      href={whatsappUrlWithMessage(message)}
+      class="btn btn-whatsapp"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={whatsappAriaLabel}
+    >
+      Consultar atendimento
+    </a>
+  </div>
+</div>
+
+<style>
+  .area-grid-wrap {
+    display: grid;
+    gap: 28px;
+  }
+
+  .area-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .area-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    font-weight: 700;
+    color: var(--primary);
+  }
+
+  .area-icon {
+    color: var(--electric);
+  }
+
+  .area-cta {
+    background: var(--light);
+    border: 1px dashed var(--border);
+    border-radius: var(--radius-md);
+    padding: 22px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .area-cta p {
+    margin: 0;
+    color: var(--muted);
+    max-width: 32rem;
+  }
+
+  @media (max-width: 780px) {
+    .area-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

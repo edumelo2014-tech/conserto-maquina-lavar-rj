@@ -1,0 +1,66 @@
+---
+import Icon from './icons/Icon.astro';
+import type { IconName } from './icons/icon-names';
+
+interface Factor {
+  icon: IconName;
+  title: string;
+  description: string;
+}
+
+interface Props {
+  factors: Factor[];
+}
+
+const { factors } = Astro.props;
+---
+
+<div class="pricing-factors">
+  {factors.map((factor) => (
+    <div class="pricing-factor">
+      <Icon name={factor.icon} size={22} class="pricing-icon" />
+      <div>
+        <h3>{factor.title}</h3>
+        <p>{factor.description}</p>
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .pricing-factors {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .pricing-factor {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+
+  .pricing-icon {
+    color: var(--electric);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .pricing-factor h3 {
+    font-size: 1rem;
+    color: var(--primary);
+    margin-bottom: 4px;
+  }
+
+  .pricing-factor p {
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 700px) {
+    .pricing-factors {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
