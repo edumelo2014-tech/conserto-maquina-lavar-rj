@@ -229,8 +229,16 @@ function isActive(href: string) {
     transform: translateY(-7px) rotate(-45deg);
   }
 
+  /* Estado padrão: escondido em qualquer largura. A regra abaixo, mais
+     específica que "display: none", é o que de fato exibe o menu quando o
+     JS remove o atributo "hidden" — sem ela, o menu nunca aparece mesmo
+     com o estado (aberto/fechado) sendo alternado corretamente. */
   .mobile-menu {
     display: none;
+  }
+
+  .mobile-menu:not([hidden]) {
+    display: block;
   }
 
   @media (max-width: 880px) {
@@ -246,17 +254,13 @@ function isActive(href: string) {
       display: flex;
     }
 
-    .mobile-menu {
+    .mobile-menu:not([hidden]) {
       position: fixed;
       inset: var(--header-height) 0 0 0;
       background: var(--white);
       padding: 28px 20px;
       overflow-y: auto;
       z-index: 940;
-    }
-
-    .mobile-menu[hidden] {
-      display: none;
     }
 
     .mobile-menu nav ul {
@@ -284,7 +288,7 @@ function isActive(href: string) {
   }
 </style>
 
-<script>
+<script is:inline>
   const header = document.getElementById('site-header');
   const toggle = document.getElementById('menu-toggle');
   const menu = document.getElementById('mobile-menu');

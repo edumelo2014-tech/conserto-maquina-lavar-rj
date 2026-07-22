@@ -6,7 +6,7 @@
 export const siteConfig = {
   siteName: 'Conserto de Máquina de Lavar',
   siteShortName: 'Conserto de Máquina de Lavar RJ',
-  siteUrl: 'https://www.consertomaquinadelavarrj.com.br',
+  siteUrl: 'https://www.consertomaquinadelavarnorj.com.br',
   defaultTitle: 'Conserto de Máquina de Lavar no RJ | Atendimento em Domicílio',
   defaultDescription:
     'Conserto de máquina de lavar no RJ com atendimento em domicílio, diagnóstico técnico e orçamento antes do serviço. Experiência desde 2010 em toda a cidade do Rio de Janeiro.',
