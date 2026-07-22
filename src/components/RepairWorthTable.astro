@@ -8,6 +8,7 @@ const rows = [
 ];
 ---
 
+<!-- Tabela: visível em telas >= 640px, com rolagem própria caso a coluna ainda não caiba -->
 <div class="table-scroll repair-worth-table">
   <table>
     <caption class="visually-hidden">Orientações gerais sobre quando vale a pena consertar a máquina de lavar</caption>
@@ -28,6 +29,24 @@ const rows = [
   </table>
 </div>
 
+<!-- Cards empilhados: visível apenas em telas pequenas, sem risco de overflow horizontal.
+     A troca entre tabela e cards é feita via CSS (display), então apenas a versão
+     visível em cada largura de tela fica exposta a leitores de tela. -->
+<ul class="repair-worth-cards">
+  {rows.map((row) => (
+    <li class="repair-worth-card">
+      <div class="repair-worth-card-row">
+        <span class="repair-worth-card-label">Situação</span>
+        <p>{row.situation}</p>
+      </div>
+      <div class="repair-worth-card-row">
+        <span class="repair-worth-card-label">Avaliação inicial</span>
+        <p>{row.evaluation}</p>
+      </div>
+    </li>
+  ))}
+</ul>
+
 <style>
   .repair-worth-table {
     background: var(--white);
@@ -35,5 +54,55 @@ const rows = [
 
   .repair-worth-table td {
     color: var(--text);
+  }
+
+  .repair-worth-cards {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .repair-worth-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 16px 18px;
+  }
+
+  .repair-worth-card-row + .repair-worth-card-row {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  .repair-worth-card-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--electric);
+    margin-bottom: 4px;
+  }
+
+  .repair-worth-card-row p {
+    margin: 0;
+    color: var(--text);
+    font-size: 0.95rem;
+  }
+
+  /* Abaixo de 640px a tabela sai do fluxo e os cards assumem — evita
+     qualquer risco de scroll horizontal causado pelo min-width da tabela. */
+  @media (max-width: 640px) {
+    .repair-worth-table {
+      display: none;
+    }
+
+    .repair-worth-cards {
+      display: flex;
+    }
   }
 </style>

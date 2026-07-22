@@ -122,11 +122,14 @@ const jsonLd = {
 
   .faq-panel {
     padding: 0 22px 20px;
-    color: var(--muted);
   }
 
+  /* Cor definida diretamente no parágrafo (não no container pai) para que
+     esta regra vença a regra global ".section-dark p" quando o accordion
+     estiver dentro de uma seção escura — o card do item é sempre branco. */
   .faq-panel p {
     margin: 0;
     line-height: 1.7;
+    color: var(--muted);
   }
 </style>

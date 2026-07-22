@@ -111,23 +111,15 @@ const jsonLd = [
   <!-- HERO -->
   <section class="hero">
     <div class="container hero-grid">
-      <div class="hero-copy">
-        <span class="eyebrow">Assistência técnica especializada e independente</span>
-        <h1>Conserto de Máquina de Lavar no RJ</h1>
-        <p class="hero-subheadline">
-          Atendimento em domicílio com experiência desde {siteConfig.startYear}, diagnóstico
-          técnico e orçamento apresentado antes da realização do serviço.
-        </p>
-        <ul class="hero-signals">
-          <li><Icon name="check-circle" size={18} /> Experiência desde {siteConfig.startYear}</li>
-          <li><Icon name="check-circle" size={18} /> Atendimento em domicílio</li>
-          <li><Icon name="check-circle" size={18} /> Diagnóstico técnico</li>
-          <li><Icon name="check-circle" size={18} /> Orçamento antes do serviço</li>
-        </ul>
-        <div class="hero-actions">
-          <WhatsAppButton label="Solicitar Orçamento no WhatsApp" />
-          <a href="/servicos/" class="btn btn-outline-primary">Conhecer os Serviços</a>
-        </div>
+      <span class="eyebrow hero-eyebrow">Assistência técnica especializada e independente</span>
+      <h1 class="hero-title">Conserto de Máquina de Lavar no RJ</h1>
+      <p class="hero-subheadline">
+        Atendimento em domicílio com experiência desde {siteConfig.startYear}, diagnóstico
+        técnico e orçamento apresentado antes da realização do serviço.
+      </p>
+      <div class="hero-actions">
+        <WhatsAppButton label="Solicitar Orçamento no WhatsApp" />
+        <a href="/servicos/" class="btn btn-outline-primary">Conhecer os Serviços</a>
       </div>
       <div class="hero-media">
         <Image
@@ -141,6 +133,12 @@ const jsonLd = [
           class="hero-img"
         />
       </div>
+      <ul class="hero-signals">
+        <li><Icon name="check-circle" size={18} /> Experiência desde {siteConfig.startYear}</li>
+        <li><Icon name="check-circle" size={18} /> Atendimento em domicílio</li>
+        <li><Icon name="check-circle" size={18} /> Diagnóstico técnico</li>
+        <li><Icon name="check-circle" size={18} /> Orçamento antes do serviço</li>
+      </ul>
     </div>
   </section>
 
@@ -213,9 +211,6 @@ const jsonLd = [
         {services.map((service) => (
           <ServiceCard icon={service.icon} title={service.title} description={service.description} />
         ))}
-      </div>
-      <div class="section-cta">
-        <a href="/servicos/" class="btn btn-outline-primary">Ver todos os serviços</a>
       </div>
     </div>
   </section>
@@ -358,7 +353,7 @@ const jsonLd = [
           lede="Idade, conservação e custo do reparo ajudam a orientar essa decisão."
         />
         <RepairWorthTable />
-        <p class="section-note light-note">
+        <p class="section-note align-left">
           Essas informações são orientativas e não substituem o diagnóstico técnico.
         </p>
       </div>
@@ -385,7 +380,7 @@ const jsonLd = [
   <section class="section section-dark">
     <div class="container">
       <SectionHeader
-        eyebrow="Information gain"
+        eyebrow="Antes do atendimento"
         title="O Que Informar ao Solicitar Atendimento no RJ?"
         lede="Quanto mais detalhes você enviar, mais precisa é a avaliação inicial do defeito."
       />
@@ -490,28 +485,47 @@ const jsonLd = [
     padding-block: clamp(40px, 6vw, 76px);
   }
 
+  /* Layout por áreas nomeadas: permite reordenar livremente entre desktop
+     (texto à esquerda, imagem à direita) e mobile (H1 > subheadline > botão >
+     imagem > sinais) sem depender da ordem dos elementos no DOM. */
   .hero-grid {
     display: grid;
     grid-template-columns: 1.05fr 0.95fr;
-    gap: 40px;
-    align-items: center;
+    column-gap: 40px;
+    row-gap: 14px;
+    align-items: start;
+    grid-template-areas:
+      'eyebrow media'
+      'title media'
+      'subheadline media'
+      'actions media'
+      'signals media';
   }
 
-  .hero h1 {
+  .hero-eyebrow {
+    grid-area: eyebrow;
+  }
+
+  .hero-title {
+    grid-area: title;
     font-size: clamp(2rem, 4vw, 3.1rem);
     color: var(--primary);
     max-width: 18ch;
+    margin-bottom: 0;
   }
 
   .hero-subheadline {
+    grid-area: subheadline;
     font-size: 1.1rem;
     color: var(--muted);
     max-width: 34rem;
+    margin-bottom: 0;
   }
 
   .hero-signals {
+    grid-area: signals;
     list-style: none;
-    margin: 0 0 26px;
+    margin: 0;
     padding: 0;
     display: grid;
     grid-template-columns: repeat(2, auto);
@@ -533,14 +547,18 @@ const jsonLd = [
   }
 
   .hero-actions {
+    grid-area: actions;
     display: flex;
     flex-wrap: wrap;
     gap: 14px;
   }
 
   .hero-media {
+    grid-area: media;
     display: flex;
     justify-content: center;
+    align-self: center;
+    min-width: 0;
   }
 
   .hero-img {
@@ -554,10 +572,21 @@ const jsonLd = [
   @media (max-width: 900px) {
     .hero-grid {
       grid-template-columns: 1fr;
+      row-gap: 18px;
+      grid-template-areas:
+        'title'
+        'subheadline'
+        'actions'
+        'media'
+        'signals';
     }
-    .hero-media {
-      order: 2;
+
+    /* A badge institucional some no mobile para manter H1 + subheadline +
+       botão + imagem visíveis sem rolagem excessiva na primeira dobra. */
+    .hero-eyebrow {
+      display: none;
     }
+
     .hero-signals {
       grid-template-columns: 1fr;
     }
@@ -569,6 +598,10 @@ const jsonLd = [
     grid-template-columns: 1.1fr 0.9fr;
     gap: 48px;
     align-items: start;
+  }
+
+  .about-grid > * {
+    min-width: 0;
   }
 
   .about-card {
@@ -629,17 +662,8 @@ const jsonLd = [
     text-align: center;
   }
 
-  .section-note {
-    text-align: center;
-    color: var(--muted);
-    font-size: 0.9rem;
-    margin-top: 28px;
-  }
-
-  .light-note {
-    text-align: left;
-    color: #cfdaf0;
-  }
+  /* .section-note é definida globalmente em src/styles/global.css, incluindo
+     o contraste correto para uso dentro de .section-dark. */
 
   /* Home visit section */
   .home-visit-grid {
@@ -647,6 +671,10 @@ const jsonLd = [
     grid-template-columns: 0.85fr 1.15fr;
     gap: 44px;
     align-items: center;
+  }
+
+  .home-visit-grid > * {
+    min-width: 0;
   }
 
   .home-visit-img {
@@ -689,6 +717,10 @@ const jsonLd = [
     align-items: start;
   }
 
+  .pricing-grid > * {
+    min-width: 0;
+  }
+
   .pricing-box {
     background: var(--light);
     border: 1px solid var(--border);
@@ -721,6 +753,13 @@ const jsonLd = [
     align-items: start;
   }
 
+  /* Crítico: sem isso, a tabela (min-width: 560px) força a trilha do grid,
+     e por consequência a página inteira, a ultrapassar a largura da viewport
+     no mobile — mesmo com a tabela virando cards abaixo de 640px. */
+  .worth-grid > * {
+    min-width: 0;
+  }
+
   .worth-img {
     width: 100%;
     border-radius: var(--radius-lg);
@@ -741,7 +780,7 @@ const jsonLd = [
   }
 
   .inform-item p {
-    color: #cfdaf0;
+    color: var(--dark-text);
     font-size: 0.92rem;
     margin: 0;
   }
@@ -756,7 +795,7 @@ const jsonLd = [
 
   .inform-extra p {
     margin: 0;
-    color: #dbe4f5;
+    color: var(--dark-text);
   }
 
   .faq-container {

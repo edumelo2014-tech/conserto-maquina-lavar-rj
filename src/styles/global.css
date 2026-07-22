@@ -14,6 +14,10 @@
   --border: #e2e8f0;
   --footer: #03132f;
 
+  /* Texto sobre fundos escuros (seções .section-dark) — sempre >= 4.5:1 de contraste */
+  --dark-text: #e2e8f0;
+  --dark-muted: #a8b5d1;
+
   --dark-gradient: linear-gradient(135deg, #071f4a, #0a2a66);
 
   --font-sans:
@@ -55,6 +59,13 @@ html {
   }
 }
 
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   font-family: var(--font-sans);
@@ -64,7 +75,8 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-img {
+img,
+svg {
   max-width: 100%;
   height: auto;
   display: block;
@@ -130,11 +142,30 @@ button {
 }
 
 .section-dark p {
-  color: #dbe4f5;
+  color: var(--dark-text);
 }
 
 .section-dark a:not(.btn) {
   color: var(--cyan);
+}
+
+/* Nota auxiliar reutilizada em várias seções (disclaimers, avisos curtos).
+   Definida aqui (fora dos blocos <style> de cada página) para que a regra
+   de contraste em fundo escuro tenha sempre prioridade sobre a cor padrão,
+   independentemente da ordem de carregamento dos estilos de cada página. */
+.section-note {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-top: 28px;
+}
+
+.section-note.align-left {
+  text-align: left;
+}
+
+.section-dark .section-note {
+  color: var(--dark-muted);
 }
 
 /* ===== Typography helpers ===== */
@@ -265,6 +296,12 @@ button {
 .grid {
   display: grid;
   gap: 24px;
+}
+
+/* Evita que um item com conteúdo intrinsecamente largo (tabela, texto longo
+   sem quebra, etc.) force a trilha do grid a ultrapassar a viewport. */
+.grid > * {
+  min-width: 0;
 }
 
 .grid-2 {

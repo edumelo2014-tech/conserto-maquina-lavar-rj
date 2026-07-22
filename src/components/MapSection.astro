@@ -14,6 +14,14 @@ const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&lay
         Carregar mapa
       </button>
     </div>
+    <iframe
+      id="map-iframe"
+      class="map-iframe"
+      title="Mapa da área de atendimento na cidade do Rio de Janeiro"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      hidden
+    ></iframe>
   </div>
   <p class="map-caption">
     O atendimento é realizado em diferentes regiões da cidade do Rio de Janeiro. Informe seu
@@ -22,22 +30,21 @@ const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&lay
 </div>
 
 <script define:vars={{ mapSrc }} is:inline>
-  const btn = document.getElementById('load-map-btn');
-  const placeholder = document.getElementById('map-placeholder');
-  const frame = document.getElementById('map-frame');
+  (function () {
+    var btn = document.getElementById('load-map-btn');
+    var placeholder = document.getElementById('map-placeholder');
+    var iframe = document.getElementById('map-iframe');
 
-  btn?.addEventListener('click', () => {
-    const iframe = document.createElement('iframe');
-    iframe.src = mapSrc;
-    iframe.title = 'Mapa da área de atendimento na cidade do Rio de Janeiro';
-    iframe.loading = 'lazy';
-    iframe.setAttribute('referrerpolicy', 'no-referrer-when-downgrade');
-    iframe.style.width = '100%';
-    iframe.style.height = '100%';
-    iframe.style.border = '0';
-    placeholder?.remove();
-    frame?.appendChild(iframe);
-  });
+    if (!btn || !iframe) return;
+
+    btn.addEventListener('click', function () {
+      iframe.setAttribute('src', mapSrc);
+      iframe.hidden = false;
+      if (placeholder) {
+        placeholder.hidden = true;
+      }
+    });
+  })();
 </script>
 
 <style>
@@ -47,6 +54,7 @@ const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&lay
   }
 
   .map-frame {
+    position: relative;
     width: 100%;
     aspect-ratio: 16 / 8;
     border-radius: var(--radius-lg);
@@ -56,6 +64,8 @@ const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&lay
   }
 
   .map-placeholder {
+    position: absolute;
+    inset: 0;
     height: 100%;
     display: flex;
     flex-direction: column;
@@ -67,6 +77,10 @@ const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&lay
     background: linear-gradient(135deg, #eef3fb, #e4ecfa);
   }
 
+  .map-placeholder[hidden] {
+    display: none;
+  }
+
   .map-placeholder-icon {
     color: var(--electric);
   }
@@ -75,6 +89,17 @@ const mapSrc = `https://www.openstreetmap.org/export/embed.html?bbox=${bbox}&lay
     color: var(--primary);
     font-weight: 700;
     margin: 0;
+  }
+
+  .map-iframe {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: block;
+  }
+
+  .map-iframe[hidden] {
+    display: none;
   }
 
   .map-caption {
