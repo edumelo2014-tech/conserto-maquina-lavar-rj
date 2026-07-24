@@ -1,0 +1,159 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import SectionHeader from '@/components/SectionHeader.astro';
+import ServiceCard from '@/components/ServiceCard.astro';
+import BrandCard from '@/components/BrandCard.astro';
+import NeighborhoodList from '@/components/NeighborhoodList.astro';
+import MiniSteps from '@/components/MiniSteps.astro';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import CTASection from '@/components/CTASection.astro';
+import { services } from '@/data/services';
+import { brands } from '@/data/brands';
+import { zonaOesteNeighborhoods } from '@/data/neighborhoods';
+import { serviceProcessSteps } from '@/data/serviceProcess';
+import { organizationJsonLd, webPageJsonLd, servicesJsonLd } from '@/lib/jsonld';
+
+const path = '/conserto-de-maquina-de-lavar-na-zona-oeste-rj/';
+const pageTitle = 'Conserto de Máquina de Lavar na Zona Oeste RJ | Atendimento em Domicílio';
+const pageDescription =
+  'Conserto de máquina de lavar na Zona Oeste RJ com atendimento em domicílio, diagnóstico técnico e orçamento antes do serviço em bairros como Barra da Tijuca, Campo Grande e Bangu.';
+
+const jsonLd = [
+  organizationJsonLd(),
+  webPageJsonLd(pageTitle, pageDescription, path),
+  ...servicesJsonLd(services.map((s) => ({ name: s.title, description: s.longDescription }))),
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} path={path} jsonLd={jsonLd}>
+  <div class="container">
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Zona Oeste RJ', href: path }]} />
+  </div>
+
+  <section class="section section-light page-intro">
+    <div class="container">
+      <span class="eyebrow">Atendimento na Zona Oeste</span>
+      <h1>Conserto de Máquina de Lavar na Zona Oeste do Rio de Janeiro</h1>
+      <p class="page-hero-lede">
+        Atendimento residencial em bairros da Zona Oeste do Rio de Janeiro, com diagnóstico
+        técnico da lavadora antes de qualquer orçamento ser apresentado.
+      </p>
+      <WhatsAppButton />
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container narrow">
+      <SectionHeader
+        align="left"
+        eyebrow="Como trabalhamos"
+        title="Conserto de Máquina de Lavar na Zona Oeste RJ"
+      />
+      <p>
+        A Zona Oeste é a maior região da cidade em extensão, com bairros como Barra da Tijuca,
+        Campo Grande e Santa Cruz apresentando distâncias e perfis de moradia bastante
+        diferentes entre si. Por isso, agendar o horário do atendimento com antecedência ajuda a
+        organizar o deslocamento até o bairro informado.
+      </p>
+      <p>
+        A avaliação da máquina acontece no local, e o orçamento só é apresentado depois que o
+        defeito é identificado com mais precisão.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container">
+      <SectionHeader
+        eyebrow="Cobertura na Zona Oeste"
+        title="Bairros Atendidos na Zona Oeste"
+        lede="Atendimento residencial nos seguintes bairros da Zona Oeste do Rio de Janeiro."
+      />
+      <NeighborhoodList neighborhoods={zonaOesteNeighborhoods} />
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container">
+      <SectionHeader eyebrow="O que oferecemos" title="Serviços Disponíveis" />
+      <div class="grid grid-3">
+        {services.map((service) => (
+          <ServiceCard icon={service.icon} title={service.title} description={service.description} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container">
+      <SectionHeader
+        eyebrow="Marcas atendidas"
+        title="Marcas de Máquinas de Lavar Atendidas na Zona Oeste"
+        lede="Atendimento a diferentes fabricantes e modelos de lavadoras residenciais."
+      />
+      <div class="grid grid-4">
+        {brands.map((brand) => (
+          <BrandCard image={brand.image} alt={brand.alt} title={brand.title} description={brand.description} />
+        ))}
+      </div>
+      <p class="section-note">
+        As marcas mencionadas pertencem aos seus respectivos titulares. O atendimento é realizado
+        de forma especializada e independente.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container">
+      <SectionHeader
+        align="left"
+        eyebrow="Processo"
+        title="Como Funciona o Atendimento na Zona Oeste"
+        lede="Um fluxo simples do primeiro contato até o teste final do equipamento."
+      />
+      <MiniSteps steps={serviceProcessSteps} />
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container narrow">
+      <SectionHeader align="left" eyebrow="Transparência" title="Orçamento e Aprovação do Serviço" />
+      <p>
+        Depois da avaliação, o orçamento é apresentado com explicação sobre o defeito
+        identificado e as peças eventualmente necessárias. A execução do reparo só começa após a
+        sua aprovação, em qualquer bairro atendido da Zona Oeste.
+      </p>
+    </div>
+  </section>
+
+  <CTASection
+    title="Precisa de Conserto de Máquina de Lavar na Zona Oeste RJ?"
+    description="Envie a marca, o modelo, o defeito observado e o bairro pelo WhatsApp para receber a avaliação inicial."
+    showPhone={true}
+  />
+</BaseLayout>
+
+<style>
+  .page-intro {
+    padding-top: clamp(32px, 5vw, 56px);
+    padding-bottom: clamp(28px, 4vw, 44px);
+  }
+
+  .page-intro h1 {
+    font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+    color: var(--primary);
+    max-width: 30ch;
+  }
+
+  .page-hero-lede {
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 40rem;
+    margin-bottom: 24px;
+  }
+
+  .narrow {
+    max-width: 760px;
+  }
+</style>

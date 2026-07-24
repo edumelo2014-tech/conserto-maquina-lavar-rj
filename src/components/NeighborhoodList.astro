@@ -1,0 +1,51 @@
+---
+import type { Neighborhood } from '@/data/neighborhoods';
+
+interface Props {
+  neighborhoods: Neighborhood[];
+}
+
+const { neighborhoods } = Astro.props;
+---
+
+<ul class="neighborhood-list">
+  {neighborhoods.map((neighborhood) => (
+    <li class="neighborhood-item" data-slug={neighborhood.slug}>
+      {neighborhood.nome}
+    </li>
+  ))}
+</ul>
+
+<style>
+  .neighborhood-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+  }
+
+  .neighborhood-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 14px 12px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.92rem;
+    color: var(--primary);
+  }
+
+  @media (max-width: 780px) {
+    .neighborhood-list {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 500px) {
+    .neighborhood-list {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>

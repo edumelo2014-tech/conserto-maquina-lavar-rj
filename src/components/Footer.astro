@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import { images } from '@/assets/images';
-import { siteConfig, whatsappUrl, whatsappAriaLabel } from '@/site.config';
+import { siteConfig, zoneLinks, whatsappUrl, whatsappAriaLabel } from '@/site.config';
 
 const year = new Date().getFullYear();
 ---
@@ -45,9 +45,10 @@ const year = new Date().getFullYear();
       <h2>Área de Atendimento</h2>
       <p>Atendemos todo o Rio de Janeiro.</p>
       <ul>
-        {siteConfig.regions.map((region) => (
-          <li>{region}</li>
-        ))}
+        {siteConfig.regions.map((region) => {
+          const href = zoneLinks[region];
+          return <li>{href ? <a href={href}>{region}</a> : region}</li>;
+        })}
       </ul>
     </div>
 

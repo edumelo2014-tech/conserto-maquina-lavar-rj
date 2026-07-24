@@ -1,6 +1,6 @@
 ---
 import Icon from './icons/Icon.astro';
-import { siteConfig, whatsappUrlWithMessage, whatsappAriaLabel } from '@/site.config';
+import { siteConfig, zoneLinks, whatsappUrlWithMessage, whatsappAriaLabel } from '@/site.config';
 
 const message =
   'Olá, gostaria de saber se atendem meu bairro para conserto de máquina de lavar no RJ.';
@@ -8,12 +8,16 @@ const message =
 
 <div class="area-grid-wrap">
   <div class="area-grid">
-    {siteConfig.regions.map((region) => (
-      <div class="area-item">
-        <Icon name="map-pin" size={22} class="area-icon" />
-        <span>{region}</span>
-      </div>
-    ))}
+    {siteConfig.regions.map((region) => {
+      const href = zoneLinks[region];
+      const Tag = href ? 'a' : 'div';
+      return (
+        <Tag class="area-item" href={href}>
+          <Icon name="map-pin" size={22} class="area-icon" />
+          <span>{region}</span>
+        </Tag>
+      );
+    })}
   </div>
   <div class="area-cta">
     <p>Não encontrou sua região? Fale conosco pelo WhatsApp e confirme o atendimento.</p>
@@ -51,6 +55,19 @@ const message =
     padding: 20px;
     font-weight: 700;
     color: var(--primary);
+    text-decoration: none;
+    transition: box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+
+  a.area-item:hover,
+  a.area-item:focus-visible {
+    border-color: var(--electric);
+    box-shadow: var(--shadow-sm);
+  }
+
+  a.area-item:focus-visible {
+    outline: 3px solid var(--electric);
+    outline-offset: 2px;
   }
 
   .area-icon {

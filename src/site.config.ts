@@ -51,6 +51,14 @@ export const siteConfig = {
   ],
 } as const;
 
+// Páginas de zona já publicadas. "Centro" fica de fora até que uma página
+// própria exista — o item continua aparecendo como texto simples até lá.
+export const zoneLinks: Record<string, string> = {
+  'Zona Sul': '/conserto-de-maquina-de-lavar-na-zona-sul-rj/',
+  'Zona Norte': '/conserto-de-maquina-de-lavar-na-zona-norte-rj/',
+  'Zona Oeste': '/conserto-de-maquina-de-lavar-na-zona-oeste-rj/',
+};
+
 function buildWhatsAppUrl(message: string): string {
   return `https://wa.me/${siteConfig.whatsappNumber}?text=${encodeURIComponent(message)}`;
 }

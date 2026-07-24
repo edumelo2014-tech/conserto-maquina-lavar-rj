@@ -1,0 +1,39 @@
+import type { ImageMetadata } from 'astro';
+import { images } from '@/assets/images';
+
+export interface BrandInfo {
+  image: ImageMetadata;
+  alt: string;
+  title: string;
+  description: string;
+}
+
+export const brands: BrandInfo[] = [
+  {
+    image: images.marcaBrastemp,
+    alt: 'Máquinas de lavar Brastemp atendidas',
+    title: 'Máquinas de Lavar Brastemp',
+    description:
+      'Atendimento a diferentes linhas e modelos, de lavadoras convencionais a versões com mais tecnologia embarcada.',
+  },
+  {
+    image: images.marcaEletrolux,
+    alt: 'Máquinas de lavar Electrolux atendidas',
+    title: 'Máquinas de Lavar Electrolux',
+    description:
+      'Avaliação de falhas elétricas, mecânicas e de programação em modelos populares da marca.',
+  },
+  {
+    image: images.marcaConsul,
+    alt: 'Máquinas de lavar Consul atendidas',
+    title: 'Máquinas de Lavar Consul',
+    description: 'Diagnóstico de defeitos comuns em lavadoras de diferentes capacidades e faixas de uso.',
+  },
+  {
+    image: images.marcaSamsung,
+    alt: 'Máquinas de lavar Samsung atendidas',
+    title: 'Máquinas de Lavar Samsung',
+    description:
+      'Suporte técnico a modelos com painéis eletrônicos e sistemas de centrifugação mais recentes.',
+  },
+];

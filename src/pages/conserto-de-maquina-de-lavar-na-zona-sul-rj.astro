@@ -1,0 +1,159 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import SectionHeader from '@/components/SectionHeader.astro';
+import ServiceCard from '@/components/ServiceCard.astro';
+import BrandCard from '@/components/BrandCard.astro';
+import NeighborhoodList from '@/components/NeighborhoodList.astro';
+import MiniSteps from '@/components/MiniSteps.astro';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import CTASection from '@/components/CTASection.astro';
+import { services } from '@/data/services';
+import { brands } from '@/data/brands';
+import { zonaSulNeighborhoods } from '@/data/neighborhoods';
+import { serviceProcessSteps } from '@/data/serviceProcess';
+import { organizationJsonLd, webPageJsonLd, servicesJsonLd } from '@/lib/jsonld';
+
+const path = '/conserto-de-maquina-de-lavar-na-zona-sul-rj/';
+const pageTitle = 'Conserto de Máquina de Lavar na Zona Sul RJ | Atendimento em Domicílio';
+const pageDescription =
+  'Conserto de máquina de lavar na Zona Sul RJ com atendimento em domicílio, diagnóstico técnico e orçamento antes do serviço em bairros como Copacabana, Ipanema e Botafogo.';
+
+const jsonLd = [
+  organizationJsonLd(),
+  webPageJsonLd(pageTitle, pageDescription, path),
+  ...servicesJsonLd(services.map((s) => ({ name: s.title, description: s.longDescription }))),
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} path={path} jsonLd={jsonLd}>
+  <div class="container">
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Zona Sul RJ', href: path }]} />
+  </div>
+
+  <section class="section section-light page-intro">
+    <div class="container">
+      <span class="eyebrow">Atendimento na Zona Sul</span>
+      <h1>Conserto de Máquina de Lavar na Zona Sul do Rio de Janeiro</h1>
+      <p class="page-hero-lede">
+        Atendimento residencial na Zona Sul do Rio de Janeiro, com diagnóstico técnico da
+        lavadora realizado antes de qualquer orçamento ser apresentado.
+      </p>
+      <WhatsAppButton />
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container narrow">
+      <SectionHeader
+        align="left"
+        eyebrow="Como trabalhamos"
+        title="Conserto de Máquina de Lavar na Zona Sul RJ"
+      />
+      <p>
+        Bairros como Copacabana, Ipanema e Botafogo têm perfis distintos de prédios e
+        apartamentos, o que costuma influenciar como a máquina de lavar está instalada — em
+        área de serviço interna, varanda ou espaços mais compactos. O atendimento na Zona Sul
+        considera essas particularidades já na avaliação inicial do equipamento.
+      </p>
+      <p>
+        Como em qualquer atendimento, a lavadora é avaliada primeiro, e o orçamento só é
+        apresentado depois que o defeito é identificado com mais precisão.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container">
+      <SectionHeader
+        eyebrow="Cobertura na Zona Sul"
+        title="Bairros Atendidos na Zona Sul"
+        lede="Atendimento residencial nos seguintes bairros da Zona Sul do Rio de Janeiro."
+      />
+      <NeighborhoodList neighborhoods={zonaSulNeighborhoods} />
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container">
+      <SectionHeader eyebrow="O que oferecemos" title="Serviços Disponíveis" />
+      <div class="grid grid-3">
+        {services.map((service) => (
+          <ServiceCard icon={service.icon} title={service.title} description={service.description} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container">
+      <SectionHeader
+        eyebrow="Marcas atendidas"
+        title="Marcas de Máquinas de Lavar Atendidas na Zona Sul"
+        lede="Atendimento a diferentes fabricantes e modelos de lavadoras residenciais."
+      />
+      <div class="grid grid-4">
+        {brands.map((brand) => (
+          <BrandCard image={brand.image} alt={brand.alt} title={brand.title} description={brand.description} />
+        ))}
+      </div>
+      <p class="section-note">
+        As marcas mencionadas pertencem aos seus respectivos titulares. O atendimento é realizado
+        de forma especializada e independente.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container">
+      <SectionHeader
+        align="left"
+        eyebrow="Processo"
+        title="Como Funciona o Atendimento na Zona Sul"
+        lede="Um fluxo simples do primeiro contato até o teste final do equipamento."
+      />
+      <MiniSteps steps={serviceProcessSteps} />
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container narrow">
+      <SectionHeader align="left" eyebrow="Transparência" title="Orçamento e Aprovação do Serviço" />
+      <p>
+        Depois do diagnóstico, o orçamento é explicado com base no defeito identificado e nas
+        peças eventualmente necessárias. O reparo só é executado após a sua aprovação —
+        independentemente do bairro da Zona Sul em que o atendimento acontece.
+      </p>
+    </div>
+  </section>
+
+  <CTASection
+    title="Precisa de Conserto de Máquina de Lavar na Zona Sul RJ?"
+    description="Envie a marca, o modelo, o defeito observado e o bairro pelo WhatsApp para receber a avaliação inicial."
+    showPhone={true}
+  />
+</BaseLayout>
+
+<style>
+  .page-intro {
+    padding-top: clamp(32px, 5vw, 56px);
+    padding-bottom: clamp(28px, 4vw, 44px);
+  }
+
+  .page-intro h1 {
+    font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+    color: var(--primary);
+    max-width: 30ch;
+  }
+
+  .page-hero-lede {
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 40rem;
+    margin-bottom: 24px;
+  }
+
+  .narrow {
+    max-width: 760px;
+  }
+</style>
