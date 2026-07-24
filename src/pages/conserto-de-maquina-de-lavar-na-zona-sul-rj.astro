@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
 import SectionHeader from '@/components/SectionHeader.astro';
@@ -8,6 +9,7 @@ import NeighborhoodList from '@/components/NeighborhoodList.astro';
 import MiniSteps from '@/components/MiniSteps.astro';
 import WhatsAppButton from '@/components/WhatsAppButton.astro';
 import CTASection from '@/components/CTASection.astro';
+import { images } from '@/assets/images';
 import { services } from '@/data/services';
 import { brands } from '@/data/brands';
 import { zonaSulNeighborhoods } from '@/data/neighborhoods';
@@ -32,14 +34,28 @@ const jsonLd = [
   </div>
 
   <section class="section section-light page-intro">
-    <div class="container">
-      <span class="eyebrow">Atendimento na Zona Sul</span>
-      <h1>Conserto de Máquina de Lavar na Zona Sul do Rio de Janeiro</h1>
-      <p class="page-hero-lede">
-        Atendimento residencial na Zona Sul do Rio de Janeiro, com diagnóstico técnico da
-        lavadora realizado antes de qualquer orçamento ser apresentado.
-      </p>
-      <WhatsAppButton />
+    <div class="container page-hero-grid">
+      <div>
+        <span class="eyebrow">Atendimento na Zona Sul</span>
+        <h1>Conserto de Máquina de Lavar na Zona Sul do Rio de Janeiro</h1>
+        <p class="page-hero-lede">
+          Atendimento residencial na Zona Sul do Rio de Janeiro, com diagnóstico técnico da
+          lavadora realizado antes de qualquer orçamento ser apresentado.
+        </p>
+        <WhatsAppButton />
+      </div>
+      <div>
+        <Image
+          src={images.tecnicoAtendendoCliente}
+          alt="Técnico conversando com cliente sobre o conserto da máquina de lavar na Zona Sul do Rio de Janeiro"
+          title="Conserto de máquina de lavar na Zona Sul RJ"
+          width={560}
+          height={700}
+          loading="eager"
+          fetchpriority="high"
+          class="page-hero-img"
+        />
+      </div>
     </div>
   </section>
 
@@ -94,7 +110,13 @@ const jsonLd = [
       />
       <div class="grid grid-4">
         {brands.map((brand) => (
-          <BrandCard image={brand.image} alt={brand.alt} title={brand.title} description={brand.description} />
+          <BrandCard
+            image={brand.image}
+            alt={`${brand.alt} na Zona Sul do Rio de Janeiro`}
+            imageTitle={`Máquinas de lavar ${brand.title.replace('Máquinas de Lavar ', '')} na Zona Sul RJ`}
+            title={brand.title}
+            description={brand.description}
+          />
         ))}
       </div>
       <p class="section-note">
@@ -140,6 +162,17 @@ const jsonLd = [
     padding-bottom: clamp(28px, 4vw, 44px);
   }
 
+  .page-hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .page-hero-grid > * {
+    min-width: 0;
+  }
+
   .page-intro h1 {
     font-size: clamp(1.9rem, 3.4vw, 2.6rem);
     color: var(--primary);
@@ -153,7 +186,19 @@ const jsonLd = [
     margin-bottom: 24px;
   }
 
+  .page-hero-img {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+
   .narrow {
     max-width: 760px;
+  }
+
+  @media (max-width: 860px) {
+    .page-hero-grid {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
