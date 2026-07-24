@@ -1,5 +1,6 @@
 ---
 import type { Neighborhood } from '@/data/neighborhoods';
+import { getNeighborhoodPage } from '@/data/neighborhoodPages';
 
 interface Props {
   neighborhoods: Neighborhood[];
@@ -9,11 +10,22 @@ const { neighborhoods } = Astro.props;
 ---
 
 <ul class="neighborhood-list">
-  {neighborhoods.map((neighborhood) => (
-    <li class="neighborhood-item" data-slug={neighborhood.slug}>
-      {neighborhood.nome}
-    </li>
-  ))}
+  {neighborhoods.map((neighborhood) => {
+    const page = getNeighborhoodPage(neighborhood.slug);
+    return (
+      <li>
+        {page ? (
+          <a class="neighborhood-item" href={page.path} data-slug={neighborhood.slug}>
+            {neighborhood.nome}
+          </a>
+        ) : (
+          <span class="neighborhood-item" data-slug={neighborhood.slug}>
+            {neighborhood.nome}
+          </span>
+        )}
+      </li>
+    );
+  })}
 </ul>
 
 <style>
@@ -27,6 +39,7 @@ const { neighborhoods } = Astro.props;
   }
 
   .neighborhood-item {
+    display: block;
     background: var(--white);
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
@@ -35,6 +48,22 @@ const { neighborhoods } = Astro.props;
     font-weight: 600;
     font-size: 0.92rem;
     color: var(--primary);
+    text-decoration: none;
+  }
+
+  a.neighborhood-item {
+    transition: box-shadow 0.15s ease, border-color 0.15s ease;
+  }
+
+  a.neighborhood-item:hover,
+  a.neighborhood-item:focus-visible {
+    border-color: var(--electric);
+    box-shadow: var(--shadow-sm);
+  }
+
+  a.neighborhood-item:focus-visible {
+    outline: 3px solid var(--electric);
+    outline-offset: 2px;
   }
 
   @media (max-width: 780px) {

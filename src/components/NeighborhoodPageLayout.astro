@@ -1,0 +1,511 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import SectionHeader from '@/components/SectionHeader.astro';
+import ServiceCard from '@/components/ServiceCard.astro';
+import ProblemCard from '@/components/ProblemCard.astro';
+import BrandCard from '@/components/BrandCard.astro';
+import MiniSteps from '@/components/MiniSteps.astro';
+import PricingFactors from '@/components/PricingFactors.astro';
+import RepairWorthTable from '@/components/RepairWorthTable.astro';
+import SafetyAlert from '@/components/SafetyAlert.astro';
+import FAQAccordion from '@/components/FAQAccordion.astro';
+import BlogCard from '@/components/BlogCard.astro';
+import CTASection from '@/components/CTASection.astro';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import Icon from '@/components/icons/Icon.astro';
+import { siteConfig } from '@/site.config';
+import { services } from '@/data/services';
+import { problems } from '@/data/problems';
+import { brands } from '@/data/brands';
+import { pricingFactors } from '@/data/pricingFactors';
+import { whyChooseUs } from '@/data/whyChooseUs';
+import { informItems } from '@/data/informItems';
+import { serviceProcessSteps } from '@/data/serviceProcess';
+import { homeFaq } from '@/data/faq';
+import type { NeighborhoodPageData } from '@/data/neighborhoodPages';
+import { organizationJsonLd, webPageJsonLd, servicesJsonLd } from '@/lib/jsonld';
+
+interface Props {
+  data: NeighborhoodPageData;
+}
+
+const { data } = Astro.props;
+
+const pageTitle = `Conserto de Máquina de Lavar ${data.preposition} ${data.nome} RJ | Atendimento em Domicílio`;
+const pageDescription = `Conserto de máquina de lavar ${data.preposition} ${data.nome} RJ com atendimento em domicílio, diagnóstico técnico e orçamento antes do serviço. ${data.zona} do Rio de Janeiro.`;
+
+const jsonLd = [
+  organizationJsonLd(),
+  webPageJsonLd(pageTitle, pageDescription, data.path),
+  ...servicesJsonLd(services.map((s) => ({ name: s.title, description: s.longDescription }))),
+];
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const recentPosts = allPosts
+  .sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
+  .slice(0, 3);
+
+const domicilioChecklist = [
+  'Atendimento no Local',
+  'Avaliação Técnica da Lavadora',
+  'Serviço Realizado Após Aprovação',
+  'Teste da Máquina Após o Reparo',
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} path={data.path} jsonLd={jsonLd}>
+  <div class="container">
+    <Breadcrumbs
+      items={[
+        { label: 'Home', href: '/' },
+        { label: data.zona, href: data.zonaHref },
+        { label: `${data.nome} RJ`, href: data.path },
+      ]}
+    />
+  </div>
+
+  <!-- HERO -->
+  <section class="section section-light page-intro">
+    <div class="container page-hero-grid">
+      <div>
+        <span class="eyebrow">{data.eyebrow}</span>
+        <h1>Conserto de Máquina de Lavar {data.preposition} {data.nome} RJ</h1>
+        <p class="page-hero-lede">{data.lead}</p>
+        <WhatsAppButton />
+      </div>
+      <div>
+        <Image
+          src={data.heroImage}
+          alt={data.heroImageAlt}
+          title={data.heroImageTitle}
+          width={560}
+          height={700}
+          loading="eager"
+          fetchpriority="high"
+          class="page-hero-img"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- EMPRESA DESDE 2010 -->
+  <section class="section section-dark">
+    <div class="container about-grid">
+      <div class="about-copy">
+        <span class="eyebrow">Nossa trajetória</span>
+        <h2>Empresa de Conserto de Máquina de Lavar {data.preposition} {data.nome} RJ Desde {siteConfig.startYear}</h2>
+        {data.empresaParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+        <WhatsAppButton label="Falar com um técnico" />
+      </div>
+      <div class="about-card">
+        <ul>
+          <li>
+            <span class="about-number">1</span>
+            <div>
+              <h3>Experiência no Mercado Desde {siteConfig.startYear}</h3>
+              <p>Vivência prática construída ao longo de anos de atendimento a lavadoras residenciais.</p>
+            </div>
+          </li>
+          <li>
+            <span class="about-number">2</span>
+            <div>
+              <h3>Atendimento Transparente</h3>
+              <p>Explicações claras sobre o defeito identificado e as opções de reparo.</p>
+            </div>
+          </li>
+          <li>
+            <span class="about-number">3</span>
+            <div>
+              <h3>Diagnóstico Antes do Reparo</h3>
+              <p>Nenhuma peça é trocada sem que a causa do problema seja confirmada.</p>
+            </div>
+          </li>
+          <li>
+            <span class="about-number">4</span>
+            <div>
+              <h3>Orçamento Antes da Execução do Serviço</h3>
+              <p>O valor é apresentado e só avançamos com a sua aprovação.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ATENDIMENTO TÉCNICO ESPECIALIZADO -->
+  <section class="section section-light">
+    <div class="container narrow">
+      <SectionHeader align="left" eyebrow="Familiaridade com a região" title={`Atendimento Técnico Especializado ${data.preposition} ${data.nome} RJ`} />
+      {data.atendimentoParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+      <p>
+        {data.atendimentoClosingBefore}
+        <a href={data.sibling.href}>{data.sibling.nome}</a>
+        {data.atendimentoClosingAfter}
+      </p>
+    </div>
+  </section>
+
+  <!-- SERVIÇOS -->
+  <section class="section section-dark">
+    <div class="container">
+      <SectionHeader eyebrow="O que oferecemos" title={`Serviços para Máquinas de Lavar ${data.preposition} ${data.nome} RJ`} lede={data.servicosLede} />
+      <div class="grid grid-3">
+        {services.map((service) => (
+          <ServiceCard icon={service.icon} title={service.title} description={service.description} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEMAS COMUNS -->
+  <section class="section section-light">
+    <div class="container">
+      <SectionHeader eyebrow="Sintomas frequentes" title={`Problemas Comuns em Máquinas de Lavar ${data.preposition} ${data.nome} RJ`} lede={data.problemasLede} />
+      <div class="grid grid-4">
+        {problems.map((problem) => (
+          <ProblemCard icon={problem.icon} title={problem.title} description={problem.description} />
+        ))}
+      </div>
+      <p class="section-note">
+        Os sintomas podem ter causas diferentes. A confirmação depende de avaliação técnica.
+      </p>
+    </div>
+  </section>
+
+  <!-- MARCAS ATENDIDAS -->
+  <section class="section section-dark">
+    <div class="container">
+      <SectionHeader eyebrow="Marcas atendidas" title={`Marcas de Máquinas de Lavar Atendidas ${data.preposition} ${data.nome} RJ`} lede={data.marcasLede} />
+      <div class="grid grid-4">
+        {brands.map((brand) => (
+          <BrandCard
+            image={brand.image}
+            alt={`${brand.alt} ${data.preposition} ${data.nome}, Rio de Janeiro`}
+            imageTitle={`Máquinas de lavar ${brand.title.replace('Máquinas de Lavar ', '')} ${data.preposition} ${data.nome} RJ`}
+            title={brand.title}
+            description={brand.description}
+          />
+        ))}
+      </div>
+      <p class="section-note">
+        As marcas mencionadas pertencem aos seus respectivos titulares. O atendimento é realizado
+        de forma especializada e independente.
+      </p>
+    </div>
+  </section>
+
+  <!-- TÉCNICO EM DOMICÍLIO -->
+  <section class="section section-light">
+    <div class="container narrow">
+      <SectionHeader align="left" eyebrow="Atendimento residencial" title={`Técnico de Máquina de Lavar em Domicílio ${data.preposition} ${data.nome} RJ`} />
+      {data.tecnicoDomicilioParagraphs.map((paragraph) => <p>{paragraph}</p>)}
+      <ul class="checklist">
+        {domicilioChecklist.map((item) => (
+          <li><Icon name="check-circle" size={18} /> {item}</li>
+        ))}
+      </ul>
+      <WhatsAppButton label="Solicitar Orçamento no WhatsApp" />
+    </div>
+  </section>
+
+  <!-- COMO FUNCIONA -->
+  <section class="section section-dark">
+    <div class="container">
+      <SectionHeader
+        align="left"
+        eyebrow="Processo"
+        title={`Como Funciona o Conserto de Máquina de Lavar ${data.preposition} ${data.nome} RJ`}
+        lede={data.comoFuncionaLede}
+      />
+      <MiniSteps steps={serviceProcessSteps} />
+    </div>
+  </section>
+
+  <!-- O QUE INFLUENCIA O PREÇO -->
+  <section class="section section-light">
+    <div class="container pricing-grid">
+      <div>
+        <SectionHeader align="left" eyebrow="Transparência" title={`O Que Influencia o Preço do Conserto ${data.preposition} ${data.nome} RJ?`} lede={data.precoLede} />
+        <PricingFactors factors={pricingFactors} />
+      </div>
+      <div class="pricing-box">
+        <Icon name="quote" size={26} class="pricing-box-icon" />
+        <p>
+          Um valor responsável depende do diagnóstico. Evite promessas de preço fechado sem
+          identificar o defeito e o modelo da máquina.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- QUANDO VALE A PENA CONSERTAR -->
+  <section class="section section-dark">
+    <div class="container narrow">
+      <SectionHeader align="left" eyebrow="Vale a pena consertar?" title={`Quando Vale a Pena Consertar a Máquina de Lavar ${data.preposition} ${data.nome} RJ?`} />
+      <RepairWorthTable />
+      <p class="section-note align-left">{data.valeAPenaParagraph}</p>
+    </div>
+  </section>
+
+  <!-- POR QUE ESCOLHER -->
+  <section class="section section-light">
+    <div class="container">
+      <SectionHeader eyebrow="Por que escolher" title={`Por Que Escolher Nossa Manutenção de Lavadoras ${data.preposition} ${data.nome} RJ?`} lede={data.porQueEscolherLede} />
+      <div class="grid grid-3">
+        {whyChooseUs.map((item) => (
+          <ServiceCard icon={item.icon} title={item.title} description={item.description} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- O QUE INFORMAR -->
+  <section class="section section-dark">
+    <div class="container">
+      <SectionHeader eyebrow="Antes do atendimento" title={`O Que Informar ao Solicitar Atendimento ${data.preposition} ${data.nome} RJ?`} lede={data.informarLede} />
+      <div class="grid grid-3 inform-grid">
+        {informItems.map((item) => (
+          <div class="inform-item">
+            <h3>{item.title}</h3>
+            <p>{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- QUANDO DESLIGAR -->
+  <section class="section section-light">
+    <div class="container">
+      <SectionHeader
+        eyebrow="Segurança"
+        title={`Quando Desligar a Máquina e Solicitar um Técnico ${data.preposition} ${data.nome} RJ?`}
+        lede={data.desligarLede}
+      />
+      <SafetyAlert />
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section section-dark">
+    <div class="container faq-container">
+      <SectionHeader eyebrow="Dúvidas frequentes" title={`Perguntas Frequentes sobre Conserto de Máquina de Lavar ${data.preposition} ${data.nome} RJ`} />
+      <FAQAccordion items={homeFaq} idPrefix={`${data.slug}-faq`} />
+    </div>
+  </section>
+
+  <!-- ARTIGOS RECENTES -->
+  {recentPosts.length > 0 && (
+    <section class="section section-light">
+      <div class="container">
+        <SectionHeader
+          eyebrow="Blog"
+          title="Conteúdos Recentes sobre Máquinas de Lavar"
+          lede="Dicas práticas e informações técnicas sobre manutenção e defeitos de máquinas de lavar."
+        />
+        <div class="grid grid-3">
+          {recentPosts.map((post) => <BlogCard post={post} />)}
+        </div>
+        <div class="section-cta">
+          <a href="/blog/" class="btn btn-outline-primary">Ver Todos os Artigos</a>
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- CTA FINAL -->
+  <CTASection title={data.ctaTitle} description={data.ctaDescription} showPhone={true} />
+</BaseLayout>
+
+<style>
+  .page-intro {
+    padding-top: clamp(32px, 5vw, 56px);
+    padding-bottom: clamp(28px, 4vw, 44px);
+  }
+
+  .page-hero-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 40px;
+    align-items: center;
+  }
+
+  .page-hero-grid > * {
+    min-width: 0;
+  }
+
+  .page-intro h1 {
+    font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+    color: var(--primary);
+    max-width: 30ch;
+  }
+
+  .page-hero-lede {
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 40rem;
+    margin-bottom: 24px;
+  }
+
+  .page-hero-img {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+  }
+
+  .narrow {
+    max-width: 760px;
+  }
+
+  @media (max-width: 860px) {
+    .page-hero-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Empresa desde 2010 */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: start;
+  }
+
+  .about-grid > * {
+    min-width: 0;
+  }
+
+  .about-card {
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    padding: 30px;
+    box-shadow: var(--shadow-lg);
+  }
+
+  .about-card ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .about-card li {
+    display: flex;
+    gap: 16px;
+  }
+
+  .about-card h3 {
+    font-size: 1rem;
+    color: var(--primary);
+    margin-bottom: 4px;
+  }
+
+  .about-card p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .about-number {
+    flex-shrink: 0;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--electric);
+    color: var(--white);
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  @media (max-width: 900px) {
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Checklist (técnico em domicílio) */
+  .checklist {
+    list-style: none;
+    margin: 0 0 26px;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+  }
+
+  .checklist li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--secondary);
+    font-weight: 600;
+  }
+
+  .checklist :global(svg) {
+    color: var(--whatsapp);
+  }
+
+  /* Preço */
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 40px;
+    align-items: start;
+  }
+
+  .pricing-grid > * {
+    min-width: 0;
+  }
+
+  .pricing-box {
+    background: var(--light);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 28px;
+  }
+
+  .pricing-box-icon {
+    color: var(--electric);
+    margin-bottom: 12px;
+  }
+
+  .pricing-box p {
+    color: var(--muted);
+    margin: 0;
+    font-size: 0.98rem;
+  }
+
+  @media (max-width: 900px) {
+    .pricing-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Inform items */
+  .inform-item h3 {
+    color: var(--white);
+    font-size: 1rem;
+    margin-bottom: 6px;
+  }
+
+  .inform-item p {
+    color: var(--dark-text);
+    font-size: 0.92rem;
+    margin: 0;
+  }
+
+  .section-cta {
+    margin-top: 36px;
+    text-align: center;
+  }
+
+  .faq-container {
+    max-width: 860px;
+  }
+</style>
