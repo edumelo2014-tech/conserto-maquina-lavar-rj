@@ -1,0 +1,8 @@
+---
+import NeighborhoodPageLayout from '@/components/NeighborhoodPageLayout.astro';
+import { getNeighborhoodPage } from '@/data/neighborhoodPages';
+
+const data = getNeighborhoodPage('anil')!;
+---
+
+<NeighborhoodPageLayout data={data} />
