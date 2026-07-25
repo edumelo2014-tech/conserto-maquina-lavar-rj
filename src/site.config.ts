@@ -40,6 +40,7 @@ export const siteConfig = {
     { label: 'Home', href: '/' },
     { label: 'Sobre', href: '/sobre/' },
     { label: 'Serviços', href: '/servicos/' },
+    { label: 'Áreas Atendidas', href: '/areas-atendidas/' },
     { label: 'Contato', href: '/contato/' },
     { label: 'Blog', href: '/blog/' },
   ],

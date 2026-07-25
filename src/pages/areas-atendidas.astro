@@ -1,0 +1,115 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import NeighborhoodList from '@/components/NeighborhoodList.astro';
+import CTASection from '@/components/CTASection.astro';
+import { zonaNorteNeighborhoods, zonaSulNeighborhoods, zonaOesteNeighborhoods } from '@/data/neighborhoods';
+import { zoneLinks } from '@/site.config';
+import { organizationJsonLd, webPageJsonLd } from '@/lib/jsonld';
+
+const path = '/areas-atendidas/';
+const pageTitle = 'Áreas Atendidas no Rio de Janeiro | Conserto de Máquina de Lavar';
+const pageDescription =
+  'Veja as áreas atendidas para conserto de máquina de lavar no Rio de Janeiro, organizadas por Zona Norte, Zona Sul e Zona Oeste, com acesso direto à página de cada bairro.';
+
+const jsonLd = [organizationJsonLd(), webPageJsonLd(pageTitle, pageDescription, path)];
+
+const zones = [
+  { nome: 'Zona Norte', href: zoneLinks['Zona Norte'], neighborhoods: zonaNorteNeighborhoods },
+  { nome: 'Zona Sul', href: zoneLinks['Zona Sul'], neighborhoods: zonaSulNeighborhoods },
+  { nome: 'Zona Oeste', href: zoneLinks['Zona Oeste'], neighborhoods: zonaOesteNeighborhoods },
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} path={path} jsonLd={jsonLd}>
+  <div class="container">
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Áreas Atendidas', href: path }]} />
+  </div>
+
+  <section class="section section-light page-intro">
+    <div class="container narrow">
+      <h1>Áreas Atendidas no Rio de Janeiro</h1>
+      <p class="page-hero-lede">
+        O atendimento cobre toda a cidade do Rio de Janeiro, organizado por zona. Escolha a sua
+        região abaixo para ver os bairros atendidos e acessar a página com informações
+        específicas do seu bairro.
+      </p>
+    </div>
+  </section>
+
+  {zones.map((zone, index) => (
+    <section class={`section ${index % 2 === 0 ? 'section-dark' : 'section-light'}`}>
+      <div class="container">
+        <h2 class="zone-heading">
+          <a href={zone.href}>{zone.nome}</a>
+        </h2>
+        <NeighborhoodList neighborhoods={zone.neighborhoods} />
+      </div>
+    </section>
+  ))}
+
+  <CTASection
+    title="Precisa de Conserto de Máquina de Lavar no RJ?"
+    description="Entre em contato pelo WhatsApp, informe a marca, o modelo, o defeito apresentado e seu bairro para solicitar uma avaliação."
+    showPhone={true}
+  />
+</BaseLayout>
+
+<style>
+  .page-intro {
+    padding-top: clamp(32px, 5vw, 56px);
+    padding-bottom: clamp(28px, 4vw, 44px);
+  }
+
+  .page-intro h1 {
+    font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+    color: var(--primary);
+  }
+
+  .page-hero-lede {
+    color: var(--muted);
+    font-size: 1.05rem;
+    max-width: 42rem;
+  }
+
+  .narrow {
+    max-width: 760px;
+  }
+
+  .zone-heading {
+    margin-bottom: 24px;
+  }
+
+  .zone-heading a {
+    text-decoration: none;
+    color: var(--primary);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-dark .zone-heading a {
+    color: var(--white);
+  }
+
+  .zone-heading a::after {
+    content: '→';
+    font-size: 0.8em;
+    color: var(--electric);
+    transition: transform 0.15s ease;
+  }
+
+  .zone-heading a:hover::after {
+    transform: translateX(4px);
+  }
+
+  .zone-heading a:hover,
+  .zone-heading a:focus-visible {
+    text-decoration: underline;
+  }
+
+  .zone-heading a:focus-visible {
+    outline: 3px solid var(--electric);
+    outline-offset: 4px;
+  }
+</style>
