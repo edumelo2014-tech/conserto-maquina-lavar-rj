@@ -2,7 +2,7 @@
 title: "Como higienizar a máquina de lavar por dentro"
 description: "Passo a passo para higienizar a máquina de lavar por dentro, remover mau cheiro e manter o equipamento em bom estado no dia a dia."
 category: "Manutenção"
-publishDate: 2026-06-12
+publishDate: 2026-08-12
 readingTime: "8 min de leitura"
 image: "../../assets/images/home/maquina-sansung.jpg"
 imageAlt: "Máquina de lavar de carga superior aberta, representando limpeza interna"

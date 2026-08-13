@@ -2,7 +2,7 @@
 title: "Máquina de lavar piscando e não liga: entenda o problema de voltagem"
 description: "Entenda por que a máquina de lavar fica piscando e não liga, a diferença entre 127V e 220V e os riscos de conectar na voltagem errada."
 category: "Defeitos"
-publishDate: 2026-07-17
+publishDate: 2026-08-07
 readingTime: "8 min de leitura"
 image: "../../assets/images/home/tecnico-atendendo-a-cliente.png"
 imageAlt: "Técnico orientando cliente sobre voltagem correta da máquina de lavar"

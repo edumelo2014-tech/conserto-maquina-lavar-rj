@@ -2,7 +2,7 @@
 title: "Como saber se a máquina de lavar queimou"
 description: "Veja os principais sinais de que a máquina de lavar queimou, os riscos envolvidos e o que fazer imediatamente após identificar o problema."
 category: "Defeitos"
-publishDate: 2026-07-24
+publishDate: 2026-08-06
 readingTime: "8 min de leitura"
 image: "../../assets/images/home/maquina-consul.webp"
 imageAlt: "Máquina de lavar de carga superior, representando avaliação de componentes queimados"

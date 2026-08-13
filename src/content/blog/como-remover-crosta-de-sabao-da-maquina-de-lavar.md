@@ -2,7 +2,7 @@
 title: "Como remover crosta de sabão em pó da máquina de lavar"
 description: "Veja como remover crosta de sabão em pó da máquina de lavar com segurança e evitar que o resíduo volte a se formar."
 category: "Manutenção"
-publishDate: 2026-06-19
+publishDate: 2026-08-11
 readingTime: "7 min de leitura"
 image: "../../assets/images/home/maquina-eletrolux.webp"
 imageAlt: "Máquina de lavar de carga superior, representando remoção de crosta de sabão acumulada"

@@ -2,7 +2,7 @@
 title: "Barulho estranho na máquina de lavar: o que pode ser"
 description: "Entenda os tipos de barulho estranho na máquina de lavar, como identificar a origem do ruído e quando vale buscar conserto de máquina de lavar no RJ."
 category: "Defeitos"
-publishDate: 2026-06-05
+publishDate: 2026-08-13
 readingTime: "8 min de leitura"
 image: "../../assets/images/home/imagem-hero.png"
 imageAlt: "Máquina de lavar em funcionamento durante o ciclo de centrifugação"

@@ -2,7 +2,7 @@
 title: "Por que a máquina de lavar para de funcionar do nada"
 description: "Entenda as causas mais comuns quando a máquina de lavar para de funcionar do nada e como agir diante de falhas intermitentes."
 category: "Defeitos"
-publishDate: 2026-07-10
+publishDate: 2026-08-08
 readingTime: "8 min de leitura"
 image: "../../assets/images/home/imagem-assistencia-tecnica.png"
 imageAlt: "Assistência técnica avaliando máquina de lavar que parou de funcionar durante o ciclo"

@@ -2,7 +2,7 @@
 title: "Máquina de lavar não centrifuga: o que verificar antes de pensar em motor queimado"
 description: "Veja as três causas mais comuns quando a máquina de lavar não centrifuga e por que o motor nem sempre é o responsável pelo defeito."
 category: "Defeitos"
-publishDate: 2026-07-03
+publishDate: 2026-08-09
 readingTime: "8 min de leitura"
 image: "../../assets/images/home/testando-componente-multimetro.png"
 imageAlt: "Técnico testando componente elétrico de máquina de lavar que não centrifuga"

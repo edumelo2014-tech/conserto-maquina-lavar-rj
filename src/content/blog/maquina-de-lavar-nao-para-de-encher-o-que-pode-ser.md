@@ -2,7 +2,7 @@
 title: "Máquina de lavar não para de encher: o que pode ser"
 description: "Entenda por que a máquina de lavar não para de encher com água, os componentes envolvidos e os riscos de deixar o defeito sem reparo."
 category: "Defeitos"
-publishDate: 2026-07-31
+publishDate: 2026-08-05
 readingTime: "8 min de leitura"
 image: "../../assets/images/home/orcamento-tecnico-celular.png"
 imageAlt: "Técnico enviando orçamento pelo celular após avaliar máquina de lavar que não para de encher"

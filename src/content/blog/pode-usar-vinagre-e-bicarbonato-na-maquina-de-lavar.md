@@ -2,7 +2,7 @@
 title: "Pode usar vinagre e bicarbonato na máquina de lavar?"
 description: "Entenda se pode usar vinagre e bicarbonato na máquina de lavar, em que quantidade e quando evitar essa combinação."
 category: "Manutenção"
-publishDate: 2026-06-26
+publishDate: 2026-08-10
 readingTime: "7 min de leitura"
 image: "../../assets/images/home/maquina-brastemp.webp"
 imageAlt: "Máquina de lavar de carga superior, representando limpeza natural com vinagre e bicarbonato"
