@@ -6,6 +6,7 @@ export interface ServiceItem {
   title: string;
   description: string;
   longDescription: string;
+  href?: string;
 }
 
 export const services: ServiceItem[] = [
@@ -28,6 +29,24 @@ export const services: ServiceItem[] = [
       'Verificação técnica dos componentes elétricos, mecânicos e eletrônicos da lavadora para apontar a origem do defeito com mais precisão, evitando trocas desnecessárias.',
   },
   {
+    slug: 'higienizacao',
+    icon: 'check-circle',
+    title: 'Higienização de Máquina de Lavar',
+    description: 'Limpeza técnica para remover resíduos, crostas e odores persistentes.',
+    longDescription:
+      'Serviço de higienização interna indicado quando a limpeza doméstica não remove mau cheiro, resíduos ou sujeira acumulada em pontos de difícil acesso.',
+    href: '/servicos/higienizacao-de-maquina-de-lavar-rj/',
+  },
+  {
+    slug: 'instalacao',
+    icon: 'clipboard-list',
+    title: 'Instalação de Máquina de Lavar',
+    description: 'Conferência das conexões hidráulicas, nivelamento e teste inicial.',
+    longDescription:
+      'Instalação e verificação do posicionamento, entrada de água, mangueira de saída e nivelamento da lavadora, respeitando as orientações do fabricante.',
+    href: '/servicos/instalacao-de-maquina-de-lavar-rj/',
+  },
+  {
     slug: 'manutencao-preventiva',
     icon: 'shield',
     title: 'Manutenção Preventiva',
@@ -35,6 +54,7 @@ export const services: ServiceItem[] = [
       'Verificação periódica que ajuda a reduzir a chance de falhas e prolongar a vida útil do equipamento.',
     longDescription:
       'Inspeção de mangueiras, filtros, vedações e componentes de desgaste natural, contribuindo para o bom funcionamento contínuo da máquina.',
+    href: '/servicos/manutencao-preventiva-de-maquina-de-lavar-rj/',
   },
   {
     slug: 'reparo-eletrico-eletronico',

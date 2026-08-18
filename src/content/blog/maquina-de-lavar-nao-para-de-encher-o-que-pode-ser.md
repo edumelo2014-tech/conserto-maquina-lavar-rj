@@ -7,7 +7,7 @@ readingTime: "8 min de leitura"
 image: "../../assets/images/home/orcamento-tecnico-celular.png"
 imageAlt: "Técnico enviando orçamento pelo celular após avaliar máquina de lavar que não para de encher"
 author: "Equipe Editorial"
-relatedSlugs: ["como-saber-se-a-maquina-de-lavar-queimou", "maquina-de-lavar-nao-centrifuga-o-que-verificar-antes-de-trocar-o-motor"]
+relatedSlugs: ["como-saber-se-a-maquina-de-lavar-queimou", "maquina-de-lavar-nao-centrifuga-causas-comuns"]
 ---
 
 Uma máquina que não para de encher água é um dos defeitos que mais preocupam, porque o risco de transbordamento é imediato e o desperdício de água acontece rápido. Este guia explica os componentes normalmente envolvidos nesse problema e os passos corretos até a avaliação técnica.
@@ -72,8 +72,8 @@ Assim que identificar que a máquina não está parando de encher, o primeiro pa
 
 Ao solicitar o conserto de máquina de lavar no RJ, é útil informar: se a água continua entrando mesmo com a máquina desligada, há quanto tempo o comportamento começou, e se há algum som diferente durante o enchimento. Essas informações ajudam o técnico a chegar mais rápido ao componente responsável — válvula, pressostato ou mangueira de pressão.
 
-Esse tipo de defeito pode ocorrer isoladamente ou em conjunto com outros sintomas elétricos, como os descritos em [o que verificar quando a máquina não centrifuga](/blog/maquina-de-lavar-nao-centrifuga-o-que-verificar-antes-de-trocar-o-motor/), especialmente em máquinas com vários anos de uso. [Volte para a home](/) para conhecer os demais serviços disponíveis.
+Esse tipo de defeito pode ocorrer isoladamente ou em conjunto com outros sintomas, como os descritos em [causas comuns quando a máquina não centrifuga](/blog/maquina-de-lavar-nao-centrifuga-causas-comuns/), especialmente em máquinas com vários anos de uso. [Volte para a home](/) para conhecer os demais serviços disponíveis.
 
-**Artigos relacionados:** [Como saber se a máquina de lavar queimou](/blog/como-saber-se-a-maquina-de-lavar-queimou/) e [Máquina de lavar não centrifuga: o que verificar antes de pensar em motor queimado](/blog/maquina-de-lavar-nao-centrifuga-o-que-verificar-antes-de-trocar-o-motor/)
+**Artigos relacionados:** [Como saber se a máquina de lavar queimou](/blog/como-saber-se-a-maquina-de-lavar-queimou/) e [Máquina de lavar não centrifuga: causas mais comuns](/blog/maquina-de-lavar-nao-centrifuga-causas-comuns/)
 
 *Conteúdo revisado pela equipe institucional do site com base na experiência prática de atendimento a máquinas de lavar no Rio de Janeiro.*

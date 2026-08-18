@@ -7,7 +7,7 @@ readingTime: "8 min de leitura"
 image: "../../assets/images/home/imagem-hero.png"
 imageAlt: "Máquina de lavar em funcionamento durante o ciclo de centrifugação"
 author: "Equipe Editorial"
-relatedSlugs: ["maquina-de-lavar-nao-centrifuga-o-que-verificar-antes-de-trocar-o-motor", "maquina-de-lavar-para-de-funcionar-do-nada-possiveis-causas"]
+relatedSlugs: ["maquina-de-lavar-nao-centrifuga-causas-comuns", "maquina-de-lavar-para-de-funcionar-do-nada-possiveis-causas"]
 ---
 
 Todo mundo que usa máquina de lavar já se assustou com algum som diferente vindo do equipamento. A dúvida que fica é sempre a mesma: isso é normal ou é sinal de um defeito que vai exigir conserto de máquina de lavar no RJ? Este guia explica os tipos de barulho mais comuns, como identificar a origem e o que fazer em cada situação.
@@ -95,6 +95,6 @@ Não. O motor é apenas uma das possíveis causas, e nem sempre a mais provável
 
 Se depois de testar essas verificações o barulho continuar, o próximo passo é uma avaliação técnica. [Volte para a home](/) para conhecer mais sobre o conserto de máquina de lavar no RJ ou envie os detalhes do que foi observado para receber orientação.
 
-**Artigos relacionados:** [Máquina de lavar não centrifuga: o que verificar antes de pensar em motor queimado](/blog/maquina-de-lavar-nao-centrifuga-o-que-verificar-antes-de-trocar-o-motor/) e [Por que a máquina de lavar para de funcionar do nada](/blog/maquina-de-lavar-para-de-funcionar-do-nada-possiveis-causas/)
+**Artigos relacionados:** [Máquina de lavar não centrifuga: causas mais comuns](/blog/maquina-de-lavar-nao-centrifuga-causas-comuns/) e [Por que a máquina de lavar para de funcionar do nada](/blog/maquina-de-lavar-para-de-funcionar-do-nada-possiveis-causas/)
 
 *Conteúdo revisado pela equipe institucional do site com base na experiência prática de atendimento a máquinas de lavar no Rio de Janeiro.*

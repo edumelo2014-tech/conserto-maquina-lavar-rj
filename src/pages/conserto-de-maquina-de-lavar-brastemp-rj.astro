@@ -1,0 +1,513 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import SectionHeader from '@/components/SectionHeader.astro';
+import FAQAccordion from '@/components/FAQAccordion.astro';
+import CTASection from '@/components/CTASection.astro';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import Icon from '@/components/icons/Icon.astro';
+import { images } from '@/assets/images';
+import { organizationJsonLd, professionalServiceJsonLd, servicesJsonLd, webPageJsonLd } from '@/lib/jsonld';
+
+const path = '/conserto-de-maquina-de-lavar-brastemp-rj/';
+const pageTitle = 'Conserto de Máquina de Lavar Brastemp no RJ | Atendimento em Domicílio';
+const pageDescription =
+  'Conserto de máquina de lavar Brastemp no RJ com atendimento em domicílio, diagnóstico técnico e orçamento antes do reparo. Assistência especializada e independente.';
+
+const commonProblems = [
+  {
+    title: 'Lavadora Brastemp não centrifuga',
+    description:
+      'Carga desequilibrada, drenagem incompleta, trava da tampa, correia e componentes de acionamento podem impedir a centrifugação.',
+  },
+  {
+    title: 'Máquina Brastemp não liga',
+    description:
+      'A avaliação considera alimentação elétrica, cabo, trava, comandos do painel, fiação interna e placa eletrônica.',
+  },
+  {
+    title: 'Lavadora não enche ou transborda',
+    description:
+      'Válvula de entrada, mangueira do pressostato, sensor de nível e condições da instalação hidráulica podem estar envolvidos.',
+  },
+  {
+    title: 'Máquina não joga a água fora',
+    description:
+      'Filtro, mangueira de saída, bomba de drenagem e obstruções precisam ser verificados antes de definir a peça responsável.',
+  },
+  {
+    title: 'Barulho ou vibração excessiva',
+    description:
+      'Nivelamento, carga, objetos soltos, suspensão, rolamentos e sistema de transmissão estão entre as causas possíveis.',
+  },
+  {
+    title: 'Painel piscando ou ciclo interrompido',
+    description:
+      'O comportamento do painel e o momento da falha ajudam a diferenciar problemas de instalação, sensores e comandos eletrônicos.',
+  },
+];
+
+const serviceSteps = [
+  ['Informações iniciais', 'O cliente envia pelo WhatsApp o modelo, o defeito observado e o bairro do atendimento.'],
+  ['Agendamento', 'O atendimento é combinado conforme a região e a disponibilidade da equipe.'],
+  ['Diagnóstico técnico', 'A lavadora é avaliada para identificar a causa do sintoma antes de indicar qualquer peça.'],
+  ['Orçamento', 'O serviço e os valores são apresentados antes do início do reparo.'],
+  ['Reparo autorizado', 'A execução acontece somente depois da aprovação do cliente.'],
+  ['Teste final', 'Os ciclos relacionados ao defeito são testados antes da conclusão do atendimento.'],
+];
+
+const faq = [
+  {
+    question: 'O atendimento de máquina de lavar Brastemp é feito em domicílio no RJ?',
+    answer:
+      'A avaliação é normalmente realizada no endereço do cliente, dentro da área atendida. Se o reparo exigir outra estrutura, essa necessidade é informada depois do diagnóstico.',
+  },
+  {
+    question: 'Vocês são assistência técnica autorizada Brastemp?',
+    answer:
+      'Não. O serviço é prestado de forma especializada e independente, sem vínculo ou representação oficial da Brastemp ou de seu fabricante.',
+  },
+  {
+    question: 'Quanto custa o conserto de uma lavadora Brastemp?',
+    answer:
+      'O valor depende do modelo, do defeito confirmado, do estado do equipamento e das peças eventualmente necessárias. O orçamento é apresentado após o diagnóstico e antes do reparo.',
+  },
+  {
+    question: 'Quais informações devo enviar para solicitar atendimento?',
+    answer:
+      'Envie uma foto da etiqueta com o modelo, descreva o sintoma, informe quando a falha acontece e indique o bairro. Fotos ou vídeos do painel e do comportamento da máquina também podem ajudar.',
+  },
+  {
+    question: 'Vale a pena consertar uma máquina de lavar Brastemp antiga?',
+    answer:
+      'A decisão depende da conservação, da frequência de defeitos, da disponibilidade de peças e da relação entre o orçamento e o valor de substituição. O diagnóstico permite avaliar o caso com mais segurança.',
+  },
+  {
+    question: 'Posso continuar usando a lavadora com barulho ou vazamento?',
+    answer:
+      'Barulho forte, cheiro de queimado, vazamento próximo à parte elétrica ou movimentação excessiva são motivos para interromper o uso. Desligue o equipamento com segurança e solicite avaliação.',
+  },
+];
+
+const jsonLd = [
+  organizationJsonLd(),
+  professionalServiceJsonLd(),
+  webPageJsonLd(pageTitle, pageDescription, path),
+  ...servicesJsonLd([
+    {
+      name: 'Conserto de Máquina de Lavar Brastemp no RJ',
+      description: pageDescription,
+    },
+  ]),
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} path={path} ogImage={images.marcaBrastemp.src} jsonLd={jsonLd}>
+  <div class="container">
+    <Breadcrumbs
+      items={[
+        { label: 'Home', href: '/' },
+        { label: 'Serviços', href: '/servicos/' },
+        { label: 'Conserto de Máquina de Lavar Brastemp no RJ', href: path },
+      ]}
+    />
+  </div>
+
+  <section class="section section-light brand-hero">
+    <div class="container brand-hero-grid">
+      <div>
+        <span class="eyebrow">Atendimento especializado e independente</span>
+        <h1>Conserto de Máquina de Lavar Brastemp no RJ</h1>
+        <p class="hero-lede">
+          Atendimento em domicílio para diagnóstico e reparo de lavadoras Brastemp na cidade do Rio de Janeiro, com orçamento apresentado antes da execução do serviço.
+        </p>
+        <WhatsAppButton label="Solicitar Orçamento no WhatsApp" />
+        <ul class="hero-checks">
+          <li><Icon name="check-circle" size={18} /> Diagnóstico antes da troca de peças</li>
+          <li><Icon name="check-circle" size={18} /> Serviço realizado após aprovação</li>
+          <li><Icon name="check-circle" size={18} /> Atendimento residencial no Rio de Janeiro</li>
+        </ul>
+      </div>
+      <div class="brand-image-card">
+        <Image
+          src={images.maquinaBrastemp}
+          alt="Máquina de lavar Brastemp para atendimento técnico no Rio de Janeiro"
+          title="Conserto de máquina de lavar Brastemp no RJ"
+          width={560}
+          height={420}
+          format="avif"
+          quality={80}
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container narrow">
+      <SectionHeader
+        align="left"
+        eyebrow="Avaliação técnica"
+        title="Assistência para Lavadoras Brastemp no Rio de Janeiro"
+      />
+      <p>
+        Uma máquina pode apresentar o mesmo sintoma por causas diferentes. Quando uma lavadora não centrifuga, por exemplo, o problema pode estar na distribuição da carga, no escoamento da água, na trava da tampa ou no sistema de acionamento. Por isso, a indicação de peças sem diagnóstico pode gerar gasto sem resolver a falha.
+      </p>
+      <p>
+        O atendimento começa pela identificação do modelo e pela descrição do comportamento da máquina. Na visita, são verificadas as condições de instalação e os componentes relacionados ao defeito. O orçamento é apresentado depois dessa avaliação e o reparo somente é realizado com autorização.
+      </p>
+      <p class="independent-note">
+        Brastemp é marca de seu respectivo titular. Este site oferece assistência especializada independente e não representa uma rede autorizada do fabricante.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container">
+      <SectionHeader
+        eyebrow="Sintomas frequentes"
+        title="Problemas em Máquinas de Lavar Brastemp Atendidos no RJ"
+        lede="O sintoma ajuda a orientar a avaliação, mas a causa precisa ser confirmada antes da substituição de qualquer componente."
+      />
+      <div class="problem-grid">
+        {commonProblems.map((problem) => (
+          <article class="info-card">
+            <Icon name="cog" size={24} />
+            <h3>{problem.title}</h3>
+            <p>{problem.description}</p>
+          </article>
+        ))}
+      </div>
+      <p class="section-note">
+        Consulte também os guias sobre <a href="/blog/maquina-de-lavar-nao-centrifuga-causas-comuns/">máquina que não centrifuga</a>, <a href="/blog/maquina-de-lavar-nao-liga-o-que-verificar/">lavadora que não liga</a> e <a href="/blog/barulho-estranho-na-maquina-de-lavar-o-que-pode-ser/">barulho estranho durante o ciclo</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container narrow">
+      <SectionHeader
+        align="left"
+        eyebrow="Modelos e identificação"
+        title="Atendimento a Diferentes Modelos de Lavadora Brastemp"
+      />
+      <p>
+        A Brastemp possui lavadoras de diferentes capacidades, gerações e sistemas de comando. Mesmo equipamentos visualmente parecidos podem utilizar peças e programações distintas. Por isso, o código exato do modelo é mais importante do que apenas a capacidade em quilos.
+      </p>
+      <p>
+        A etiqueta de identificação costuma ficar na parte traseira, em uma lateral ou sob a tampa, dependendo do modelo. Uma foto legível ajuda a verificar previamente informações básicas do equipamento. Veja o guia sobre <a href="/blog/como-encontrar-o-modelo-e-numero-de-serie-da-lavadora/">como localizar o modelo e o número de série</a>.
+      </p>
+      <div class="model-tip">
+        <Icon name="clipboard-list" size={22} />
+        <p>Ao solicitar atendimento, envie o modelo completo, a voltagem indicada na etiqueta, o bairro e uma descrição do defeito. Não compartilhe números ou dados pessoais que não sejam necessários para a avaliação.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container">
+      <SectionHeader
+        eyebrow="Do contato ao teste final"
+        title="Como Funciona o Conserto de Lavadora Brastemp no RJ"
+      />
+      <ol class="steps-grid">
+        {serviceSteps.map(([title, description], index) => (
+          <li>
+            <span>{index + 1}</span>
+            <div>
+              <h3>{title}</h3>
+              <p>{description}</p>
+            </div>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container split-content">
+      <div>
+        <SectionHeader
+          align="left"
+          eyebrow="Orçamento responsável"
+          title="Quanto Custa Consertar uma Máquina Brastemp?"
+        />
+        <p>
+          Não existe um preço único para todos os modelos e defeitos. O orçamento depende do diagnóstico, da complexidade do reparo, do estado de conservação e da disponibilidade dos componentes compatíveis.
+        </p>
+        <p>
+          Desconfie de um valor fechado informado apenas pelo sintoma. “Não centrifuga” pode envolver desde uma condição de uso até componentes mecânicos ou eletrônicos com custos muito diferentes.
+        </p>
+      </div>
+      <aside class="price-box">
+        <h3>O que influencia o orçamento</h3>
+        <ul>
+          <li>Modelo e geração da lavadora;</li>
+          <li>Defeito confirmado no diagnóstico;</li>
+          <li>Necessidade e disponibilidade de peças;</li>
+          <li>Estado geral do equipamento;</li>
+          <li>Testes necessários após o reparo.</li>
+        </ul>
+        <WhatsAppButton label="Solicitar Avaliação" />
+      </aside>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container narrow">
+      <SectionHeader
+        align="left"
+        eyebrow="Cobertura"
+        title="Atendimento de Máquina de Lavar Brastemp em Domicílio no RJ"
+      />
+      <p>
+        O serviço atende residências na cidade do Rio de Janeiro conforme disponibilidade de agenda. A cobertura está organizada entre <a href="/conserto-de-maquina-de-lavar-na-zona-norte-rj/">Zona Norte</a>, <a href="/conserto-de-maquina-de-lavar-na-zona-sul-rj/">Zona Sul</a> e <a href="/conserto-de-maquina-de-lavar-na-zona-oeste-rj/">Zona Oeste</a>.
+      </p>
+      <p>
+        Consulte a página de <a href="/areas-atendidas/">áreas atendidas</a> para verificar os bairros listados. A presença de uma página local não substitui a confirmação da agenda e das condições do atendimento pelo WhatsApp.
+      </p>
+      <p>
+        Para conhecer o atendimento a outras marcas e os serviços disponíveis, acesse a página principal de <a href="/">conserto de máquina de lavar no RJ</a>.
+      </p>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container faq-container">
+      <SectionHeader
+        eyebrow="Dúvidas frequentes"
+        title="Perguntas sobre Conserto de Máquina Brastemp no RJ"
+      />
+      <FAQAccordion items={faq} idPrefix="brastemp-faq" />
+    </div>
+  </section>
+
+  <CTASection
+    title="Precisa de Conserto de Máquina de Lavar Brastemp no RJ?"
+    description="Envie o modelo, o defeito observado e o bairro para solicitar uma avaliação."
+    showPhone={true}
+  />
+</BaseLayout>
+
+<style>
+  .brand-hero {
+    padding-top: clamp(32px, 5vw, 56px);
+  }
+
+  .brand-hero-grid,
+  .split-content {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 44px;
+    align-items: center;
+  }
+
+  .brand-hero-grid > *,
+  .split-content > * {
+    min-width: 0;
+  }
+
+  .brand-hero h1 {
+    color: var(--primary);
+    font-size: clamp(2rem, 4vw, 3rem);
+    max-width: 20ch;
+  }
+
+  .hero-lede {
+    color: var(--muted);
+    font-size: 1.08rem;
+    max-width: 42rem;
+  }
+
+  .hero-checks {
+    display: grid;
+    gap: 9px;
+    list-style: none;
+    margin: 24px 0 0;
+    padding: 0;
+  }
+
+  .hero-checks li {
+    align-items: center;
+    color: var(--secondary);
+    display: flex;
+    font-weight: 600;
+    gap: 9px;
+  }
+
+  .hero-checks :global(svg) {
+    color: var(--whatsapp);
+  }
+
+  .brand-image-card {
+    align-items: center;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    display: flex;
+    justify-content: center;
+    min-height: 360px;
+    padding: 20px;
+  }
+
+  .brand-image-card :global(img) {
+    height: auto;
+    max-height: 340px;
+    object-fit: contain;
+    width: 100%;
+  }
+
+  .narrow,
+  .faq-container {
+    max-width: 860px;
+  }
+
+  .independent-note,
+  .model-tip,
+  .price-box {
+    border-radius: var(--radius-md);
+    padding: 22px;
+  }
+
+  .independent-note {
+    background: rgba(255, 255, 255, 0.08);
+    border-left: 4px solid var(--accent);
+  }
+
+  .problem-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .info-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: 24px;
+  }
+
+  .info-card :global(svg) {
+    color: var(--electric);
+    margin-bottom: 14px;
+  }
+
+  .info-card h3 {
+    color: var(--primary);
+    font-size: 1.05rem;
+  }
+
+  .info-card p {
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin: 0;
+  }
+
+  .section-note a,
+  .section-dark a,
+  .section-light a {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .model-tip {
+    align-items: flex-start;
+    background: rgba(255, 255, 255, 0.08);
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+  }
+
+  .model-tip :global(svg) {
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .model-tip p {
+    margin: 0;
+  }
+
+  .steps-grid {
+    display: grid;
+    gap: 18px;
+    grid-template-columns: repeat(2, 1fr);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .steps-grid li {
+    align-items: flex-start;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    display: flex;
+    gap: 16px;
+    padding: 22px;
+  }
+
+  .steps-grid > li > span {
+    align-items: center;
+    background: var(--electric);
+    border-radius: 50%;
+    color: var(--white);
+    display: flex;
+    flex: 0 0 34px;
+    font-weight: 800;
+    height: 34px;
+    justify-content: center;
+  }
+
+  .steps-grid h3 {
+    color: var(--primary);
+    font-size: 1rem;
+    margin-bottom: 5px;
+  }
+
+  .steps-grid p {
+    color: var(--muted);
+    font-size: 0.92rem;
+    margin: 0;
+  }
+
+  .price-box {
+    background: var(--white);
+    color: var(--text);
+  }
+
+  .price-box h3 {
+    color: var(--primary);
+  }
+
+  .price-box ul {
+    margin-bottom: 24px;
+    padding-left: 1.2rem;
+  }
+
+  @media (max-width: 900px) {
+    .brand-hero-grid,
+    .split-content {
+      grid-template-columns: 1fr;
+    }
+
+    .problem-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 620px) {
+    .problem-grid,
+    .steps-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .brand-image-card {
+      min-height: 260px;
+      padding: 16px;
+    }
+  }
+</style>

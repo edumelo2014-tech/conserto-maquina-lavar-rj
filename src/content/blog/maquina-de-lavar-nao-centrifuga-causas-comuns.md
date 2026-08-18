@@ -3,12 +3,12 @@ title: "Máquina de lavar não centrifuga: causas mais comuns"
 description: "Veja as causas mais frequentes quando a máquina de lavar não centrifuga e entenda quando vale buscar um conserto de máquina de lavar no RJ."
 category: "Defeitos"
 publishDate: 2025-03-18
-updatedDate: 2025-09-02
-readingTime: "6 min de leitura"
+updatedDate: 2026-08-18
+readingTime: "7 min de leitura"
 image: "../../assets/images/home/maquina-brastemp.webp"
 imageAlt: "Máquina de lavar de carga superior parada, representando falha na centrifugação"
 author: "Equipe Editorial"
-relatedSlugs: ["maquina-de-lavar-nao-liga-o-que-verificar", "maquina-de-lavar-fazendo-muito-barulho-possiveis-causas"]
+relatedSlugs: ["maquina-de-lavar-nao-liga-o-que-verificar", "barulho-estranho-na-maquina-de-lavar-o-que-pode-ser"]
 ---
 
 A máquina de lavar não centrifugar é um dos motivos mais comuns de solicitação de conserto de máquina de lavar no RJ. Apesar de parecer um problema grave, nem sempre está relacionado ao motor — existem várias outras causas possíveis.
@@ -17,6 +17,7 @@ A máquina de lavar não centrifugar é um dos motivos mais comuns de solicitaç
 
 - Carga desequilibrada
 - Sensor de tampa ou porta
+- Drenagem incompleta
 - Correia e acoplamento
 - Placa eletrônica
 - Motor
@@ -29,6 +30,12 @@ Quando as roupas se acumulam de um lado do tambor, muitos modelos interrompem a 
 
 Se o sensor que detecta o fechamento da tampa ou da porta não está funcionando corretamente, a máquina pode entender que o compartimento está aberto e bloquear a centrifugação, mesmo com tudo fechado.
 
+## Drenagem incompleta
+
+A centrifugação normalmente só começa depois que a água é retirada do cesto. Quando o filtro está obstruído, a mangueira de saída está dobrada ou a bomba de drenagem apresenta falha, a máquina pode interromper o ciclo antes de ganhar velocidade.
+
+Água parada no cesto e roupas muito encharcadas são sinais importantes. Verifique apenas os pontos externos e acessíveis descritos no manual do equipamento. Não incline a máquina nem desmonte a bomba sem conhecimento técnico.
+
 ## Correia e acoplamento
 
 Em modelos com correia, o desgaste ou o deslizamento desse componente pode impedir que o tambor gire na velocidade necessária para centrifugar. Já o acoplamento entre motor e tambor, quando desgastado, também pode causar sintomas semelhantes.
@@ -39,12 +46,12 @@ A placa eletrônica comanda as etapas do ciclo, incluindo a centrifugação. Fal
 
 ## Motor
 
-O motor é, de fato, uma das causas possíveis, mas não deve ser o primeiro item avaliado. Um diagnóstico técnico ajuda a confirmar se o motor realmente é o responsável pelo defeito antes de qualquer substituição.
+O motor é uma das causas possíveis, mas não deve ser o primeiro item avaliado. Cheiro de queimado, zumbido sem movimento ou esforço incomum podem indicar falha no motor ou em componentes associados, como capacitor, correia e placa. Um diagnóstico técnico deve confirmar a causa antes de qualquer substituição.
 
 > Evite forçar a tampa ou tentar destravar o tambor manualmente sem orientação técnica, pois isso pode danificar outros componentes.
 
 Se a máquina não centrifuga mesmo após redistribuir a carga, o ideal é solicitar uma avaliação e enviar a marca, o modelo e o comportamento observado para dar início ao [conserto de máquina de lavar no RJ](/).
 
-**Artigos relacionados:** [Máquina de lavar não liga: o que verificar antes de chamar um técnico](/blog/maquina-de-lavar-nao-liga-o-que-verificar/) e [Máquina de lavar fazendo muito barulho: possíveis causas](/blog/maquina-de-lavar-fazendo-muito-barulho-possiveis-causas/)
+**Artigos relacionados:** [Máquina de lavar não liga: o que verificar antes de chamar um técnico](/blog/maquina-de-lavar-nao-liga-o-que-verificar/) e [Barulho estranho na máquina de lavar: o que pode ser](/blog/barulho-estranho-na-maquina-de-lavar-o-que-pode-ser/)
 
 *Conteúdo revisado pela equipe institucional do site com base na experiência prática de atendimento a máquinas de lavar no Rio de Janeiro.*

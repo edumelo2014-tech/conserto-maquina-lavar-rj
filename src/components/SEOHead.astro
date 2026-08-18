@@ -13,12 +13,40 @@ interface Props {
 const { title, description, path, ogImage = '/images/logo/logo.png', noindex = false, jsonLd = [] } =
   Astro.props;
 
+function limitAtWord(value: string, maxLength: number) {
+  if (value.length <= maxLength) return value;
+  const shortened = value.slice(0, maxLength + 1);
+  const lastSpace = shortened.lastIndexOf(' ');
+  return shortened.slice(0, lastSpace > 0 ? lastSpace : maxLength).replace(/[\s,;:|–—-]+$/, '');
+}
+
+function buildSeoTitle(value: string) {
+  let result = value
+    .replace(' | Atendimento em Domicílio', '')
+    .replace(' | Blog', '')
+    .replace('Serviços para Máquina de Lavar | Higienização, Instalação e Manutenção', 'Serviços para Lavadoras | Instalação e Manutenção');
+
+  if (result.length > 55) {
+    result = result.replace('Máquina de Lavar', 'Lavadora').replace('Máquinas de Lavar', 'Lavadoras');
+  }
+
+  return limitAtWord(result, 55);
+}
+
+function buildSeoDescription(value: string) {
+  const result = limitAtWord(value, 139);
+  return /[.!?]$/.test(result) ? result : `${result}.`;
+}
+
+const seoTitle = buildSeoTitle(title);
+const seoDescription = buildSeoDescription(description);
+
 const canonicalUrl = new URL(path, siteConfig.siteUrl).toString();
 const ogImageUrl = new URL(ogImage, siteConfig.siteUrl).toString();
 ---
 
-<title>{title}</title>
-<meta name="description" content={description} />
+<title>{seoTitle}</title>
+<meta name="description" content={seoDescription} />
 <link rel="canonical" href={canonicalUrl} />
 <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
 <meta name="author" content={siteConfig.siteName} />
@@ -26,15 +54,15 @@ const ogImageUrl = new URL(ogImage, siteConfig.siteUrl).toString();
 
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content={siteConfig.siteName} />
-<meta property="og:title" content={title} />
-<meta property="og:description" content={description} />
+<meta property="og:title" content={seoTitle} />
+<meta property="og:description" content={seoDescription} />
 <meta property="og:url" content={canonicalUrl} />
 <meta property="og:image" content={ogImageUrl} />
 <meta property="og:locale" content="pt_BR" />
 
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content={title} />
-<meta name="twitter:description" content={description} />
+<meta name="twitter:title" content={seoTitle} />
+<meta name="twitter:description" content={seoDescription} />
 <meta name="twitter:image" content={ogImageUrl} />
 
 {jsonLd.map((entry) => (

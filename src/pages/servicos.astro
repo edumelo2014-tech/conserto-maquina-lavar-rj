@@ -12,14 +12,16 @@ import { problems } from '@/data/problems';
 import { serviceProcessSteps } from '@/data/serviceProcess';
 import { organizationJsonLd, webPageJsonLd, servicesJsonLd } from '@/lib/jsonld';
 
-const pageTitle = 'Serviços para Máquina de Lavar no RJ | Manutenção e Reparo';
+const pageTitle = 'Serviços para Máquina de Lavar | Higienização, Instalação e Manutenção';
 const pageDescription =
   'Conheça os serviços de conserto, diagnóstico e manutenção de máquinas de lavar com atendimento na cidade do Rio de Janeiro.';
+
+const specificServices = services.filter((service) => service.href);
 
 const jsonLd = [
   organizationJsonLd(),
   webPageJsonLd(pageTitle, pageDescription, '/servicos/'),
-  ...servicesJsonLd(services.map((s) => ({ name: s.title, description: s.longDescription }))),
+  ...servicesJsonLd(specificServices.map((s) => ({ name: s.title, description: s.longDescription }))),
 ];
 ---
 
@@ -31,7 +33,7 @@ const jsonLd = [
   <section class="section section-light page-intro">
     <div class="container">
       <span class="eyebrow">Manutenção e reparo</span>
-      <h1>Serviços para Máquinas de Lavar no RJ</h1>
+      <h1>Serviços para Máquinas de Lavar</h1>
       <p class="page-hero-lede">
         Conserto e manutenção de lavadoras com atendimento na cidade do Rio de Janeiro, sempre com
         diagnóstico técnico antes da execução de qualquer serviço.
@@ -42,7 +44,7 @@ const jsonLd = [
 
   <section class="section section-dark">
     <div class="container narrow">
-      <SectionHeader align="left" eyebrow="Como trabalhamos" title="Conserto e Manutenção de Lavadoras no Rio de Janeiro" />
+      <SectionHeader align="left" eyebrow="Como trabalhamos" title="Soluções para Manutenção e Cuidado da Lavadora" />
       <p>
         O atendimento cobre desde reparos pontuais até manutenção preventiva, com foco em
         identificar a causa real do defeito antes de qualquer troca de peça. O objetivo é que você
@@ -51,12 +53,16 @@ const jsonLd = [
     </div>
   </section>
 
-  <section class="section section-light" id="lista-de-servicos">
+  <section class="section section-light" id="servicos-especificos">
     <div class="container">
-      <SectionHeader eyebrow="O que oferecemos" title="Serviços Disponíveis" />
+      <SectionHeader
+        eyebrow="Escolha o atendimento"
+        title="Serviços Específicos para sua Lavadora"
+        lede="Acesse a página de cada serviço para entender quando ele é indicado, o que é avaliado e como funciona o atendimento."
+      />
       <div class="grid grid-3">
-        {services.map((service) => (
-          <ServiceCard icon={service.icon} title={service.title} description={service.longDescription} />
+        {specificServices.map((service) => (
+          <ServiceCard icon={service.icon} title={service.title} description={service.longDescription} href={service.href} />
         ))}
       </div>
     </div>
@@ -67,7 +73,7 @@ const jsonLd = [
       <SectionHeader
         align="left"
         eyebrow="Processo"
-        title="Como Funciona o Atendimento no RJ"
+        title="Como Funciona o Atendimento"
         lede="Um fluxo simples do primeiro contato até o teste final do equipamento."
       />
       <MiniSteps steps={serviceProcessSteps} />
@@ -109,7 +115,7 @@ const jsonLd = [
   </section>
 
   <CTASection
-    title="Solicite Atendimento no Rio de Janeiro"
+    title="Solicite Atendimento para sua Máquina de Lavar"
     description="Envie a marca, o modelo e o defeito observado pelo WhatsApp para receber a avaliação inicial."
     showPhone={true}
   />

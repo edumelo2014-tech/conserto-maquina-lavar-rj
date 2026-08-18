@@ -1,0 +1,278 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import SectionHeader from '@/components/SectionHeader.astro';
+import FAQAccordion from '@/components/FAQAccordion.astro';
+import CTASection from '@/components/CTASection.astro';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import Icon from '@/components/icons/Icon.astro';
+import { images } from '@/assets/images';
+import { organizationJsonLd, professionalServiceJsonLd, servicesJsonLd, webPageJsonLd } from '@/lib/jsonld';
+
+interface BrandPageData {
+  slug: string;
+  name: string;
+  image: ImageMetadata;
+  imageAlt: string;
+  intro: string;
+  profile: string;
+  identification: string;
+  problems: Array<{ title: string; description: string }>;
+  modelNotes: string[];
+  faq: Array<{ question: string; answer: string }>;
+}
+
+const brandPages: Record<string, BrandPageData> = {
+  'conserto-de-maquina-de-lavar-electrolux-rj': {
+    slug: 'conserto-de-maquina-de-lavar-electrolux-rj',
+    name: 'Electrolux',
+    image: images.maquinaEletrolux,
+    imageAlt: 'Máquina de lavar Electrolux para atendimento técnico no Rio de Janeiro',
+    intro:
+      'Atendimento em domicílio para diagnóstico e reparo de lavadoras Electrolux na cidade do Rio de Janeiro, com orçamento apresentado antes da execução do serviço.',
+    profile:
+      'As lavadoras Electrolux incluem modelos com comandos mecânicos, painéis eletrônicos e diferentes sistemas de lavagem. Um mesmo sintoma pode envolver instalação, sensores, drenagem, transmissão ou controle eletrônico, por isso a avaliação começa pelo modelo exato e pelo momento em que a falha ocorre.',
+    identification:
+      'A identificação completa evita confusão entre lavadoras de capacidade semelhante. A etiqueta costuma trazer modelo, número de série e tensão, informações importantes para avaliar a compatibilidade de componentes.',
+    problems: [
+      { title: 'Lavadora Electrolux não centrifuga', description: 'Carga desequilibrada, drenagem incompleta, sensor da tampa, correia e acionamento precisam ser avaliados antes de suspeitar do motor.' },
+      { title: 'Máquina não liga ou não inicia', description: 'Tomada, cabo, trava, seletor, painel e placa eletrônica estão entre os pontos relacionados ao sintoma.' },
+      { title: 'Lavadora não enche de água', description: 'Registro, pressão da rede, filtro de entrada, válvula e sensor de nível podem impedir o enchimento correto.' },
+      { title: 'Água não sai da máquina', description: 'Mangueira dobrada, filtro obstruído e falhas na bomba podem interromper a drenagem e bloquear a centrifugação.' },
+      { title: 'Barulho forte na centrifugação', description: 'Nivelamento, suspensão, rolamentos, objetos soltos e desgaste mecânico podem gerar ruído ou vibração.' },
+      { title: 'Painel exibe erro ou interrompe o ciclo', description: 'O código e a etapa da falha orientam o diagnóstico, mas não substituem testes no equipamento.' },
+    ],
+    modelNotes: [
+      'Informe se a abertura é superior ou frontal e a capacidade aproximada.',
+      'Fotografe a etiqueta sem retirar tampas ou desmontar o equipamento.',
+      'Registre códigos, luzes piscando e a etapa em que o ciclo para.',
+    ],
+    faq: [
+      { question: 'O conserto de lavadora Electrolux é feito em domicílio no RJ?', answer: 'A avaliação é normalmente realizada na residência, dentro da área atendida. Qualquer necessidade diferente é informada depois do diagnóstico.' },
+      { question: 'Vocês são assistência autorizada Electrolux?', answer: 'Não. O atendimento é especializado e independente, sem vínculo ou representação oficial do fabricante.' },
+      { question: 'Quanto custa consertar uma máquina Electrolux?', answer: 'O valor depende do modelo, do defeito confirmado, da conservação e das peças necessárias. O orçamento é apresentado antes do reparo.' },
+      { question: 'O código de erro mostra qual peça deve ser trocada?', answer: 'O código indica uma área ou condição a verificar, mas causas diferentes podem gerar sinais semelhantes. A peça só deve ser definida depois de testes.' },
+      { question: 'Quais dados enviar pelo WhatsApp?', answer: 'Envie o modelo, o bairro, a descrição do sintoma e, se possível, fotos da etiqueta e do painel.' },
+    ],
+  },
+  'conserto-de-maquina-de-lavar-consul-rj': {
+    slug: 'conserto-de-maquina-de-lavar-consul-rj',
+    name: 'Consul',
+    image: images.maquinaConsul,
+    imageAlt: 'Máquina de lavar Consul para atendimento técnico no Rio de Janeiro',
+    intro:
+      'Atendimento em domicílio para diagnóstico e reparo de máquinas de lavar Consul no Rio de Janeiro, com avaliação técnica e orçamento antes do serviço.',
+    profile:
+      'Máquinas Consul de diferentes capacidades podem usar conjuntos distintos de válvula, sensor de nível, transmissão e controles. A descrição do sintoma ajuda, mas o modelo completo é necessário para relacionar corretamente o defeito aos componentes da lavadora.',
+    identification:
+      'Além do nome da marca e da capacidade, envie o código completo da etiqueta. Essa identificação ajuda a diferenciar versões visualmente parecidas e evita indicação de componente incompatível.',
+    problems: [
+      { title: 'Máquina Consul não centrifuga', description: 'Tampa, carga, drenagem, atuador, correia e transmissão são verificados antes de concluir que existe falha no motor.' },
+      { title: 'Lavadora não bate a roupa', description: 'O sintoma pode envolver o mecanismo de agitação, acoplamento, transmissão, motor ou comando do ciclo.' },
+      { title: 'Máquina não joga água fora', description: 'Obstruções, mangueira de saída e bomba de drenagem podem manter água no cesto e impedir a etapa seguinte.' },
+      { title: 'Lavadora não enche ou não para de encher', description: 'Válvula, sensor de nível, mangueira de pressão e condições hidráulicas precisam ser diferenciados no diagnóstico.' },
+      { title: 'Máquina faz barulho ou trepida', description: 'Nivelamento, excesso de carga, objetos soltos e desgaste na suspensão ou transmissão podem causar o comportamento.' },
+      { title: 'Painel não responde', description: 'Alimentação, interruptor, fiação, comandos e placa eletrônica estão entre os pontos que exigem verificação.' },
+    ],
+    modelNotes: [
+      'Informe a capacidade e o código completo localizado na etiqueta.',
+      'Descreva se o defeito acontece na lavagem, drenagem ou centrifugação.',
+      'Envie vídeo curto quando houver barulho, trepidação ou falha intermitente.',
+    ],
+    faq: [
+      { question: 'Há atendimento para máquina Consul em domicílio no RJ?', answer: 'Sim, a avaliação é normalmente feita no endereço do cliente, conforme a área e a agenda de atendimento.' },
+      { question: 'Este serviço é autorizado pela Consul?', answer: 'Não. Trata-se de assistência especializada independente, sem vínculo oficial com a Consul ou seu fabricante.' },
+      { question: 'Quanto custa o conserto da lavadora Consul?', answer: 'O preço depende da causa confirmada, do modelo e dos componentes necessários. O orçamento é informado antes da execução.' },
+      { question: 'Máquina Consul que não centrifuga está com motor queimado?', answer: 'Não necessariamente. Drenagem, trava, carga, transmissão e outros componentes podem produzir o mesmo sintoma.' },
+      { question: 'É necessário transportar a máquina?', answer: 'Muitos diagnósticos e reparos podem ser realizados no local. Se houver necessidade diferente, ela é explicada após a avaliação.' },
+    ],
+  },
+  'conserto-de-maquina-de-lavar-samsung-rj': {
+    slug: 'conserto-de-maquina-de-lavar-samsung-rj',
+    name: 'Samsung',
+    image: images.maquinaSamsung,
+    imageAlt: 'Máquina de lavar Samsung frontal para atendimento técnico no Rio de Janeiro',
+    intro:
+      'Atendimento técnico em domicílio para máquinas de lavar Samsung no Rio de Janeiro, incluindo avaliação de modelos frontais e sistemas eletrônicos.',
+    profile:
+      'Lavadoras Samsung costumam reunir controle eletrônico, sensores, trava de porta e programas específicos. Nos modelos de abertura frontal, drenagem, vedação e nivelamento também influenciam diretamente o funcionamento. O código exibido no painel é útil, mas precisa ser interpretado junto com testes no equipamento.',
+    identification:
+      'O código do modelo e o número de série normalmente aparecem em uma etiqueta no gabinete ou próximo à abertura da porta. Uma foto legível ajuda a identificar a família correta sem desmontar a lavadora.',
+    problems: [
+      { title: 'Lavadora Samsung não centrifuga', description: 'Drenagem, balanceamento, trava da porta, sensores e acionamento podem impedir a rotação final.' },
+      { title: 'Máquina não liga ou painel não responde', description: 'Instalação elétrica, cabo, filtro, trava, placa de interface e controle eletrônico precisam ser diferenciados.' },
+      { title: 'Código de erro no painel', description: 'O código orienta a área de diagnóstico, mas deve ser combinado com o modelo e o comportamento real da máquina.' },
+      { title: 'Lavadora não drena', description: 'Filtro, mangueira e bomba de drenagem são causas comuns quando permanece água no tambor.' },
+      { title: 'Vazamento pela porta ou parte inferior', description: 'Vedação, resíduos, mangueiras, filtro e instalação podem estar relacionados ao ponto de saída da água.' },
+      { title: 'Barulho, vibração ou tambor sem girar', description: 'Carga, nivelamento, amortecimento, rolamentos e sistema de acionamento exigem avaliação conforme o modelo.' },
+    ],
+    modelNotes: [
+      'Informe se o equipamento é lavadora ou lava e seca e se possui abertura frontal.',
+      'Fotografe o código exibido e a etiqueta com o modelo completo.',
+      'Descreva se existe água parada, porta travada, ruído ou interrupção do ciclo.',
+    ],
+    faq: [
+      { question: 'Vocês consertam máquina de lavar Samsung no RJ em domicílio?', answer: 'A avaliação é normalmente feita na residência, conforme a região atendida e a disponibilidade da agenda.' },
+      { question: 'A assistência é autorizada Samsung?', answer: 'Não. O serviço é especializado e independente, sem representação oficial ou vínculo com a Samsung.' },
+      { question: 'Vocês atendem lava e seca Samsung?', answer: 'O atendimento depende do modelo e do tipo de equipamento. Envie uma foto da etiqueta para confirmar antes do agendamento.' },
+      { question: 'O que significa o código de erro da lavadora?', answer: 'Cada código aponta para uma condição ou sistema, mas não confirma sozinho qual peça está com defeito. O diagnóstico considera o manual técnico e testes.' },
+      { question: 'Quanto custa o reparo de uma máquina Samsung?', answer: 'O preço varia conforme modelo, diagnóstico, conservação e peças necessárias. O orçamento é apresentado antes da execução.' },
+    ],
+  },
+};
+
+export function getStaticPaths() {
+  return [
+    'conserto-de-maquina-de-lavar-electrolux-rj',
+    'conserto-de-maquina-de-lavar-consul-rj',
+    'conserto-de-maquina-de-lavar-samsung-rj',
+  ].map((brand) => ({ params: { brand } }));
+}
+
+const brandKey = Astro.params.brand ?? '';
+const data = brandPages[brandKey];
+if (!data) throw new Error(`Página de marca não configurada: ${brandKey}`);
+
+const path = `/${data.slug}/`;
+const pageTitle = `Conserto de Máquina de Lavar ${data.name} no RJ | Atendimento em Domicílio`;
+const pageDescription = `Conserto de máquina de lavar ${data.name} no RJ com atendimento em domicílio, diagnóstico técnico e orçamento antes do reparo. Assistência especializada e independente.`;
+const serviceSteps = [
+  ['Informações iniciais', 'Envie modelo, sintoma e bairro pelo WhatsApp.'],
+  ['Agendamento', 'A visita é combinada conforme região e disponibilidade.'],
+  ['Diagnóstico', 'A causa do problema é investigada antes da indicação de peças.'],
+  ['Orçamento', 'Valores e serviço são apresentados antes da execução.'],
+  ['Reparo autorizado', 'O trabalho começa somente depois da aprovação.'],
+  ['Teste final', 'As funções relacionadas ao defeito são verificadas ao concluir.'],
+];
+const jsonLd = [
+  organizationJsonLd(),
+  professionalServiceJsonLd(),
+  webPageJsonLd(pageTitle, pageDescription, path),
+  ...servicesJsonLd([{ name: `Conserto de Máquina de Lavar ${data.name} no RJ`, description: pageDescription }]),
+];
+---
+
+<BaseLayout title={pageTitle} description={pageDescription} path={path} ogImage={data.image.src} jsonLd={jsonLd}>
+  <div class="container">
+    <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Serviços', href: '/servicos/' }, { label: `Conserto de Máquina de Lavar ${data.name} no RJ`, href: path }]} />
+  </div>
+
+  <section class="section section-light brand-hero">
+    <div class="container brand-hero-grid">
+      <div>
+        <span class="eyebrow">Atendimento especializado e independente</span>
+        <h1>Conserto de Máquina de Lavar {data.name} no RJ</h1>
+        <p class="hero-lede">{data.intro}</p>
+        <WhatsAppButton label="Solicitar Orçamento no WhatsApp" />
+        <ul class="hero-checks">
+          <li><Icon name="check-circle" size={18} /> Diagnóstico antes da troca de peças</li>
+          <li><Icon name="check-circle" size={18} /> Serviço realizado após aprovação</li>
+          <li><Icon name="check-circle" size={18} /> Atendimento residencial no Rio de Janeiro</li>
+        </ul>
+      </div>
+      <div class="brand-image-card">
+        <Image src={data.image} alt={data.imageAlt} title={`Conserto de máquina de lavar ${data.name} no RJ`} width={560} height={420} format="avif" quality={80} loading="eager" fetchpriority="high" />
+      </div>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container narrow">
+      <SectionHeader align="left" eyebrow="Avaliação técnica" title={`Assistência para Lavadoras ${data.name} no Rio de Janeiro`} />
+      <p>{data.profile}</p>
+      <p>O atendimento começa pela identificação do modelo e pela descrição do comportamento. Na visita, são avaliadas as condições de instalação e os componentes relacionados ao sintoma. O orçamento é apresentado após o diagnóstico e o reparo somente é realizado com autorização.</p>
+      <p class="independent-note">{data.name} é marca de seu respectivo titular. Este site oferece assistência especializada independente e não representa uma rede autorizada do fabricante.</p>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container">
+      <SectionHeader eyebrow="Sintomas frequentes" title={`Problemas em Máquinas de Lavar ${data.name} Atendidos no RJ`} lede="O sintoma orienta a avaliação, mas a causa deve ser confirmada antes da substituição de qualquer componente." />
+      <div class="problem-grid">
+        {data.problems.map((problem) => <article class="info-card"><Icon name="cog" size={24} /><h3>{problem.title}</h3><p>{problem.description}</p></article>)}
+      </div>
+      <p class="section-note">Leia também sobre <a href="/blog/maquina-de-lavar-nao-centrifuga-causas-comuns/">máquina que não centrifuga</a>, <a href="/blog/maquina-de-lavar-nao-liga-o-que-verificar/">lavadora que não liga</a> e <a href="/blog/barulho-estranho-na-maquina-de-lavar-o-que-pode-ser/">barulho estranho durante o ciclo</a>.</p>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container narrow">
+      <SectionHeader align="left" eyebrow="Modelo correto" title={`Como Identificar sua Máquina de Lavar ${data.name}`} />
+      <p>{data.identification}</p>
+      <ul class="model-list">{data.modelNotes.map((note) => <li><Icon name="clipboard-check" size={18} /> {note}</li>)}</ul>
+      <p>Consulte o guia sobre <a href="/blog/como-encontrar-o-modelo-e-numero-de-serie-da-lavadora/">como encontrar o modelo e o número de série</a>.</p>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container">
+      <SectionHeader eyebrow="Do contato ao teste final" title={`Como Funciona o Conserto de Lavadora ${data.name} no RJ`} />
+      <ol class="steps-grid">{serviceSteps.map(([title, description], index) => <li><span>{index + 1}</span><div><h3>{title}</h3><p>{description}</p></div></li>)}</ol>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container split-content">
+      <div>
+        <SectionHeader align="left" eyebrow="Orçamento responsável" title={`Quanto Custa Consertar uma Máquina ${data.name}?`} />
+        <p>O preço depende do modelo, da causa confirmada, da conservação e dos componentes necessários. O mesmo sintoma pode ter origens e custos muito diferentes.</p>
+        <p>Por isso, um valor responsável é apresentado depois da avaliação. O cliente decide se autoriza o serviço antes do início do reparo.</p>
+      </div>
+      <aside class="price-box"><h3>O que influencia o orçamento</h3><ul><li>Modelo e geração;</li><li>Defeito confirmado;</li><li>Peças compatíveis;</li><li>Estado do equipamento;</li><li>Testes após o reparo.</li></ul><WhatsAppButton label="Solicitar Avaliação" /></aside>
+    </div>
+  </section>
+
+  <section class="section section-light">
+    <div class="container narrow">
+      <SectionHeader align="left" eyebrow="Cobertura" title={`Atendimento de Máquina ${data.name} em Domicílio no RJ`} />
+      <p>O serviço atende residências na cidade do Rio de Janeiro conforme a agenda. A cobertura está organizada entre <a href="/conserto-de-maquina-de-lavar-na-zona-norte-rj/">Zona Norte</a>, <a href="/conserto-de-maquina-de-lavar-na-zona-sul-rj/">Zona Sul</a> e <a href="/conserto-de-maquina-de-lavar-na-zona-oeste-rj/">Zona Oeste</a>.</p>
+      <p>Consulte as <a href="/areas-atendidas/">áreas atendidas</a> e confirme a disponibilidade pelo WhatsApp.</p>
+      <p>Para conhecer o atendimento a outras marcas e os serviços disponíveis, acesse a página principal de <a href="/">conserto de máquina de lavar no RJ</a>.</p>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="container faq-container">
+      <SectionHeader eyebrow="Dúvidas frequentes" title={`Perguntas sobre Conserto de Máquina ${data.name} no RJ`} />
+      <FAQAccordion items={data.faq} idPrefix={`${data.name.toLowerCase()}-faq`} />
+    </div>
+  </section>
+
+  <CTASection title={`Precisa de Conserto de Máquina de Lavar ${data.name} no RJ?`} description="Envie o modelo, o defeito observado e o bairro para solicitar uma avaliação." showPhone={true} />
+</BaseLayout>
+
+<style>
+  .brand-hero { padding-top: clamp(32px, 5vw, 56px); }
+  .brand-hero-grid, .split-content { display: grid; grid-template-columns: 1.1fr .9fr; gap: 44px; align-items: center; }
+  .brand-hero-grid > *, .split-content > * { min-width: 0; }
+  .brand-hero h1 { color: var(--primary); font-size: clamp(2rem, 4vw, 3rem); max-width: 22ch; }
+  .hero-lede { color: var(--muted); font-size: 1.08rem; max-width: 42rem; }
+  .hero-checks, .model-list { display: grid; gap: 9px; list-style: none; margin: 24px 0 0; padding: 0; }
+  .hero-checks li, .model-list li { align-items: center; display: flex; font-weight: 600; gap: 9px; }
+  .hero-checks li { color: var(--secondary); }
+  .hero-checks :global(svg) { color: var(--whatsapp); }
+  .model-list :global(svg) { color: var(--accent); flex-shrink: 0; }
+  .brand-image-card { align-items: center; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); display: flex; justify-content: center; min-height: 360px; padding: 20px; }
+  .brand-image-card :global(img) { height: auto; max-height: 340px; object-fit: contain; width: 100%; }
+  .narrow, .faq-container { max-width: 860px; }
+  .independent-note, .price-box { border-radius: var(--radius-md); padding: 22px; }
+  .independent-note { background: rgba(255,255,255,.08); border-left: 4px solid var(--accent); }
+  .problem-grid { display: grid; gap: 20px; grid-template-columns: repeat(3, 1fr); }
+  .info-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); padding: 24px; }
+  .info-card :global(svg) { color: var(--electric); margin-bottom: 14px; }
+  .info-card h3 { color: var(--primary); font-size: 1.05rem; }
+  .info-card p { color: var(--muted); font-size: .92rem; margin: 0; }
+  .section-note a, .section-dark a, .section-light a { text-decoration: underline; text-underline-offset: 3px; }
+  .steps-grid { display: grid; gap: 18px; grid-template-columns: repeat(2, 1fr); list-style: none; margin: 0; padding: 0; }
+  .steps-grid li { align-items: flex-start; background: var(--white); border: 1px solid var(--border); border-radius: var(--radius-md); display: flex; gap: 16px; padding: 22px; }
+  .steps-grid > li > span { align-items: center; background: var(--electric); border-radius: 50%; color: var(--white); display: flex; flex: 0 0 34px; font-weight: 800; height: 34px; justify-content: center; }
+  .steps-grid h3 { color: var(--primary); font-size: 1rem; margin-bottom: 5px; }
+  .steps-grid p { color: var(--muted); font-size: .92rem; margin: 0; }
+  .price-box { background: var(--white); color: var(--text); }
+  .price-box h3 { color: var(--primary); }
+  .price-box ul { margin-bottom: 24px; padding-left: 1.2rem; }
+  @media (max-width: 900px) { .brand-hero-grid, .split-content { grid-template-columns: 1fr; } .problem-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 620px) { .problem-grid, .steps-grid { grid-template-columns: 1fr; } .brand-image-card { min-height: 260px; padding: 16px; } }
+</style>

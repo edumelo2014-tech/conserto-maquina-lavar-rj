@@ -9,16 +9,17 @@ interface Props {
   imageTitle?: string;
   title: string;
   description: string;
+  href?: string;
 }
 
-const { image, alt, imageTitle, title, description } = Astro.props;
+const { image, alt, imageTitle, title, description, href } = Astro.props;
 ---
 
 <article class="brand-card card">
   <div class="brand-logo-frame">
     <Image src={image} alt={alt} title={imageTitle} width={160} height={90} loading="lazy" class="brand-logo-img" />
   </div>
-  <h3>{title}</h3>
+  <h3>{href ? <a href={href}>{title}</a> : title}</h3>
   <p>{description}</p>
 </article>
 
@@ -56,6 +57,15 @@ const { image, alt, imageTitle, title, description } = Astro.props;
     font-size: 1rem;
     color: var(--primary);
     margin-bottom: 6px;
+  }
+
+  .brand-card h3 a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .brand-card h3 a:hover {
+    color: var(--electric);
   }
 
   .brand-card p {

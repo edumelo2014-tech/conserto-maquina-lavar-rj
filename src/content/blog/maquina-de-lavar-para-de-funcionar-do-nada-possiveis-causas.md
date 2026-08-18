@@ -7,7 +7,7 @@ readingTime: "8 min de leitura"
 image: "../../assets/images/home/imagem-assistencia-tecnica.png"
 imageAlt: "Assistência técnica avaliando máquina de lavar que parou de funcionar durante o ciclo"
 author: "Equipe Editorial"
-relatedSlugs: ["maquina-de-lavar-piscando-e-nao-liga-entenda-a-voltagem", "maquina-de-lavar-nao-centrifuga-o-que-verificar-antes-de-trocar-o-motor"]
+relatedSlugs: ["maquina-de-lavar-piscando-e-nao-liga-entenda-a-voltagem", "maquina-de-lavar-nao-centrifuga-causas-comuns"]
 ---
 
 Poucas coisas são tão frustrantes quanto uma máquina que funciona normalmente por semanas e, de repente, para no meio de um ciclo — ou simplesmente não liga mais. Esse tipo de falha intermitente costuma ter explicação, mesmo quando parece não fazer sentido. Este guia explica as causas mais comuns e como agir diante desse comportamento.
@@ -34,7 +34,7 @@ Esse padrão intermitente costuma indicar um problema eletrônico ou elétrico, 
 
 Quedas de energia, oscilações de voltagem e picos causados por tempestades são uma das causas mais comuns de falhas intermitentes em máquinas com painel eletrônico. A placa que comanda o equipamento é sensível a essas variações, e exposições repetidas podem comprometer componentes internos aos poucos, até o dia em que a falha se torna mais frequente ou permanente.
 
-Isso é especialmente relevante no Rio de Janeiro durante períodos de chuva forte, quando oscilações na rede elétrica são mais comuns. Usar um estabilizador de energia dedicado para a máquina de lavar é uma forma simples de reduzir esse risco.
+Isso merece atenção especial quando a falha começou depois de uma queda ou oscilação de energia. A instalação deve seguir o manual do fabricante, com tomada, aterramento e circuito compatíveis; adaptações e dispositivos de proteção devem ser avaliados por um eletricista qualificado.
 
 Se sua máquina começou a falhar logo após uma queda de energia ou tempestade, fale com um técnico pelo [WhatsApp](https://wa.me/5521969008005) e informe esse detalhe — ele ajuda bastante a direcionar o diagnóstico.
 
@@ -77,8 +77,8 @@ Falhas intermitentes são, por natureza, mais difíceis de diagnosticar do que d
 
 Em muitos casos, o diagnóstico envolve testar a placa eletrônica com equipamento apropriado, verificar conexões internas e avaliar se há sinais de oxidação ou componentes danificados visualmente. Esse tipo de avaliação também é comum quando a máquina apresenta [luzes piscando e não liga](/blog/maquina-de-lavar-piscando-e-nao-liga-entenda-a-voltagem/), um sintoma que pode estar relacionado à mesma origem elétrica.
 
-[Volte para a home](/) para conhecer os demais serviços disponíveis ou veja também o que verificar quando a [máquina não centrifuga](/blog/maquina-de-lavar-nao-centrifuga-o-que-verificar-antes-de-trocar-o-motor/).
+[Volte para a home](/) para conhecer os demais serviços disponíveis ou veja também as causas comuns quando a [máquina não centrifuga](/blog/maquina-de-lavar-nao-centrifuga-causas-comuns/).
 
-**Artigos relacionados:** [Máquina de lavar piscando e não liga: entenda o problema de voltagem](/blog/maquina-de-lavar-piscando-e-nao-liga-entenda-a-voltagem/) e [Máquina de lavar não centrifuga: o que verificar antes de pensar em motor queimado](/blog/maquina-de-lavar-nao-centrifuga-o-que-verificar-antes-de-trocar-o-motor/)
+**Artigos relacionados:** [Máquina de lavar piscando e não liga: entenda o problema de voltagem](/blog/maquina-de-lavar-piscando-e-nao-liga-entenda-a-voltagem/) e [Máquina de lavar não centrifuga: causas mais comuns](/blog/maquina-de-lavar-nao-centrifuga-causas-comuns/)
 
 *Conteúdo revisado pela equipe institucional do site com base na experiência prática de atendimento a máquinas de lavar no Rio de Janeiro.*

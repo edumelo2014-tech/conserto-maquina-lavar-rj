@@ -90,6 +90,8 @@ Não, desde que sejam usados produtos adequados e nas quantidades corretas. Pelo
 
 Manter esse cuidado periódico evita boa parte dos chamados de conserto de máquina de lavar no RJ relacionados a mau cheiro e resíduos acumulados. [Volte para a home](/) para conhecer os demais serviços disponíveis.
 
+Se a limpeza doméstica não resolver o odor ou os resíduos acumulados, conheça o [serviço de higienização de máquina de lavar no RJ](/servicos/higienizacao-de-maquina-de-lavar-rj/). A página explica quando a limpeza técnica é indicada e como ela se diferencia de um conserto.
+
 **Artigos relacionados:** [Como remover crosta de sabão em pó da máquina de lavar](/blog/como-remover-crosta-de-sabao-da-maquina-de-lavar/) e [Pode usar vinagre e bicarbonato na máquina de lavar?](/blog/pode-usar-vinagre-e-bicarbonato-na-maquina-de-lavar/)
 
 *Conteúdo revisado pela equipe institucional do site com base na experiência prática de atendimento a máquinas de lavar no Rio de Janeiro.*

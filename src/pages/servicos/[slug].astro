@@ -1,0 +1,124 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import SectionHeader from '@/components/SectionHeader.astro';
+import FAQAccordion from '@/components/FAQAccordion.astro';
+import CTASection from '@/components/CTASection.astro';
+import WhatsAppButton from '@/components/WhatsAppButton.astro';
+import Icon from '@/components/icons/Icon.astro';
+import { images } from '@/assets/images';
+import { organizationJsonLd, professionalServiceJsonLd, servicesJsonLd, webPageJsonLd } from '@/lib/jsonld';
+
+export const pages = [
+  {
+    slug: 'higienizacao-de-maquina-de-lavar-rj',
+    path: '/servicos/higienizacao-de-maquina-de-lavar-rj/',
+    title: 'Higienização de Máquina de Lavar no RJ | Limpeza Técnica',
+    description: 'Higienização de máquina de lavar no RJ para remover resíduos, crostas e odores persistentes. Avaliação e orçamento antes do serviço.',
+    eyebrow: 'Limpeza técnica em domicílio',
+    h1: 'Higienização de Máquina de Lavar no RJ',
+    lede: 'Limpeza técnica da lavadora para casos de mau cheiro persistente, crostas e resíduos em pontos que a rotina doméstica não consegue alcançar.',
+    image: images.maquinaSamsung,
+    imageAlt: 'Máquina de lavar aberta para serviço de higienização no Rio de Janeiro',
+    introTitle: 'Quando Contratar Higienização de Lavadora no RJ',
+    intro: ['A higienização profissional tem uma finalidade diferente da limpeza mensal feita pelo usuário. Ela é indicada quando resíduos de sabão, amaciante, fiapos ou mofo permanecem mesmo após um ciclo de limpeza comum.', 'Antes do serviço, o estado da lavadora é avaliado para separar sujeira acumulada de sintomas causados por drenagem, vedação ou outro defeito. Se houver necessidade de reparo, isso é informado separadamente para que o cliente decida com clareza.'],
+    itemsTitle: 'Sinais de que a Máquina Pode Precisar de Higienização',
+    items: [
+      ['Mau cheiro persistente', 'O odor retorna pouco tempo depois da limpeza comum ou passa para as roupas.'],
+      ['Crostas e resíduos', 'Sabão e amaciante formam depósitos visíveis no cesto, dispenser ou partes de difícil acesso.'],
+      ['Manchas e partículas', 'As roupas saem com pequenos resíduos apesar do uso correto dos produtos.'],
+      ['Mofo recorrente', 'Pontos escuros reaparecem na borracha, tampa ou compartimentos internos.'],
+      ['Tempo sem limpeza', 'A máquina teve uso frequente por longo período sem higienização adequada.'],
+      ['Após avaliação', 'Um cheiro de esgoto ou água parada pode exigir diagnóstico da drenagem, e não apenas limpeza.'],
+    ],
+    processTitle: 'Como Funciona a Higienização de Máquina de Lavar no RJ',
+    steps: [['Contato inicial', 'Informe marca, modelo, bairro e o sinal observado.'], ['Avaliação', 'O técnico verifica o estado geral e diferencia acúmulo de sujeira de possível defeito.'], ['Orçamento', 'O escopo da higienização é explicado antes da execução.'], ['Limpeza técnica', 'Os pontos compatíveis com o modelo são higienizados com procedimento adequado.'], ['Teste final', 'A lavadora é testada e são repassadas orientações de conservação.']],
+    distinctionTitle: 'Higienização Profissional ou Limpeza em Casa?',
+    distinction: 'A limpeza doméstica é preventiva e pode ser feita periodicamente conforme o manual. A higienização profissional atende acúmulos persistentes e pontos que exigem conhecimento do modelo. Veja o guia educativo sobre <a href="/blog/como-higienizar-a-maquina-de-lavar-por-dentro/">como higienizar a máquina por dentro</a>; se os sinais continuarem, solicite uma avaliação do serviço.',
+    faq: [
+      { question: 'A higienização elimina todo mau cheiro?', answer: 'Ela ajuda quando a origem é o acúmulo de resíduos. Se o odor estiver relacionado à drenagem, instalação ou água retida, pode ser necessário corrigir essa causa.' },
+      { question: 'Higienização é a mesma coisa que conserto?', answer: 'Não. Higienização remove sujeira e resíduos; conserto corrige um defeito. Quando a avaliação encontra uma falha, o reparo é apresentado separadamente.' },
+      { question: 'Quanto custa higienizar uma máquina de lavar?', answer: 'O valor depende do modelo, da construção do equipamento e do nível de acúmulo. O orçamento é informado antes da execução.' },
+      { question: 'Posso usar a máquina logo depois?', answer: 'Após a conclusão e o teste, o técnico informa quando o equipamento está liberado e quais cuidados devem ser seguidos.' },
+    ],
+  },
+  {
+    slug: 'instalacao-de-maquina-de-lavar-rj',
+    path: '/servicos/instalacao-de-maquina-de-lavar-rj/',
+    title: 'Instalação de Máquina de Lavar no RJ | Nivelamento e Teste',
+    description: 'Instalação de máquina de lavar no RJ com verificação hidráulica, posicionamento, nivelamento e teste inicial conforme o modelo.',
+    eyebrow: 'Preparação para o primeiro uso',
+    h1: 'Instalação de Máquina de Lavar no RJ',
+    lede: 'Conferência do posicionamento, entrada e saída de água, nivelamento e teste de funcionamento para iniciar o uso da lavadora com segurança.',
+    image: images.tecnicoAtendendoCliente,
+    imageAlt: 'Técnico orientando cliente durante instalação de máquina de lavar no Rio de Janeiro',
+    introTitle: 'Instalação Correta de Lavadora no Rio de Janeiro',
+    intro: ['Uma instalação inadequada pode causar vibração, deslocamento, vazamento, demora no enchimento ou falha no escoamento. O serviço verifica os pontos diretamente ligados à lavadora antes do primeiro ciclo.', 'Alterações na rede elétrica, criação de tomada, aterramento ou mudanças na tubulação do imóvel não são tratadas como conserto da máquina e podem exigir eletricista ou profissional hidráulico habilitado.'],
+    itemsTitle: 'O que é Verificado na Instalação da Máquina',
+    items: [['Local e medidas', 'Espaço, ventilação e folgas necessárias conforme o equipamento.'], ['Nivelamento', 'Ajuste dos pés para reduzir vibração e movimentação durante a centrifugação.'], ['Entrada de água', 'Conexão, vedação e condição aparente da mangueira de abastecimento.'], ['Saída de água', 'Altura, posição e fixação da mangueira de drenagem conforme o manual.'], ['Alimentação elétrica', 'Compatibilidade indicada na etiqueta e condições visíveis do ponto, sem modificar a rede do imóvel.'], ['Teste inicial', 'Ciclo compatível para observar enchimento, movimentação, drenagem e centrifugação.']],
+    processTitle: 'Como Funciona a Instalação de Máquina de Lavar no RJ',
+    steps: [['Envio dos dados', 'Informe marca, modelo, endereço e envie fotos do local e das conexões.'], ['Conferência prévia', 'São verificadas as condições básicas para receber o equipamento.'], ['Agendamento', 'A visita é combinada conforme região e disponibilidade.'], ['Instalação', 'A máquina é posicionada, conectada e nivelada dentro do escopo informado.'], ['Teste e orientação', 'O funcionamento inicial é observado e o cliente recebe orientações de uso.']],
+    distinctionTitle: 'Instalação não é Reparo de Defeito',
+    distinction: 'Esta página atende a busca de quem precisa preparar uma lavadora para uso. Se a máquina já estava instalada e parou de funcionar, a intenção correta é <a href="/">conserto de máquina de lavar no RJ</a>. Manter essas finalidades separadas evita diagnósticos e orçamentos inadequados.',
+    faq: [
+      { question: 'Vocês instalam máquina nova e usada?', answer: 'A possibilidade depende do modelo, do estado das mangueiras e das condições do local. Envie fotos e os dados do equipamento para avaliação inicial.' },
+      { question: 'O serviço inclui criar tomada ou ponto de água?', answer: 'Não necessariamente. Mudanças na instalação elétrica ou hidráulica do imóvel devem ser avaliadas por profissionais habilitados e são separadas do serviço na lavadora.' },
+      { question: 'É preciso retirar os parafusos de transporte?', answer: 'Alguns modelos, especialmente os de abertura frontal, utilizam travas de transporte. A necessidade e o procedimento devem seguir o manual específico do equipamento.' },
+      { question: 'A instalação inclui teste?', answer: 'Sim, quando as condições do local permitem, é realizado um teste compatível para observar as funções básicas relacionadas à instalação.' },
+    ],
+  },
+  {
+    slug: 'manutencao-preventiva-de-maquina-de-lavar-rj',
+    path: '/servicos/manutencao-preventiva-de-maquina-de-lavar-rj/',
+    title: 'Manutenção Preventiva de Máquina de Lavar no RJ | Inspeção',
+    description: 'Manutenção preventiva de máquina de lavar no RJ com inspeção de mangueiras, vedações, filtros e sinais de desgaste.',
+    eyebrow: 'Inspeção e conservação',
+    h1: 'Manutenção Preventiva de Máquina de Lavar no RJ',
+    lede: 'Inspeção periódica para identificar vazamentos, desgaste e condições de instalação antes que pequenos sinais evoluam para falhas maiores.',
+    image: images.tecnicoTestandoComponente,
+    imageAlt: 'Técnico realizando manutenção preventiva em máquina de lavar no Rio de Janeiro',
+    introTitle: 'Por que Fazer Manutenção Preventiva da Lavadora no RJ',
+    intro: ['A manutenção preventiva observa o estado da máquina enquanto ela ainda funciona. O objetivo é encontrar sinais de desgaste, ressecamento, folgas ou vazamentos iniciais e orientar os cuidados adequados para o modelo.', 'Ela não garante que nunca ocorrerá um defeito, nem deve servir para trocar peças sem necessidade. Qualquer recomendação de intervenção deve ser explicada e aprovada depois da avaliação.'],
+    itemsTitle: 'Pontos Observados na Manutenção Preventiva',
+    items: [['Mangueiras e conexões', 'Sinais visíveis de ressecamento, dobra, vazamento ou fixação inadequada.'], ['Vedações', 'Condição de borrachas e pontos sujeitos a umidade ou perda de água.'], ['Filtros e drenagem', 'Acúmulos acessíveis e comportamento do escoamento durante o teste.'], ['Ruídos e vibração', 'Mudanças de som, nivelamento e estabilidade durante as etapas do ciclo.'], ['Comandos e ciclos', 'Resposta do painel e funcionamento das etapas observáveis.'], ['Orientação de uso', 'Hábitos de carga, dosagem de produtos e ventilação que ajudam na conservação.']],
+    processTitle: 'Como Funciona a Manutenção Preventiva no RJ',
+    steps: [['Histórico do equipamento', 'Informe modelo, idade aproximada, frequência de uso e reparos anteriores.'], ['Inspeção visual', 'Mangueiras, vedações, conexões e condições externas são observadas.'], ['Teste funcional', 'As etapas possíveis do ciclo são acompanhadas para identificar sinais anormais.'], ['Relato técnico', 'Os achados e as prioridades são explicados sem indicar trocas desnecessárias.'], ['Aprovação', 'Qualquer correção é orçada e somente executada com autorização.']],
+    distinctionTitle: 'Manutenção Preventiva ou Conserto?',
+    distinction: 'A manutenção preventiva é indicada para uma lavadora em funcionamento que precisa de inspeção e conservação. Quando já existe falha — como não ligar, não drenar ou não centrifugar — o atendimento passa a ser de <a href="/">conserto de máquina de lavar no RJ</a>.',
+    faq: [
+      { question: 'Com que frequência devo fazer manutenção preventiva?', answer: 'Não há um intervalo único para todos os casos. Frequência de uso, idade, ambiente e orientações do fabricante influenciam a necessidade.' },
+      { question: 'A manutenção preventiva inclui troca de peças?', answer: 'A inspeção não pressupõe troca. Se houver componente desgastado ou condição que exija correção, o orçamento é apresentado separadamente antes de qualquer serviço.' },
+      { question: 'Máquina nova precisa de manutenção preventiva?', answer: 'Os cuidados do manual e a instalação correta são prioritários. Uma avaliação técnica pode ser útil quando surgem ruídos, vibração, vazamentos ou mudança de funcionamento.' },
+      { question: 'A manutenção evita todos os defeitos?', answer: 'Não. Ela pode identificar sinais antecipados e reduzir riscos ligados a desgaste e conservação, mas componentes também podem falhar sem aviso.' },
+    ],
+  },
+];
+
+export function getStaticPaths() {
+  return pages.map((page) => ({ params: { slug: page.slug }, props: { page } }));
+}
+
+const { page } = Astro.props;
+const jsonLd = [organizationJsonLd(), professionalServiceJsonLd(), webPageJsonLd(page.title, page.description, page.path), ...servicesJsonLd([{ name: page.h1, description: page.description }])];
+---
+
+<BaseLayout title={page.title} description={page.description} path={page.path} ogImage={page.image.src} jsonLd={jsonLd}>
+  <div class="container"><Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Serviços', href: '/servicos/' }, { label: page.h1, href: page.path }]} /></div>
+  <section class="section section-light service-hero">
+    <div class="container hero-grid">
+      <div><span class="eyebrow">{page.eyebrow}</span><h1>{page.h1}</h1><p class="hero-lede">{page.lede}</p><WhatsAppButton label="Solicitar Atendimento no WhatsApp" /><ul class="hero-checks"><li><Icon name="check-circle" size={18} /> Avaliação antes da execução</li><li><Icon name="check-circle" size={18} /> Orçamento apresentado previamente</li><li><Icon name="check-circle" size={18} /> Atendimento na cidade do Rio de Janeiro</li></ul></div>
+      <div class="image-card"><Image src={page.image} alt={page.imageAlt} title={page.h1} width={600} height={430} format="avif" quality={80} loading="eager" fetchpriority="high" /></div>
+    </div>
+  </section>
+  <section class="section section-dark"><div class="container narrow"><SectionHeader align="left" eyebrow="Indicação do serviço" title={page.introTitle} />{page.intro.map((text) => <p>{text}</p>)}</div></section>
+  <section class="section section-light"><div class="container"><SectionHeader eyebrow="Avaliação objetiva" title={page.itemsTitle} /><div class="item-grid">{page.items.map(([title, description]) => <article class="info-card"><Icon name="cog" size={24} /><h3>{title}</h3><p>{description}</p></article>)}</div></div></section>
+  <section class="section section-dark"><div class="container"><SectionHeader eyebrow="Etapas do atendimento" title={page.processTitle} /><ol class="steps-grid">{page.steps.map(([title, description], index) => <li><span>{index + 1}</span><div><h3>{title}</h3><p>{description}</p></div></li>)}</ol></div></section>
+  <section class="section section-light"><div class="container narrow"><SectionHeader align="left" eyebrow="Intenção bem definida" title={page.distinctionTitle} /><p set:html={page.distinction} /><p>Conheça também os demais <a href="/servicos/">serviços para máquinas de lavar</a> ou consulte as <a href="/areas-atendidas/">áreas atendidas no Rio de Janeiro</a>.</p></div></section>
+  <section class="section section-dark"><div class="container faq-container"><SectionHeader eyebrow="Dúvidas frequentes" title={`Perguntas sobre ${page.h1}`} /><FAQAccordion items={page.faq} idPrefix={`${page.slug}-faq`} /></div></section>
+  <CTASection title={`Solicite ${page.h1}`} description="Envie a marca, o modelo, o bairro e o que você observou para receber a avaliação inicial." showPhone={true} />
+</BaseLayout>
+
+<style>
+  .service-hero{padding-top:clamp(32px,5vw,56px)}.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:44px;align-items:center}.hero-grid>*{min-width:0}.service-hero h1{color:var(--primary);font-size:clamp(2rem,4vw,3rem);max-width:21ch}.hero-lede{color:var(--muted);font-size:1.08rem;max-width:42rem}.hero-checks{display:grid;gap:9px;list-style:none;margin:24px 0 0;padding:0}.hero-checks li{align-items:center;color:var(--secondary);display:flex;font-weight:600;gap:9px}.hero-checks :global(svg){color:var(--whatsapp)}.image-card{align-items:center;background:var(--white);border:1px solid var(--border);border-radius:var(--radius-lg);box-shadow:var(--shadow-lg);display:flex;justify-content:center;min-height:360px;overflow:hidden;padding:16px}.image-card :global(img){border-radius:calc(var(--radius-lg) - 8px);height:330px;object-fit:cover;width:100%}.narrow,.faq-container{max-width:860px}.item-grid{display:grid;gap:20px;grid-template-columns:repeat(3,1fr)}.info-card{background:var(--white);border:1px solid var(--border);border-radius:var(--radius-md);box-shadow:var(--shadow-sm);padding:24px}.info-card :global(svg){color:var(--electric);margin-bottom:14px}.info-card h3{color:var(--primary);font-size:1.05rem}.info-card p{color:var(--muted);font-size:.92rem;margin:0}.steps-grid{display:grid;gap:18px;grid-template-columns:repeat(2,1fr);list-style:none;margin:0;padding:0}.steps-grid li{align-items:flex-start;background:var(--white);border-radius:var(--radius-md);display:flex;gap:16px;padding:22px}.steps-grid>li>span{align-items:center;background:var(--electric);border-radius:50%;color:var(--white);display:flex;flex:0 0 34px;font-weight:800;height:34px;justify-content:center}.steps-grid h3{color:var(--primary);font-size:1rem;margin-bottom:5px}.steps-grid p{color:var(--muted);font-size:.92rem;margin:0}.section-light a,.section-dark a{text-decoration:underline;text-underline-offset:3px}@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.item-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:620px){.item-grid,.steps-grid{grid-template-columns:1fr}.image-card{min-height:260px}.image-card :global(img){height:260px}}
+</style>

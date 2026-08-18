@@ -40,7 +40,7 @@ Ligar um equipamento configurado para 127V em uma tomada de 220V, ou o inverso, 
 
 A informação de voltagem geralmente está indicada em uma etiqueta na parte traseira ou lateral da máquina, junto com outros dados técnicos como modelo e número de série. Ela também costuma constar no manual do equipamento e, em muitos modelos, no próprio manual de instalação entregue na compra.
 
-Para confirmar a voltagem da tomada, um teste simples (feito com cuidado, sem contato direto com partes metálicas) é observar outros equipamentos já instalados no mesmo ponto, ou usar um multímetro para medir a tensão disponível. Em caso de dúvida, um eletricista consegue confirmar isso rapidamente e com segurança.
+Não use outro equipamento como referência e não tente medir a tomada sem capacitação. Em caso de dúvida, um eletricista deve confirmar a tensão e as condições do circuito com instrumentos apropriados.
 
 Se preferir, envie uma foto da etiqueta de identificação da sua máquina pelo [WhatsApp](https://wa.me/5521969008005) para receber orientação sobre a voltagem correta antes de qualquer ligação.
 
@@ -56,7 +56,7 @@ Diferente de outros defeitos que se desenvolvem aos poucos, o dano por voltagem 
 
 Disjuntores residenciais protegem a instalação elétrica contra sobrecarga e curto-circuito, mas não necessariamente evitam o dano causado por conectar um equipamento na voltagem errada — essa é uma incompatibilidade entre o equipamento e a tomada, não uma sobrecarga que o disjuntor identificaria.
 
-Alguns modelos de máquina possuem proteção interna contra picos de tensão, mas essa proteção tem limites e não substitui a confirmação correta da voltagem antes da instalação. Um estabilizador de voltagem dedicado à máquina de lavar pode reduzir riscos adicionais, especialmente em regiões com oscilações frequentes na rede elétrica.
+Alguns modelos possuem proteções internas, mas elas não substituem uma instalação compatível com o manual do fabricante. A tomada, o aterramento, o disjuntor e qualquer dispositivo de proteção devem ser dimensionados por um eletricista; não conecte estabilizadores, transformadores ou adaptadores sem orientação específica para o modelo.
 
 ## Soluções para problema de voltagem
 
@@ -64,7 +64,7 @@ Se a suspeita é de incompatibilidade de voltagem, o caminho mais seguro é:
 
 1. Desconectar imediatamente a máquina da tomada, sem tentar ligar novamente.
 2. Confirmar a voltagem indicada na etiqueta do equipamento.
-3. Confirmar a voltagem da tomada com um eletricista ou multímetro.
+3. Solicitar a um eletricista a confirmação da tensão e das condições da tomada.
 4. Caso a máquina tenha sido exposta à voltagem errada, mesmo que por pouco tempo, solicitar avaliação técnica antes de qualquer nova tentativa de uso.
 
 Em alguns casos, é possível adaptar a instalação elétrica para atender à voltagem da máquina; em outros, pode ser necessário avaliar se algum componente interno já foi afetado pela exposição incorreta.
