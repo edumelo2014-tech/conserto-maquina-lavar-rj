@@ -42,7 +42,7 @@ A informação de voltagem geralmente está indicada em uma etiqueta na parte tr
 
 Não use outro equipamento como referência e não tente medir a tomada sem capacitação. Em caso de dúvida, um eletricista deve confirmar a tensão e as condições do circuito com instrumentos apropriados.
 
-Se preferir, envie uma foto da etiqueta de identificação da sua máquina pelo [WhatsApp](https://wa.me/5521969008005) para receber orientação sobre a voltagem correta antes de qualquer ligação.
+Se preferir, envie uma foto da etiqueta de identificação da sua máquina pelo [WhatsApp](https://wa.me/5521976810442) para receber orientação sobre a voltagem correta antes de qualquer ligação.
 
 ## Conectar em voltagem errada: consequências para o equipamento
 

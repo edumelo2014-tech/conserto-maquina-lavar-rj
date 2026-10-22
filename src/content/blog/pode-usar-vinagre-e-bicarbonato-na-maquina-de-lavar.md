@@ -42,7 +42,7 @@ Para manchas localizadas, uma pasta simples costuma resolver: misture bicarbonat
 
 Já para o ciclo de lavagem como um todo, é possível adicionar meia xícara de vinagre branco no compartimento de amaciante para ajudar a remover odores e deixar os tecidos mais macios, sem a necessidade de amaciante industrializado.
 
-Se tiver dúvidas sobre proporções para o seu modelo de máquina, um técnico pode orientar pelo [WhatsApp](https://wa.me/5521969008005) antes de você aplicar qualquer produto caseiro em maior quantidade.
+Se tiver dúvidas sobre proporções para o seu modelo de máquina, um técnico pode orientar pelo [WhatsApp](https://wa.me/5521976810442) antes de você aplicar qualquer produto caseiro em maior quantidade.
 
 ## Segurança: quantidade correta para não danificar a máquina
 

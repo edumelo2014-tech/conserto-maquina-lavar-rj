@@ -64,7 +64,7 @@ A prioridade nesse momento é a segurança, não o reparo. Os passos recomendado
 3. **Ventile o ambiente**, caso tenha havido fumaça, e verifique se o disjuntor do circuito precisa ser desarmado manualmente.
 4. **Registre o que foi observado** — em que momento o cheiro apareceu, se houve fumaça ou faísca, e se algum som diferente ocorreu antes.
 
-Com a máquina desconectada e as observações registradas, fale com um técnico pelo [WhatsApp](https://wa.me/5521969008005) para orientação sobre os próximos passos antes de qualquer tentativa de religar o equipamento.
+Com a máquina desconectada e as observações registradas, fale com um técnico pelo [WhatsApp](https://wa.me/5521976810442) para orientação sobre os próximos passos antes de qualquer tentativa de religar o equipamento.
 
 ## Diagnóstico técnico de componentes queimados
 

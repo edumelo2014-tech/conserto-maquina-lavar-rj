@@ -36,7 +36,7 @@ A crosta acumulada não é apenas uma questão estética. Quando se forma na gav
 
 Já quando o acúmulo ocorre nas dobras de vedação da porta, além do risco de mofo, a crosta pode comprometer a vedação e favorecer pequenos vazamentos. Em casos mais avançados, resíduos que chegam à mangueira de drenagem ou ao filtro podem contribuir para entupimentos, um dos motivos mais comuns de solicitação de conserto de máquina de lavar no RJ.
 
-Se notar sinais de vazamento ou drenagem lenta associados à crosta, fale com um técnico pelo [WhatsApp](https://wa.me/5521969008005) para confirmar se a causa é só o resíduo acumulado ou se há outro componente envolvido.
+Se notar sinais de vazamento ou drenagem lenta associados à crosta, fale com um técnico pelo [WhatsApp](https://wa.me/5521976810442) para confirmar se a causa é só o resíduo acumulado ou se há outro componente envolvido.
 
 ## Método eficaz: ciclo rápido + vinagre
 
