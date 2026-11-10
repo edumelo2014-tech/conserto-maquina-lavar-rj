@@ -12,9 +12,10 @@ interface Props {
   ogImage?: string;
   noindex?: boolean;
   jsonLd?: Record<string, unknown>[];
+  whatsappMessage?: string;
 }
 
-const { title, description, path, ogImage, noindex, jsonLd = [] } = Astro.props;
+const { title, description, path, ogImage, noindex, jsonLd = [], whatsappMessage } = Astro.props;
 ---
 
 <!doctype html>
@@ -29,11 +30,11 @@ const { title, description, path, ogImage, noindex, jsonLd = [] } = Astro.props;
   </head>
   <body>
     <a href="#main-content" class="skip-link">Pular para o conteúdo principal</a>
-    <Header />
+    <Header whatsappMessage={whatsappMessage} />
     <main id="main-content">
       <slot />
     </main>
-    <Footer />
-    <FloatingWhatsApp />
+    <Footer whatsappMessage={whatsappMessage} />
+    <FloatingWhatsApp message={whatsappMessage} />
   </body>
 </html>

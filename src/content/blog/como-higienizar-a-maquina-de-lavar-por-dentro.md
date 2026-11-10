@@ -39,7 +39,7 @@ Alguns sinais indicam que já passou da hora de fazer uma limpeza interna:
 - Resíduos brancos ou esverdeados na gaveta de sabão.
 - Roupas que saem da máquina cheirando a mofo mesmo lavadas com produtos de qualidade.
 
-Se preferir já resolver isso hoje, fale com um técnico pelo [WhatsApp](https://wa.me/5521976810442) para tirar dúvidas sobre o estado da sua máquina antes de iniciar a limpeza.
+Se preferir já resolver isso hoje, fale com um técnico pelo [WhatsApp](https://wa.me/5521969008005) para tirar dúvidas sobre o estado da sua máquina antes de iniciar a limpeza.
 
 ## Passo a passo: higienização com ciclo rápido
 

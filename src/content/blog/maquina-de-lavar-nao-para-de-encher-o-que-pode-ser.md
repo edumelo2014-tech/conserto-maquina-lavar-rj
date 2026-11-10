@@ -36,7 +36,7 @@ A válvula de entrada é responsável por abrir e fechar a passagem de água par
 
 Esse tipo de falha costuma ser mais comum em máquinas com vários anos de uso ou em regiões onde a água tem mais impurezas, já que resíduos podem se acumular na válvula ao longo do tempo e prejudicar o fechamento completo.
 
-Se preferir descrever o comportamento da sua máquina antes de qualquer visita, fale com um técnico pelo [WhatsApp](https://wa.me/5521976810442) e informe se a água continua entrando mesmo com a máquina desligada.
+Se preferir descrever o comportamento da sua máquina antes de qualquer visita, fale com um técnico pelo [WhatsApp](https://wa.me/5521969008005) e informe se a água continua entrando mesmo com a máquina desligada.
 
 ## Pressostato defeituoso: como afeta o enchimento
 

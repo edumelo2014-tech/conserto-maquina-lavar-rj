@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import type { ImageMetadata } from 'astro';
-import { siteConfig, whatsappUrl, whatsappAriaLabel } from '@/site.config';
+import { siteConfig, whatsappUrl, whatsappUrlWithMessage, whatsappAriaLabel } from '@/site.config';
 import WhatsAppIcon from './icons/WhatsAppIcon.astro';
 
 interface Props {
@@ -11,6 +11,7 @@ interface Props {
   showPhone?: boolean;
   backgroundImage?: ImageMetadata;
   backgroundAlt?: string;
+  whatsappMessage?: string;
 }
 
 const {
@@ -20,7 +21,10 @@ const {
   showPhone = false,
   backgroundImage,
   backgroundAlt = '',
+  whatsappMessage,
 } = Astro.props;
+
+const whatsappHref = whatsappMessage ? whatsappUrlWithMessage(whatsappMessage) : whatsappUrl;
 ---
 
 <section class={`cta-section ${backgroundImage ? 'has-image' : ''}`}>
@@ -40,7 +44,7 @@ const {
     <p>{description}</p>
     <div class="cta-actions">
       <a
-        href={whatsappUrl}
+        href={whatsappHref}
         class="btn btn-whatsapp"
         target="_blank"
         rel="noopener noreferrer"

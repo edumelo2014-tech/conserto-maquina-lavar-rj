@@ -34,6 +34,15 @@ interface Props {
 
 const { data } = Astro.props;
 
+const locationPreposition = data.path.includes('-nas-')
+  ? 'nas'
+  : data.path.includes('-na-')
+    ? 'na'
+    : data.path.includes('-no-')
+      ? 'no'
+      : 'em';
+const whatsappMessage = `Olá, vim do Google e quero solicitar um orçamento para conserto de máquina de lavar ${locationPreposition} ${data.nome}.`;
+
 const pageTitle = `Conserto de Máquina de Lavar ${data.preposition} ${data.nome} RJ | Atendimento em Domicílio`;
 const pageDescription = `Conserto de máquina de lavar ${data.preposition} ${data.nome} RJ com atendimento em domicílio, diagnóstico técnico e orçamento antes do serviço. ${data.zona} do Rio de Janeiro.`;
 
@@ -56,7 +65,7 @@ const domicilioChecklist = [
 ];
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} path={data.path} jsonLd={jsonLd}>
+<BaseLayout title={pageTitle} description={pageDescription} path={data.path} jsonLd={jsonLd} whatsappMessage={whatsappMessage}>
   <div class="container">
     <Breadcrumbs
       items={[
@@ -74,7 +83,7 @@ const domicilioChecklist = [
         <span class="eyebrow">{data.eyebrow}</span>
         <h1>Conserto de Máquina de Lavar {data.preposition} {data.nome} RJ</h1>
         <p class="page-hero-lede">{data.lead}</p>
-        <WhatsAppButton />
+        <WhatsAppButton message={whatsappMessage} />
       </div>
       <div>
         <Image
@@ -98,7 +107,7 @@ const domicilioChecklist = [
         <span class="eyebrow">Nossa trajetória</span>
         <h2>Empresa de Conserto de Máquina de Lavar {data.preposition} {data.nome} RJ Desde {siteConfig.startYear}</h2>
         {data.empresaParagraphs.map((paragraph) => <p>{paragraph}</p>)}
-        <WhatsAppButton label="Falar com um técnico" />
+        <WhatsAppButton label="Falar com um técnico" message={whatsappMessage} />
       </div>
       <div class="about-card">
         <ul>
@@ -207,7 +216,7 @@ const domicilioChecklist = [
           <li><Icon name="check-circle" size={18} /> {item}</li>
         ))}
       </ul>
-      <WhatsAppButton label="Solicitar Orçamento no WhatsApp" />
+      <WhatsAppButton label="Solicitar Orçamento no WhatsApp" message={whatsappMessage} />
     </div>
   </section>
 
@@ -317,7 +326,7 @@ const domicilioChecklist = [
   )}
 
   <!-- CTA FINAL -->
-  <CTASection title={data.ctaTitle} description={data.ctaDescription} showPhone={true} />
+  <CTASection title={data.ctaTitle} description={data.ctaDescription} showPhone={true} whatsappMessage={whatsappMessage} />
 </BaseLayout>
 
 <style>

@@ -36,7 +36,7 @@ Quedas de energia, oscilações de voltagem e picos causados por tempestades sã
 
 Isso merece atenção especial quando a falha começou depois de uma queda ou oscilação de energia. A instalação deve seguir o manual do fabricante, com tomada, aterramento e circuito compatíveis; adaptações e dispositivos de proteção devem ser avaliados por um eletricista qualificado.
 
-Se sua máquina começou a falhar logo após uma queda de energia ou tempestade, fale com um técnico pelo [WhatsApp](https://wa.me/5521976810442) e informe esse detalhe — ele ajuda bastante a direcionar o diagnóstico.
+Se sua máquina começou a falhar logo após uma queda de energia ou tempestade, fale com um técnico pelo [WhatsApp](https://wa.me/5521969008005) e informe esse detalhe — ele ajuda bastante a direcionar o diagnóstico.
 
 ## Umidade excessiva e seus efeitos na máquina
 

@@ -1,10 +1,17 @@
 ---
 import WhatsAppIcon from './icons/WhatsAppIcon.astro';
-import { whatsappUrl, whatsappAriaLabel } from '@/site.config';
+import { whatsappUrl, whatsappUrlWithMessage, whatsappAriaLabel } from '@/site.config';
+
+interface Props {
+  message?: string;
+}
+
+const { message } = Astro.props;
+const href = message ? whatsappUrlWithMessage(message) : whatsappUrl;
 ---
 
 <a
-  href={whatsappUrl}
+  href={href}
   class="floating-whatsapp"
   target="_blank"
   rel="noopener noreferrer"

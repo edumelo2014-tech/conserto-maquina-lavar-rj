@@ -1,7 +1,14 @@
 ---
 import { Image } from 'astro:assets';
 import { images } from '@/assets/images';
-import { siteConfig, zoneLinks, whatsappUrl, whatsappAriaLabel } from '@/site.config';
+import { siteConfig, zoneLinks, whatsappUrl, whatsappUrlWithMessage, whatsappAriaLabel } from '@/site.config';
+
+interface Props {
+  whatsappMessage?: string;
+}
+
+const { whatsappMessage } = Astro.props;
+const whatsappHref = whatsappMessage ? whatsappUrlWithMessage(whatsappMessage) : whatsappUrl;
 
 const year = new Date().getFullYear();
 ---
@@ -26,7 +33,7 @@ const year = new Date().getFullYear();
         {siteConfig.startYear}.
       </p>
       <p class="footer-phone">
-        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer" aria-label={whatsappAriaLabel}>
+        <a href={whatsappHref} target="_blank" rel="noopener noreferrer" aria-label={whatsappAriaLabel}>
           WhatsApp: {siteConfig.phoneDisplay}
         </a>
       </p>

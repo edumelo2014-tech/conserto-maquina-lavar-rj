@@ -12,11 +12,11 @@ export const siteConfig = {
     'Conserto de máquina de lavar no RJ com atendimento em domicílio, diagnóstico técnico e orçamento antes do serviço. Experiência desde 2010 em toda a cidade do Rio de Janeiro.',
 
   // Contato
-  phoneDisplay: '(21) 97681-0442',
-  phoneE164: '+5521976810442',
-  whatsappNumber: '5521976810442',
+  phoneDisplay: '(21) 96900-8005',
+  phoneE164: '+5521969008005',
+  whatsappNumber: '5521969008005',
   whatsappDefaultMessage:
-    'Olá, vim do site de conserto de máquina de lavar no RJ e quero solicitar um orçamento.',
+    'Olá, vim do Google e quero solicitar um orçamento para conserto de máquina de lavar.',
   emailContact: '', // A CONFIGURAR — e-mail institucional, se existir
 
   // Localização e atuação

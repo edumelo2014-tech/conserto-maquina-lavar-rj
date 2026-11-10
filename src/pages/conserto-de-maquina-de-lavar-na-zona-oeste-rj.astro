@@ -20,6 +20,8 @@ const path = '/conserto-de-maquina-de-lavar-na-zona-oeste-rj/';
 const pageTitle = 'Conserto de Máquina de Lavar na Zona Oeste RJ | Atendimento em Domicílio';
 const pageDescription =
   'Conserto de máquina de lavar na Zona Oeste RJ com atendimento em domicílio, diagnóstico técnico e orçamento antes do serviço em bairros como Barra da Tijuca, Campo Grande e Bangu.';
+const whatsappMessage =
+  'Olá, vim do Google e quero solicitar um orçamento para conserto de máquina de lavar na Zona Oeste.';
 
 const jsonLd = [
   organizationJsonLd(),
@@ -28,7 +30,7 @@ const jsonLd = [
 ];
 ---
 
-<BaseLayout title={pageTitle} description={pageDescription} path={path} jsonLd={jsonLd}>
+<BaseLayout title={pageTitle} description={pageDescription} path={path} jsonLd={jsonLd} whatsappMessage={whatsappMessage}>
   <div class="container">
     <Breadcrumbs items={[{ label: 'Home', href: '/' }, { label: 'Zona Oeste RJ', href: path }]} />
   </div>
@@ -42,7 +44,7 @@ const jsonLd = [
           Atendimento residencial em bairros da Zona Oeste do Rio de Janeiro, com diagnóstico
           técnico da lavadora antes de qualquer orçamento ser apresentado.
         </p>
-        <WhatsAppButton />
+        <WhatsAppButton message={whatsappMessage} />
       </div>
       <div>
         <Image
@@ -150,6 +152,7 @@ const jsonLd = [
   </section>
 
   <CTASection
+    whatsappMessage={whatsappMessage}
     title="Precisa de Conserto de Máquina de Lavar na Zona Oeste RJ?"
     description="Envie a marca, o modelo, o defeito observado e o bairro pelo WhatsApp para receber a avaliação inicial."
     showPhone={true}

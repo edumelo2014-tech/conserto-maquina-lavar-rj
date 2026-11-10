@@ -32,7 +32,7 @@ A forma mais confiável de avaliar isso é comparar com a própria máquina: se 
 
 > Observe também se o barulho é constante durante todo o ciclo ou só acontece em rotações mais altas. Isso ajuda a diferenciar um problema mecânico de um problema de instalação.
 
-Se preferir agilizar o processo, fale agora com um técnico pelo [WhatsApp](https://wa.me/5521976810442) e descreva o som que a máquina está fazendo — isso já ajuda a direcionar o diagnóstico antes da visita.
+Se preferir agilizar o processo, fale agora com um técnico pelo [WhatsApp](https://wa.me/5521969008005) e descreva o som que a máquina está fazendo — isso já ajuda a direcionar o diagnóstico antes da visita.
 
 ## Tipos de barulho e o que cada um costuma indicar
 

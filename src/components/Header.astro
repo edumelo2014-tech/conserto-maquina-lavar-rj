@@ -1,8 +1,15 @@
 ---
 import { Image } from 'astro:assets';
 import { images } from '@/assets/images';
-import { siteConfig, whatsappUrl, whatsappAriaLabel } from '@/site.config';
+import { siteConfig, whatsappUrl, whatsappUrlWithMessage, whatsappAriaLabel } from '@/site.config';
 import WhatsAppIcon from './icons/WhatsAppIcon.astro';
+
+interface Props {
+  whatsappMessage?: string;
+}
+
+const { whatsappMessage } = Astro.props;
+const whatsappHref = whatsappMessage ? whatsappUrlWithMessage(whatsappMessage) : whatsappUrl;
 
 const currentPath = Astro.url.pathname;
 
@@ -41,7 +48,7 @@ function isActive(href: string) {
 
     <div class="header-actions">
       <a
-        href={whatsappUrl}
+        href={whatsappHref}
         class="btn btn-whatsapp header-cta"
         target="_blank"
         rel="noopener noreferrer"
@@ -81,7 +88,7 @@ function isActive(href: string) {
       </ul>
     </nav>
     <a
-      href={whatsappUrl}
+      href={whatsappHref}
       class="btn btn-whatsapp btn-block"
       target="_blank"
       rel="noopener noreferrer"

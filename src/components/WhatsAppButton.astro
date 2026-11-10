@@ -1,6 +1,6 @@
 ---
 import WhatsAppIcon from './icons/WhatsAppIcon.astro';
-import { whatsappUrl, whatsappAriaLabel } from '@/site.config';
+import { whatsappUrl, whatsappUrlWithMessage, whatsappAriaLabel } from '@/site.config';
 
 interface Props {
   label?: string;
@@ -9,8 +9,14 @@ interface Props {
   message?: string;
 }
 
-const { label = 'Solicitar Orçamento no WhatsApp', class: className = '', variant = 'solid' } =
-  Astro.props;
+const {
+  label = 'Solicitar Orçamento no WhatsApp',
+  class: className = '',
+  variant = 'solid',
+  message,
+} = Astro.props;
+
+const href = message ? whatsappUrlWithMessage(message) : whatsappUrl;
 
 const classes = ['btn', 'btn-whatsapp', variant === 'block' ? 'btn-block' : '', className]
   .filter(Boolean)
@@ -18,7 +24,7 @@ const classes = ['btn', 'btn-whatsapp', variant === 'block' ? 'btn-block' : '', 
 ---
 
 <a
-  href={whatsappUrl}
+  href={href}
   class={classes}
   target="_blank"
   rel="noopener noreferrer"
